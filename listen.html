@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Composerdle · By Ear — hear it, read it, name the composer</title>
+<meta name="description" content="A daily classical-music guessing game: hear a real recording, read the real score, name the composer in six tries.">
+<meta property="og:title" content="Composerdle · By Ear">
+<meta property="og:description" content="Hear the piece. Read the score. Name its maker — in six tries.">
+<meta property="og:image" content="https://composerdle-eta.vercel.app/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f5eddb; --paper-hi: #fbf5e7; --ink: #211c12; --ink-soft: #5c5137;
+    --faint: #b3a37e; --burgundy: #7c2323; --gold: #9a7724; --rule: #b6a276;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    font-family: 'Spectral', Georgia, serif; font-weight: 400; font-size: 17px; color: var(--ink);
+    background:
+      radial-gradient(120% 90% at 50% 0%, rgba(255,252,240,.9), rgba(255,252,240,0) 60%),
+      radial-gradient(100% 100% at 50% 100%, rgba(122,94,35,.10), rgba(122,94,35,0) 55%),
+      var(--paper);
+    min-height: 100vh; padding: 0 20px 64px;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background: repeating-linear-gradient(to bottom, transparent 0 34px, rgba(33,28,18,.045) 34px 35px);
+    pointer-events: none;
+  }
+  .page { max-width: 680px; margin: 0 auto; position: relative; }
+
+  header { text-align: center; padding: 14px 0 2px; }
+  .clef { font-size: 26px; line-height: 1; color: var(--gold); display: inline-block; vertical-align: middle; margin-right: 8px; }
+  h1 { display: inline-block; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 700; font-size: clamp(28px, 5vw, 40px); letter-spacing: .12em; text-transform: uppercase; vertical-align: middle; }
+  h1 .dle { color: var(--burgundy); }
+  .tagline { font-style: italic; font-size: 15px; color: var(--ink-soft); margin-top: 0; }
+  .meta { margin-top: 6px; font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-soft); font-weight: 500; }
+  nav.modes { display: inline-block; margin: 6px 8px 0; font-size: 14px; letter-spacing: .16em; text-transform: uppercase; font-weight: 500; }
+  nav.modes a, nav.modes span { color: var(--ink-soft); text-decoration: none; margin: 0 7px; padding-bottom: 2px; }
+  nav.modes span { color: var(--burgundy); border-bottom: 1px solid var(--burgundy); }
+  nav.modes a:hover { color: var(--burgundy); }
+  .archive { display: inline-block; margin: 4px 6px 0; font-size: 12px; letter-spacing: .1em; }
+  .archive a { color: var(--ink-soft); text-decoration: none; margin: 0 6px; }
+  .archive a:hover { color: var(--burgundy); }
+  .namebar { display: inline-block; margin: 4px 8px 0; font-size: 13px; color: var(--ink-soft); font-style: italic; }
+  .namebar input { font: 400 14px 'Spectral', Georgia, serif; padding: 6px 10px; border: 1px solid var(--ink-soft); background: var(--paper-hi); margin: 0 6px; }
+  .namebar button { font-size: 11px; padding: 7px 14px; background: var(--ink); color: var(--paper-hi); border: 1px solid var(--ink); }
+  .namebar a, .toolrow a { color: var(--burgundy); }
+  .toolrow { display: inline-block; margin: 4px 8px 0; font-size: 12px; letter-spacing: .1em; }
+  .toolrow a { margin: 0 6px; cursor: pointer; text-decoration: none; }
+
+  .flourish { display: flex; align-items: center; gap: 14px; margin: 8px 0 12px; color: var(--gold); }
+  .flourish::before, .flourish::after { content: ''; flex: 1; height: 3px; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+
+  /* desktop: score on the left, play controls on the right — no page scrolling */
+  @media (min-width: 1000px) {
+    .page { max-width: 1280px; }
+    #game { display: grid; grid-template-columns: 57fr 43fr; gap: 28px; align-items: start; }
+    #board { max-width: 680px; margin-left: auto; margin-right: auto; }
+  }
+
+  .scorecard {
+    background: #fdfaf1; border: 1px solid var(--rule);
+    outline: 1px solid rgba(201,185,143,.45); outline-offset: 3px;
+    box-shadow: 0 2px 10px rgba(70,55,20,.08); padding: 18px 18px 10px;
+  }
+  .byline { display: flex; justify-content: space-between; align-items: center; font-size: 12px; letter-spacing: .24em; text-transform: uppercase; color: var(--ink-soft); padding: 0 4px 12px; border-bottom: 1px dotted var(--faint); margin-bottom: 10px; }
+  .byline .redact { background: var(--ink); color: var(--ink); padding: 1px 8px; user-select: none; letter-spacing: 0; transform: rotate(-.6deg); }
+  .crop { overflow: hidden; overflow-y: auto; max-height: 52vh; background: #fff; border: 1px solid var(--rule); }
+  @media (max-width: 999px) { .crop { max-height: 38vh; } }
+  .crop img { width: 100%; display: block; }
+  .pagenav { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 10px; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-soft); }
+  .pagenav button { padding: 4px 14px; font-size: 15px; letter-spacing: 0; background: transparent; border: 2px solid var(--ink); color: var(--ink); }
+  .pagenav button:disabled { opacity: .35; cursor: default; }
+  audio { width: 100%; margin-top: 10px; display: block; }
+  .hintline { margin-top: 8px; text-align: center; font-style: italic; font-size: 15px; color: var(--ink-soft); }
+
+  #controls { margin-top: 14px; display: grid; gap: 10px; }
+  @media (min-width: 1000px) { #controls { margin-top: 0; } }
+  .fieldlabel { font-size: 14px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink); font-weight: 600; margin-bottom: -6px; }
+  .fieldlabel em { text-transform: none; letter-spacing: 0; color: var(--gold); }
+  #guess, #pieceGuess { width: 100%; font: 500 19px 'Spectral', Georgia, serif; color: var(--ink); background: var(--paper-hi); border: 2px solid var(--ink-soft); padding: 12px 16px; border-radius: 0; }
+  #guess:focus, #pieceGuess:focus { outline: 3px solid var(--gold); outline-offset: 1px; }
+  #guess.shake { animation: shake .4s; }
+  @keyframes shake { 20%,60% { transform: translateX(-6px); } 40%,80% { transform: translateX(6px); } }
+  button { font: 600 15px 'Spectral', Georgia, serif; letter-spacing: .16em; text-transform: uppercase; padding: 12px 20px; cursor: pointer; border-radius: 0; transition: transform .12s ease, background .15s ease; outline: 1px solid var(--faint); outline-offset: 3px; }
+  button:active { transform: translateY(1px); }
+  button:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+  #btnGuess { background: var(--ink); color: var(--paper-hi); border: 2px solid var(--ink); width: 100%; font-size: 17px; padding: 14px 20px; }
+  #btnGuess:hover { background: var(--burgundy); border-color: var(--burgundy); }
+  #pieceMsg { text-align: center; font-style: italic; font-size: 17px; min-height: 20px; }
+  #pieceMsg.good { color: #2e6b2e; }
+  #pieceMsg.warm { color: var(--gold); }
+  #pieceMsg.cold { color: var(--burgundy); }
+  .aidrow { display: flex; gap: 14px; }
+  .aidrow button { flex: 1; background: transparent; border: 2px solid var(--ink); color: var(--ink); }
+  .aidrow button:hover:not(:disabled) { background: rgba(33,28,18,.06); }
+  .aidrow button:disabled { opacity: .4; cursor: not-allowed; }
+  #hintsOut { list-style: none; padding: 0; display: grid; gap: 8px; }
+  #hintsOut li { font-size: 18px; font-style: italic; color: var(--ink-soft); border-left: 3px solid var(--gold); padding-left: 12px; }
+
+  #tries { margin-top: 12px; text-align: center; font-size: 30px; letter-spacing: 16px; user-select: none; }
+  #tries .spent { color: var(--faint); }
+  #tries .lost { color: var(--burgundy); }
+  #wrong { list-style: none; margin-top: 12px; text-align: center; padding: 0; }
+  #wrong li { display: inline-block; margin: 3px 8px; font-style: italic; font-size: 18px; color: var(--burgundy); text-decoration: line-through; }
+
+  #result { margin-top: 14px; text-align: center; background: var(--paper-hi); border: 1px solid var(--gold); outline: 1px solid var(--gold); outline-offset: 4px; padding: 20px 20px 18px; box-shadow: 0 6px 24px rgba(70,55,20,.14); }
+  #result .verdict { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 24px; color: var(--burgundy); }
+  #result .name { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(30px, 7vw, 44px); line-height: 1.1; margin-top: 8px; }
+  #result .yrs { margin-top: 4px; color: var(--ink-soft); letter-spacing: .2em; font-size: 14px; }
+  #result .work { margin-top: 10px; font-style: italic; font-size: 17px; }
+  #result .score { margin-top: 12px; font-size: 16px; }
+  #result .grid { margin-top: 6px; font-size: 20px; letter-spacing: 4px; }
+  .endbtns { margin-top: 20px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  #btnShare { background: var(--gold); border: 1px solid var(--gold); color: var(--paper-hi); }
+  #btnShare:hover { background: var(--ink); border-color: var(--ink); }
+  #btnChallenge { background: transparent; border: 2px solid var(--ink); color: var(--ink); }
+  #btnChallenge:hover { background: rgba(33,28,18,.06); }
+  #btnEncore { background: var(--ink); border: 2px solid var(--ink); color: var(--paper-hi); }
+  #btnEncore:hover { background: var(--burgundy); border-color: var(--burgundy); }
+
+  #board { margin-top: 26px; }
+  #board h2 { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 24px; text-align: center; letter-spacing: .12em; text-transform: uppercase; }
+  #boardTabs { text-align: center; margin-top: 8px; }
+  #boardTabs button { font-size: 11px; padding: 6px 16px; background: transparent; border: 1px solid var(--ink-soft); color: var(--ink-soft); }
+  #boardTabs button.on { background: var(--ink); color: var(--paper-hi); border-color: var(--ink); }
+  #board ol { list-style: none; padding: 0; margin-top: 12px; counter-reset: rank; }
+  #board li { display: flex; justify-content: space-between; padding: 10px 14px; border-bottom: 1px dotted var(--faint); font-size: 18px; counter-increment: rank; }
+  #board li span:first-child::before { content: counter(rank) '.  '; color: var(--gold); }
+  #board li.me { background: rgba(168,132,44,.12); font-weight: 500; }
+  #board li.empty { justify-content: center; font-style: italic; color: var(--ink-soft); }
+  #board li.empty::before { content: none; }
+  .stk { font-style: normal; font-size: 12px; }
+
+  dialog { border: 1px solid var(--gold); outline: 1px solid var(--gold); outline-offset: 4px; background: var(--paper-hi); color: var(--ink); font-family: 'Spectral', Georgia, serif; max-width: 480px; padding: 28px; }
+  dialog::backdrop { background: rgba(33,28,18,.5); }
+  dialog h2 { font-family: 'Cormorant Garamond', serif; letter-spacing: .1em; text-transform: uppercase; font-size: 22px; margin-bottom: 12px; text-align: center; }
+  dialog p, dialog li { font-size: 15px; line-height: 1.55; margin-bottom: 8px; }
+  dialog ul { padding-left: 18px; }
+  dialog button { margin: 12px auto 0; display: block; background: var(--ink); color: var(--paper-hi); border: 1px solid var(--ink); }
+  dialog input { width: 100%; font: 400 16px 'Spectral', Georgia, serif; padding: 10px 12px; border: 1px solid var(--ink-soft); background: #fff; margin-top: 6px; }
+  dialog a { color: var(--burgundy); }
+  .statrow { text-align: center; margin-bottom: 8px; }
+  .dist { margin-top: 10px; }
+  .drow { display: flex; align-items: center; gap: 8px; margin: 3px 0; }
+  .drow > span { width: 16px; text-align: right; color: var(--ink-soft); font-size: 13px; }
+  .dbar { background: var(--gold); color: var(--paper-hi); font-size: 12px; padding: 2px 6px; min-height: 18px; }
+
+  #err { margin-top: 26px; text-align: center; color: var(--burgundy); font-style: italic; }
+  footer { margin-top: 48px; text-align: center; font-size: 13px; font-style: italic; color: var(--ink-soft); }
+  footer .orn { color: var(--gold); font-style: normal; }
+  footer a { color: var(--ink-soft); }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <span class="clef">𝄞</span>
+    <h1>Composer<span class="dle">dle</span></h1>
+    <p class="tagline">Hear the piece. Read the score. Name its maker.</p>
+    <p class="meta" id="meta"></p>
+    <nav class="modes"><a href="index.html">I · By Facts</a><span>II · By Ear</span></nav>
+    <nav class="modes" id="tiers"></nav>
+    <p class="archive" id="archive"></p>
+    <p class="namebar" id="namebar"></p>
+    <p class="toolrow"><a id="lnkHowto">How to play</a> · <a id="lnkStats">My stats</a> · <a href="credits.html">Credits</a></p>
+  </header>
+
+  <div class="flourish" aria-hidden="true">♪</div>
+
+  <div id="game" hidden>
+    <div class="stage">
+    <div class="scorecard">
+      <div class="byline">
+        <span>The score</span>
+        <span>by <span class="redact">a certain somebody</span></span>
+      </div>
+      <div class="crop" id="cropbox"><img id="scoreImg" alt="Score page — composer name withheld"></div>
+      <div class="pagenav">
+        <button id="pgPrev" aria-label="Previous page">‹</button>
+        <span id="pgLabel"></span>
+        <button id="pgNext" aria-label="Next page">›</button>
+      </div>
+      <audio id="player" controls preload="metadata"></audio>
+    </div>
+    <p class="hintline">A real recording, a real engraved score — six tries. The pages turn with the music.</p>
+    </div>
+
+    <div class="side">
+    <div id="controls">
+      <label class="fieldlabel" for="guess">The composer</label>
+      <input id="guess" list="names" placeholder="Full name or surname — e.g. Dvořák" autocomplete="off" autocapitalize="words" aria-label="Composer guess">
+      <label class="fieldlabel" for="pieceGuess">The piece <em>(required — getting it right doubles your points)</em></label>
+      <input id="pieceGuess" placeholder="e.g. Symphony No. 5" autocomplete="off" aria-label="Piece name guess">
+      <button id="btnGuess">Submit guess ♪</button>
+      <p id="pieceMsg" aria-live="polite"></p>
+      <div class="aidrow">
+        <button id="btnHintEar">Hint ♪ — costs a try</button>
+        <button id="btnQuit">Give up</button>
+      </div>
+      <ul id="hintsOut" aria-live="polite"></ul>
+      <datalist id="names"></datalist>
+    </div>
+
+    <div id="tries" aria-label="Remaining tries"></div>
+    <ul id="wrong"></ul>
+
+    <div id="result" hidden aria-live="polite">
+      <div class="verdict"></div>
+      <div class="name"></div>
+      <div class="yrs"></div>
+      <div class="work"></div>
+      <div class="score"></div>
+      <div class="grid"></div>
+      <div class="endbtns">
+        <button id="btnShare">Share</button>
+        <button id="btnChallenge">Challenge a friend</button>
+        <button id="btnEncore">Next piece ▸</button>
+      </div>
+    </div>
+    </div>
+  </div>
+  <p id="err" hidden></p>
+
+  <section id="board">
+    <h2>Leaderboard</h2>
+    <div id="boardTabs">
+      <button data-scope="career" class="on">Career</button>
+      <button data-scope="daily">Today</button>
+    </div>
+    <ol id="boardList"></ol>
+  </section>
+
+  <footer>an idea by <a href="https://www.youtube.com/@twosetviolin" target="_blank" rel="noopener">TwoSet Violin</a>, brought to the web <span class="orn">·</span> <a href="credits.html">recordings &amp; scores from the public domain</a></footer>
+</div>
+
+<dialog id="dlgHowto">
+  <h2>How to play</h2>
+  <ul>
+    <li>Each day brings a real recording and its real engraved score — with the composer's name inked out.</li>
+    <li>Each of your <b>six tries</b> must name both the <b>composer</b> (surname is enough) and the <b>piece</b>, together.</li>
+    <li>A <b>hint</b> (year, era, genre) costs a try. Wrong composers are struck from the list.</li>
+    <li>Getting the <b>piece</b> right at any point <b>doubles your points</b> — and we'll tell you if you've at least got the right genre.</li>
+    <li>Fewer tries = more points. Harder tiers multiply them (×2, ×3). Dailies build your career score and streak — one attempt per day, so make it count.</li>
+    <li>Encores and challenges are for glory, not points.</li>
+  </ul>
+  <p style="font-style:italic;text-align:center;font-size:13px;color:var(--ink-soft)">An idea by <a href="https://www.youtube.com/@twosetviolin" target="_blank" rel="noopener">TwoSet Violin</a>, brought to the web.</p>
+  <button id="dlgHowtoClose">To the stage</button>
+</dialog>
+<dialog id="dlgStats">
+  <h2>My stats</h2>
+  <div id="statsOut"></div>
+  <button id="dlgStatsClose">Close</button>
+</dialog>
+<dialog id="dlgName">
+  <h2>Welcome to the hall</h2>
+  <p>Every performer needs a stage name — it is how your scores appear on the leaderboard.</p>
+  <input id="dlgNameInput" maxlength="24" placeholder="e.g. Maestro Fortissimo" autocomplete="nickname" aria-label="Stage name">
+  <button id="dlgNameSave">Take the stage</button>
+  <p style="text-align:center; margin-top:10px"><a href="#" id="dlgNameSkip">just browsing today</a></p>
+</dialog>
+
+<script src="names.js"></script>
+<script src="lb.js"></script>
+<script>
+(() => {
+  const MAX = 6;
+  const $ = id => document.getElementById(id);
+  const qs = new URLSearchParams(location.search);
+  const MODE = ['easy', 'medium', 'hard'].includes(qs.get('mode')) ? qs.get('mode') : 'easy';
+  const CHALLENGE = (qs.get('c') || '').replace(/[^a-z0-9]/g, '');
+  const DAY = qs.get('day');
+
+  let S = null;      // server state {day, today, key, scored, puzzle, state}
+  let page = 0;
+
+  $('tiers').innerHTML = ['easy', 'medium', 'hard'].map(t => {
+    const label = t[0].toUpperCase() + t.slice(1);
+    return t === MODE && !CHALLENGE ? `<span>${label}</span>` : `<a href="?mode=${t}">${label}</a>`;
+  }).join('');
+
+  const dl = $('names');
+  function buildList() {
+    dl.innerHTML = '';
+    COMPOSER_NAMES.forEach(n => { const o = document.createElement('option'); o.value = n; dl.appendChild(o); });
+  }
+  const strike = name => { const o = [...dl.options].find(o => o.value === name); if (o) o.remove(); };
+
+  // ---------- score viewer ----------
+  const img = $('scoreImg');
+  function showPage(i) {
+    page = i;
+    img.src = S.puzzle.pages[i];
+    $('pgLabel').textContent = `page ${i + 1} of ${S.puzzle.pages.length}`;
+    $('pgPrev').disabled = i <= 0;
+    $('pgNext').disabled = i >= S.puzzle.pages.length - 1;
+  }
+  img.addEventListener('load', () => {
+    const dispH = img.naturalHeight / img.naturalWidth * img.clientWidth;
+    const done = S.state.done;
+    const top = (page === 0 && !done) ? (S.puzzle.crop || 0) : 0;
+    const bottom = !done ? (S.puzzle.cropBottom || 0) : 0;
+    img.style.marginTop = `-${top * dispH}px`;
+    $('cropbox').style.height = bottom ? `${dispH * (1 - top - bottom)}px` : 'auto';
+  });
+  $('player').addEventListener('timeupdate', () => {
+    const p = $('player');
+    if (p.paused || !p.duration) return;
+    // ponytail: linear pacing; per-piece cue lists slot in here if ever hand-timed
+    const spp = p.duration / S.puzzle.pages.length;
+    const target = Math.min(Math.floor(p.currentTime / spp), S.puzzle.pages.length - 1);
+    if (target > page) showPage(target);
+  });
+
+  // ---------- render ----------
+  function tierLabel() { return MODE[0].toUpperCase() + MODE.slice(1); }
+  function renderMeta() {
+    if (CHALLENGE) { $('meta').textContent = 'A challenge — unscored, honour only'; $('archive').innerHTML = ''; return; }
+    if (S.key.startsWith('e-')) { $('meta').textContent = `Encore · ${tierLabel()} · practice, no points`; return; }
+    $('meta').textContent = `${tierLabel()} · today's puzzle`;
+    const prev = S.day > 0 ? `<a href="?mode=${MODE}&day=${S.day - 1}">‹ yesterday</a>` : '';
+    const next = S.day < S.today ? `<a href="?mode=${MODE}&day=${S.day + 1}">tomorrow ›</a>` : '';
+    $('archive').innerHTML = prev + next;
+  }
+  function render() {
+    const st = S.state;
+    $('tries').innerHTML = Array.from({ length: MAX }, (_, i) => {
+      if (i >= st.marks.length) return '♪';
+      return `<span class="${st.marks[i] === 'wrong' ? 'spent lost' : 'spent'}">♪</span>`;
+    }).join('');
+    $('wrong').innerHTML = st.wrong.map(w => `<li>${lbEsc(w)}</li>`).join('');
+    $('hintsOut').innerHTML = st.hints.map(h => `<li>${lbEsc(h)}</li>`).join('');
+    $('btnHintEar').disabled = st.done || st.hints.length >= 3 || st.marks.length >= MAX - 1;
+    if (st.pieceFound && !st.done) { $('pieceMsg').textContent = '✓ Piece identified — your points will be doubled.'; $('pieceMsg').className = 'good'; $('pieceGuess').disabled = true; }
+    $('controls').hidden = st.done;
+    $('result').hidden = !st.done;
+    if (st.done) renderResult();
+  }
+  function renderResult() {
+    const st = S.state, r = st.result;
+    const verdicts = ['Perfect pitch!', 'Bravo — a fine ear.', 'Bravo!', 'Well heard.', 'A close call.', 'Saved at the final bar.'];
+    $('result').querySelector('.verdict').textContent = st.won ? verdicts[st.marks.length - 1] : 'The curtain falls. It was…';
+    $('result').querySelector('.name').textContent = r.composer;
+    $('result').querySelector('.yrs').textContent = r.years;
+    $('result').querySelector('.work').textContent = `“${r.title}” · ${r.performer} (${r.license}) · score: ${r.scoreNote}`;
+    $('result').querySelector('.score').textContent =
+      (st.won ? `Named in ${st.marks.length}/${MAX}` : `X/${MAX} — train the ear, return tomorrow`)
+      + (r.pieceFound ? ' · piece named, points doubled' : '')
+      + (S.scored ? ` · +${r.pts} pts` : ' · unscored');
+    $('result').querySelector('.grid').textContent = grid();
+    showPage(page); // un-crop via load handler
+  }
+  const grid = () => S.state.marks.map(m => m === 'win' ? '🟩' : m === 'skip' ? '⬜' : '🟥').join('');
+
+  // when a game ends, flow straight into the next piece (countdown, cancellable)
+  let autoNext = null;
+  function startAutoNext() {
+    clearInterval(autoNext);
+    let n = 7;
+    const btn = $('btnEncore');
+    btn.textContent = `Next piece ▸ ${n}`;
+    autoNext = setInterval(() => {
+      if (--n <= 0) { clearInterval(autoNext); btn.click(); }
+      else btn.textContent = `Next piece ▸ ${n}`;
+    }, 1000);
+  }
+  function cancelAutoNext() {
+    clearInterval(autoNext);
+    $('btnEncore').textContent = 'Next piece ▸';
+  }
+
+  // ---------- actions ----------
+  let busy = false;
+  async function act(action, value) {
+    if (busy) return;             // serialize: one request in flight → no read-modify-write race
+    busy = true;
+    $('btnGuess').disabled = $('btnHintEar').disabled = $('btnQuit').disabled = true;
+    try {
+      const r = await apiPost('/api/guess', { gs: S.gs, action, value });
+      S.state = r.state;
+      if (r.gs) S.gs = r.gs;                 // advance the signed game-state token
+      if (r.strike) strike(r.strike);
+      if (r.piece) {
+        const m = $('pieceMsg');
+        if (r.piece === 'correct') { m.textContent = '✓ Piece identified — your points will be doubled.'; m.className = 'good'; $('pieceGuess').disabled = true; $('pieceGuess').value = ''; }
+        else if (r.piece === 'genre') { m.textContent = `Right genre — it is indeed a ${r.genre} — but not that piece.`; m.className = 'warm'; }
+        else { m.textContent = 'Not that piece — and not its genre either.'; m.className = 'cold'; }
+      }
+      if (action === 'guess' && !S.state.done && S.state.marks.at(-1) === 'wrong') {
+        $('guess').classList.remove('shake'); void $('guess').offsetWidth; $('guess').classList.add('shake');
+      }
+      if (S.state.done) sfx(S.state.won ? 'win' : 'lose');
+      else if (r.piece === 'correct') sfx('good');
+      else if (action === 'guess' && S.state.marks.at(-1) === 'wrong') sfx('wrong');
+      render();
+      if (S.state.done) { lbRender(); statsRender().catch(() => {}); startAutoNext(); }
+    } catch (e) {
+      if (e.message !== 'too short' && e.message !== 'empty guess') showErr(e.message);
+    } finally {
+      busy = false;
+      $('btnGuess').disabled = $('btnQuit').disabled = S.state.done;
+      $('btnHintEar').disabled = S.state.done || S.state.hints.length >= 3 || S.state.marks.length >= MAX - 1;
+    }
+  }
+  const showErr = m => { $('err').hidden = false; $('err').textContent = m; setTimeout(() => $('err').hidden = true, 4000); };
+
+  $('btnGuess').addEventListener('click', () => {
+    const c = $('guess').value.trim();
+    if (!c) { $('guess').focus(); return; }
+    const p = $('pieceGuess').disabled ? '' : $('pieceGuess').value.trim();
+    if (!p && !$('pieceGuess').disabled) {
+      const m = $('pieceMsg');
+      m.textContent = 'Every guess names the piece too — take a stab at it.';
+      m.className = 'cold';
+      $('pieceGuess').focus();
+      return;
+    }
+    $('guess').value = '';
+    act('guess', { c, p });
+  });
+  $('guess').addEventListener('keydown', e => { if (e.key === 'Enter') $('btnGuess').click(); });
+  $('pieceGuess').addEventListener('keydown', e => { if (e.key === 'Enter') $('btnGuess').click(); });
+  $('btnHintEar').addEventListener('click', () => act('hint'));
+  $('btnQuit').addEventListener('click', () => act('quit'));
+  $('pgPrev').addEventListener('click', () => page > 0 && showPage(page - 1));
+  $('pgNext').addEventListener('click', () => page < S.puzzle.pages.length - 1 && showPage(page + 1));
+
+  $('btnShare').addEventListener('click', () => {
+    cancelAutoNext();
+    const head = CHALLENGE ? 'Composerdle challenge' : S.key.startsWith('e-') ? 'Composerdle encore'
+      : `Composerdle By Ear No. ${S.day + 1} (${MODE})`;
+    const score = S.state.won ? `${S.state.marks.length}/${MAX}` : `X/${MAX}`;
+    navigator.clipboard.writeText(`🎼🎧 ${head} — ${score}${S.state.result.pieceFound ? ' +piece' : ''}\n${grid()}\nhttps://composerdle-eta.vercel.app/listen.html`);
+    $('btnShare').textContent = 'Copied!'; setTimeout(() => $('btnShare').textContent = 'Share', 1500);
+  });
+  $('btnChallenge').addEventListener('click', () => {
+    cancelAutoNext();
+    navigator.clipboard.writeText(`Can you name this composer? 🎼 https://composerdle-eta.vercel.app/listen.html?c=${S.state.result.challengeId}`);
+    $('btnChallenge').textContent = 'Link copied!'; setTimeout(() => $('btnChallenge').textContent = 'Challenge a friend', 1500);
+  });
+  $('btnEncore').addEventListener('click', () => { cancelAutoNext(); load({ nonce: Math.random().toString(36).slice(2, 10) }); });
+  ['pgPrev', 'pgNext', 'lnkStats', 'lnkHowto'].forEach(id => $(id).addEventListener('click', cancelAutoNext));
+
+  // ---------- dialogs ----------
+  $('lnkHowto').addEventListener('click', () => $('dlgHowto').showModal());
+  $('dlgHowtoClose').addEventListener('click', () => $('dlgHowto').close());
+  $('lnkStats').addEventListener('click', async () => { await statsRender(); $('dlgStats').showModal(); });
+  $('dlgStatsClose').addEventListener('click', () => $('dlgStats').close());
+  lbNamePrompt(() => {
+    try { if (!localStorage.getItem('cdle-howto')) { $('dlgHowto').showModal(); localStorage.setItem('cdle-howto', '1'); } } catch (e) {}
+  });
+
+  // ---------- load ----------
+  async function load(extra) {
+    try {
+      const p = new URLSearchParams({ mode: 'ear', tier: MODE });
+      if (CHALLENGE && !extra) p.set('challenge', CHALLENGE);
+      if (DAY !== null && !extra) p.set('day', DAY);
+      if (extra && extra.nonce) p.set('nonce', extra.nonce);
+      S = await apiGet('/api/daily?' + p);
+      $('game').hidden = false; $('err').hidden = true;
+      buildList();
+      $('pieceGuess').disabled = false;
+      $('pieceMsg').textContent = ''; $('pieceMsg').className = '';
+      const player = $('player');
+      player.src = S.puzzle.audio; player.load();
+      showPage(0);
+      renderMeta(); render();
+      if (S.state.done) startAutoNext(); // returning to a finished daily → roll onward
+    } catch (e) {
+      $('game').hidden = true;
+      $('err').hidden = false;
+      $('err').textContent = 'The concert hall is unreachable — check your connection and refresh.';
+    }
+  }
+
+  lbNameBar(() => lbRender());
+  lbRender();
+  load();
+})();
+</script>
+</body>
+</html>

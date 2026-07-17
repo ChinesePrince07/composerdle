@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Composerdle — the daily composer guessing game</title>
+<meta name="description" content="A daily classical-music guessing game: six fun-fact clues, one composer. Plus a by-ear mode with real recordings and scores.">
+<meta property="og:title" content="Composerdle">
+<meta property="og:description" content="Six clues. One composer. A daily classical guessing game.">
+<meta property="og:image" content="https://composerdle-eta.vercel.app/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f5eddb; --paper-hi: #fbf5e7; --ink: #211c12; --ink-soft: #5c5137;
+    --faint: #b3a37e; --burgundy: #7c2323; --gold: #9a7724; --rule: #b6a276;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    font-family: 'Spectral', Georgia, serif; font-weight: 400; font-size: 17px; color: var(--ink);
+    background:
+      radial-gradient(120% 90% at 50% 0%, rgba(255,252,240,.9), rgba(255,252,240,0) 60%),
+      radial-gradient(100% 100% at 50% 100%, rgba(122,94,35,.10), rgba(122,94,35,0) 55%),
+      var(--paper);
+    min-height: 100vh; padding: 0 20px 64px;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background: repeating-linear-gradient(to bottom, transparent 0 34px, rgba(33,28,18,.045) 34px 35px);
+    pointer-events: none;
+  }
+  .page { max-width: 640px; margin: 0 auto; position: relative; }
+  header { text-align: center; padding: 14px 0 2px; }
+  .clef { font-size: 26px; line-height: 1; color: var(--gold); display: inline-block; vertical-align: middle; margin-right: 8px; }
+  h1 { display: inline-block; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 700; font-size: clamp(28px, 5vw, 40px); letter-spacing: .12em; text-transform: uppercase; vertical-align: middle; }
+  h1 .dle { color: var(--burgundy); }
+  .tagline { font-style: italic; font-size: 15px; color: var(--ink-soft); margin-top: 0; }
+  .meta { margin-top: 6px; font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-soft); font-weight: 500; }
+  nav.modes { display: inline-block; margin: 6px 8px 0; font-size: 14px; letter-spacing: .16em; text-transform: uppercase; font-weight: 500; }
+  nav.modes a, nav.modes span { color: var(--ink-soft); text-decoration: none; margin: 0 7px; padding-bottom: 2px; }
+  nav.modes span { color: var(--burgundy); border-bottom: 1px solid var(--burgundy); }
+  nav.modes a:hover { color: var(--burgundy); }
+  .archive { display: inline-block; margin: 4px 6px 0; font-size: 12px; letter-spacing: .1em; }
+  .archive a { color: var(--ink-soft); text-decoration: none; margin: 0 6px; }
+  .archive a:hover { color: var(--burgundy); }
+  .namebar { display: inline-block; margin: 4px 8px 0; font-size: 13px; color: var(--ink-soft); font-style: italic; }
+  .namebar input { font: 400 14px 'Spectral', Georgia, serif; padding: 6px 10px; border: 1px solid var(--ink-soft); background: var(--paper-hi); margin: 0 6px; }
+  .namebar button { font-size: 11px; padding: 7px 14px; background: var(--ink); color: var(--paper-hi); border: 1px solid var(--ink); }
+  .namebar a, .toolrow a { color: var(--burgundy); }
+  .toolrow { display: inline-block; margin: 4px 8px 0; font-size: 12px; letter-spacing: .1em; }
+  .toolrow a { margin: 0 6px; cursor: pointer; text-decoration: none; }
+  .flourish { display: flex; align-items: center; gap: 14px; margin: 8px 0 12px; color: var(--gold); }
+  .flourish::before, .flourish::after { content: ''; flex: 1; height: 3px; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+
+  /* desktop: clues on the left, guessing on the right — no page scrolling */
+  @media (min-width: 1000px) {
+    .page { max-width: 1240px; }
+    #game { display: grid; grid-template-columns: 55fr 45fr; gap: 28px; align-items: start; }
+    #controls { margin-top: 0; }
+    #board { max-width: 640px; margin-left: auto; margin-right: auto; }
+  }
+
+  #hints { list-style: none; display: grid; gap: 10px; padding: 0; max-height: 62vh; overflow-y: auto; }
+  .hint {
+    background: var(--paper-hi); border: 1px solid var(--rule);
+    outline: 1px solid rgba(201,185,143,.45); outline-offset: 3px;
+    padding: 12px 16px 13px; box-shadow: 0 2px 10px rgba(70,55,20,.08);
+  }
+  .hint.fresh { animation: enter .5s cubic-bezier(.2,.7,.3,1) both; }
+  .hint .label { font-size: 13px; letter-spacing: .3em; text-transform: uppercase; color: var(--burgundy); font-weight: 600; display: flex; align-items: baseline; gap: 10px; }
+  .hint .label::after { content: ''; flex: 1; border-bottom: 1px dotted var(--faint); }
+  .hint p { margin-top: 8px; font-size: 19px; line-height: 1.6; }
+  @keyframes enter { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+  #controls { margin-top: 14px; display: grid; gap: 10px; }
+  .guessrow { display: flex; gap: 10px; }
+  #guess { flex: 1; min-width: 0; font: 500 19px 'Spectral', Georgia, serif; color: var(--ink); background: var(--paper-hi); border: 2px solid var(--ink-soft); padding: 12px 16px; border-radius: 0; }
+  #guess:focus { outline: 3px solid var(--gold); outline-offset: 1px; }
+  #guess.shake { animation: shake .4s; }
+  @keyframes shake { 20%,60% { transform: translateX(-6px); } 40%,80% { transform: translateX(6px); } }
+  button { font: 600 15px 'Spectral', Georgia, serif; letter-spacing: .16em; text-transform: uppercase; padding: 12px 20px; cursor: pointer; border-radius: 0; transition: transform .12s ease, background .15s ease, color .15s ease; outline: 1px solid var(--faint); outline-offset: 3px; }
+  button:active { transform: translateY(1px); }
+  button:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+  #btnGuess { background: var(--ink); color: var(--paper-hi); border: 1px solid var(--ink); }
+  #btnGuess:hover { background: var(--burgundy); border-color: var(--burgundy); }
+  #btnHint { background: transparent; color: var(--ink); border: 2px solid var(--ink); width: 100%; }
+  #btnHint:hover:not(:disabled) { background: rgba(33,28,18,.06); }
+  #btnHint:disabled { opacity: .4; cursor: not-allowed; }
+
+  #tries { margin-top: 12px; text-align: center; font-size: 30px; letter-spacing: 16px; color: var(--ink); user-select: none; }
+  #tries .spent { color: var(--faint); }
+  #tries .lost { color: var(--burgundy); }
+  #wrong { list-style: none; margin-top: 12px; text-align: center; padding: 0; }
+  #wrong li { display: inline-block; margin: 3px 8px; font-style: italic; font-size: 18px; color: var(--burgundy); text-decoration: line-through; }
+
+  #result { margin-top: 14px; text-align: center; background: var(--paper-hi); border: 1px solid var(--gold); outline: 1px solid var(--gold); outline-offset: 4px; padding: 20px 20px 18px; box-shadow: 0 6px 24px rgba(70,55,20,.14); animation: enter .6s cubic-bezier(.2,.7,.3,1) both; }
+  #result .verdict { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 24px; color: var(--burgundy); }
+  #result .name { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(30px, 7vw, 44px); line-height: 1.1; margin-top: 8px; }
+  #result .yrs { margin-top: 4px; color: var(--ink-soft); letter-spacing: .2em; font-size: 14px; }
+  #result .score { margin-top: 14px; font-size: 16px; }
+  #result .grid { margin-top: 6px; font-size: 20px; letter-spacing: 4px; }
+  .endbtns { margin-top: 20px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  #btnShare { background: var(--gold); border: 1px solid var(--gold); color: var(--paper-hi); }
+  #btnShare:hover { background: var(--ink); border-color: var(--ink); }
+  #btnEncore { background: var(--ink); border: 2px solid var(--ink); color: var(--paper-hi); }
+  #btnEncore:hover { background: var(--burgundy); border-color: var(--burgundy); }
+
+  #board { margin-top: 26px; }
+  #board h2 { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 24px; text-align: center; letter-spacing: .12em; text-transform: uppercase; }
+  #boardTabs { text-align: center; margin-top: 8px; }
+  #boardTabs button { font-size: 11px; padding: 6px 16px; background: transparent; border: 1px solid var(--ink-soft); color: var(--ink-soft); }
+  #boardTabs button.on { background: var(--ink); color: var(--paper-hi); border-color: var(--ink); }
+  #board ol { list-style: none; padding: 0; margin-top: 12px; counter-reset: rank; }
+  #board li { display: flex; justify-content: space-between; padding: 10px 14px; border-bottom: 1px dotted var(--faint); font-size: 18px; counter-increment: rank; }
+  #board li span:first-child::before { content: counter(rank) '.  '; color: var(--gold); }
+  #board li.me { background: rgba(168,132,44,.12); font-weight: 500; }
+  #board li.empty { justify-content: center; font-style: italic; color: var(--ink-soft); }
+  #board li.empty::before { content: none; }
+  .stk { font-style: normal; font-size: 12px; }
+
+  dialog { border: 1px solid var(--gold); outline: 1px solid var(--gold); outline-offset: 4px; background: var(--paper-hi); color: var(--ink); font-family: 'Spectral', Georgia, serif; max-width: 480px; padding: 28px; }
+  dialog::backdrop { background: rgba(33,28,18,.5); }
+  dialog h2 { font-family: 'Cormorant Garamond', serif; letter-spacing: .1em; text-transform: uppercase; font-size: 22px; margin-bottom: 12px; text-align: center; }
+  dialog p, dialog li { font-size: 15px; line-height: 1.55; margin-bottom: 8px; }
+  dialog ul { padding-left: 18px; }
+  dialog button { margin: 12px auto 0; display: block; background: var(--ink); color: var(--paper-hi); border: 1px solid var(--ink); }
+  dialog input { width: 100%; font: 400 16px 'Spectral', Georgia, serif; padding: 10px 12px; border: 1px solid var(--ink-soft); background: #fff; margin-top: 6px; }
+  dialog a { color: var(--burgundy); }
+  .statrow { text-align: center; margin-bottom: 8px; }
+  .dist { margin-top: 10px; }
+  .drow { display: flex; align-items: center; gap: 8px; margin: 3px 0; }
+  .drow > span { width: 16px; text-align: right; color: var(--ink-soft); font-size: 13px; }
+  .dbar { background: var(--gold); color: var(--paper-hi); font-size: 12px; padding: 2px 6px; min-height: 18px; }
+
+  #err { margin-top: 26px; text-align: center; color: var(--burgundy); font-style: italic; }
+  footer { margin-top: 48px; text-align: center; font-size: 13px; font-style: italic; color: var(--ink-soft); }
+  footer .orn { color: var(--gold); font-style: normal; }
+  footer a { color: var(--ink-soft); }
+  [hidden] { display: none !important; }
+  @media (prefers-reduced-motion: reduce) { .hint, #result { animation: none; } #guess.shake { animation: none; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <span class="clef">𝄞</span>
+    <h1>Composer<span class="dle">dle</span></h1>
+    <p class="tagline">Six clues. One composer. A fresh one every round.</p>
+    <p class="meta" id="meta"></p>
+    <nav class="modes"><span>I · By Facts</span><a href="listen.html">II · By Ear</a></nav>
+    <nav class="modes" id="tiers"></nav>
+    <p class="archive" id="archive"></p>
+    <p class="namebar" id="namebar"></p>
+    <p class="toolrow"><a id="lnkHowto">How to play</a> · <a id="lnkStats">My stats</a> · <a href="credits.html">Credits</a></p>
+  </header>
+
+  <div class="flourish" aria-hidden="true">♪</div>
+
+  <div id="game" hidden>
+    <ol id="hints" aria-live="polite"></ol>
+
+    <div class="side">
+    <div id="controls">
+      <div class="guessrow">
+        <input id="guess" list="names" placeholder="Full name or surname…" autocomplete="off" autocapitalize="words" aria-label="Your guess">
+        <button id="btnGuess">Guess</button>
+      </div>
+      <button id="btnHint">I need another clue&nbsp;&nbsp;♪</button>
+      <datalist id="names"></datalist>
+    </div>
+
+    <div id="tries" aria-label="Remaining tries"></div>
+    <ul id="wrong"></ul>
+
+    <div id="result" hidden aria-live="polite">
+      <div class="verdict"></div>
+      <div class="name"></div>
+      <div class="yrs"></div>
+      <div class="score"></div>
+      <div class="grid"></div>
+      <div class="endbtns">
+        <button id="btnShare">Share</button>
+        <button id="btnEncore">Next composer ▸</button>
+      </div>
+    </div>
+    </div>
+  </div>
+  <p id="err" hidden></p>
+
+  <section id="board">
+    <h2>Leaderboard</h2>
+    <div id="boardTabs">
+      <button data-scope="career" class="on">Career</button>
+      <button data-scope="daily">Today</button>
+    </div>
+    <ol id="boardList"></ol>
+  </section>
+
+  <footer>an idea by <a href="https://www.youtube.com/@twosetviolin" target="_blank" rel="noopener">TwoSet Violin</a>, brought to the web <span class="orn">·</span> in the key of Wordle <span class="orn">·</span> <a href="credits.html">credits</a></footer>
+</div>
+
+<dialog id="dlgHowto">
+  <h2>How to play</h2>
+  <ul>
+    <li>Each day, one composer hides behind six fun-fact clues, cryptic first, obvious last.</li>
+    <li>You have <b>six tries</b>: guess (surname is enough) or ask for the next clue — either spends a try.</li>
+    <li>Wrong guesses are struck off the list.</li>
+    <li>By Facts is endless practice — a new random composer each round, with clues that reshuffle every time.</li>
+    <li>Pick a level: <b>Easy</b> serves common-knowledge clues, <b>Hard</b> only the niche, obscure ones (the famous-work giveaways never appear).</li>
+    <li>Want it to count? <a href="listen.html">Mode II · By Ear</a> is the scored daily: real recordings, real scores, leaderboards and streaks.</li>
+  </ul>
+  <p style="font-style:italic;text-align:center;font-size:13px;color:var(--ink-soft)">An idea by <a href="https://www.youtube.com/@twosetviolin" target="_blank" rel="noopener">TwoSet Violin</a>, brought to the web.</p>
+  <button id="dlgHowtoClose">To the stage</button>
+</dialog>
+<dialog id="dlgStats">
+  <h2>My stats</h2>
+  <div id="statsOut"></div>
+  <button id="dlgStatsClose">Close</button>
+</dialog>
+<dialog id="dlgName">
+  <h2>Welcome to the hall</h2>
+  <p>Every performer needs a stage name — it is how your scores appear on the leaderboard.</p>
+  <input id="dlgNameInput" maxlength="24" placeholder="e.g. Maestro Fortissimo" autocomplete="nickname" aria-label="Stage name">
+  <button id="dlgNameSave">Take the stage</button>
+  <p style="text-align:center; margin-top:10px"><a href="#" id="dlgNameSkip">just browsing today</a></p>
+</dialog>
+
+<script src="names.js"></script>
+<script src="lb.js"></script>
+<script>
+(() => {
+  const MAX = 6;
+  const $ = id => document.getElementById(id);
+  const qs = new URLSearchParams(location.search);
+  const DAY = qs.get('day');
+  const LEVEL = ['easy', 'medium', 'hard'].includes(qs.get('tier')) ? qs.get('tier') : 'easy';
+  const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI'];
+
+  $('tiers').innerHTML = ['easy', 'medium', 'hard'].map(t => {
+    const label = t[0].toUpperCase() + t.slice(1);
+    return t === LEVEL ? `<span>${label}</span>` : `<a href="?tier=${t}">${label}</a>`;
+  }).join('');
+
+  let S = null;
+
+  const dl = $('names');
+  function buildList() {
+    dl.innerHTML = '';
+    COMPOSER_NAMES.forEach(n => { const o = document.createElement('option'); o.value = n; dl.appendChild(o); });
+  }
+  const strike = name => { const o = [...dl.options].find(o => o.value === name); if (o) o.remove(); };
+
+  function renderMeta() {
+    const lvl = LEVEL[0].toUpperCase() + LEVEL.slice(1);
+    if (S.key.startsWith('e-')) { $('meta').textContent = `${lvl} · a random composer`; $('archive').innerHTML = ''; return; }
+    $('meta').textContent = `Opus No. ${S.day + 1}`;
+    const prev = S.day > 0 ? `<a href="?day=${S.day - 1}">‹ earlier opus</a>` : '';
+    const next = S.day < S.today ? `<a href="?day=${S.day + 1}">later opus ›</a>` : '';
+    $('archive').innerHTML = prev + next;
+  }
+  function render() {
+    const st = S.state;
+    // rebuild from the authoritative clue list; animate only the newest card, so
+    // settled cards never re-animate (no overlap) and a stale append can't duplicate.
+    const hints = $('hints');
+    const grew = S.puzzle.clues.length > (+hints.dataset.n || 0);
+    hints.innerHTML = S.puzzle.clues.map((c, i) => {
+      const fresh = grew && i === S.puzzle.clues.length - 1 ? ' fresh' : '';
+      return `<li class="hint${fresh}"><div class="label">Clue ${ROMAN[i]}</div><p>${lbEsc(c)}</p></li>`;
+    }).join('');
+    hints.dataset.n = S.puzzle.clues.length;
+    $('tries').innerHTML = Array.from({ length: MAX }, (_, i) => {
+      if (i >= st.marks.length) return '♪';
+      return `<span class="${st.marks[i] === 'wrong' ? 'spent lost' : 'spent'}">♪</span>`;
+    }).join('');
+    $('wrong').innerHTML = st.wrong.map(w => `<li>${lbEsc(w)}</li>`).join('');
+    $('btnHint').disabled = st.done || S.puzzle.clues.length >= MAX;
+    $('controls').hidden = st.done;
+    $('result').hidden = !st.done;
+    if (st.done) renderResult();
+  }
+  function renderResult() {
+    const st = S.state, r = st.result;
+    const verdicts = ['Bravissimo! A one-clue prodigy.', 'Bravo — barely a rehearsal needed.', 'Bravo!', 'Well played.', 'A close call.', 'Saved at the final bar.'];
+    $('result').querySelector('.verdict').textContent = st.won ? verdicts[st.marks.length - 1] : 'The curtain falls. It was…';
+    $('result').querySelector('.name').textContent = r.composer;
+    $('result').querySelector('.yrs').textContent = r.years;
+    $('result').querySelector('.score').textContent =
+      (st.won ? `Solved in ${st.marks.length}/${MAX}` : `X/${MAX} — better luck tomorrow`)
+      + (S.scored ? ` · +${r.pts} pts` : ' · unscored');
+    $('result').querySelector('.grid').textContent = grid();
+  }
+  const grid = () => S.state.marks.map(m => m === 'win' ? '🟩' : m === 'skip' ? '⬜' : '🟥').join('');
+
+  // when a game ends, flow straight into the next composer (countdown, cancellable)
+  let autoNext = null;
+  function startAutoNext() {
+    clearInterval(autoNext);
+    let n = 7;
+    const btn = $('btnEncore');
+    btn.textContent = `Next composer ▸ ${n}`;
+    autoNext = setInterval(() => {
+      if (--n <= 0) { clearInterval(autoNext); btn.click(); }
+      else btn.textContent = `Next composer ▸ ${n}`;
+    }, 1000);
+  }
+  function cancelAutoNext() {
+    clearInterval(autoNext);
+    $('btnEncore').textContent = 'Next composer ▸';
+  }
+
+  let busy = false;
+  async function act(action, value) {
+    if (busy) return;              // serialize: one request in flight → no read-modify-write race
+    busy = true;
+    $('btnGuess').disabled = $('btnHint').disabled = true;
+    try {
+      const r = await apiPost('/api/guess', { gs: S.gs, action, value });
+      S.state = r.state;
+      if (r.gs) S.gs = r.gs;                 // advance the signed game-state token
+      if (r.strike) strike(r.strike);
+      if (r.clues) S.puzzle.clues = r.clues; // authoritative list from the server, never guessed
+      if (action === 'guess' && !S.state.done && S.state.marks.at(-1) === 'wrong') {
+        $('guess').classList.remove('shake'); void $('guess').offsetWidth; $('guess').classList.add('shake');
+      }
+      if (S.state.done) sfx(S.state.won ? 'win' : 'lose');
+      else if (action === 'guess' && S.state.marks.at(-1) === 'wrong') sfx('wrong');
+      render();
+      if (S.state.done) { lbRender(); statsRender().catch(() => {}); startAutoNext(); }
+    } catch (e) {
+      if (e.message !== 'empty guess') showErr(e.message);
+    } finally {
+      busy = false;
+      $('btnGuess').disabled = false;
+      $('btnHint').disabled = S.state.done || S.puzzle.clues.length >= MAX;
+    }
+  }
+  const showErr = m => { $('err').hidden = false; $('err').textContent = m; setTimeout(() => $('err').hidden = true, 4000); };
+
+  $('btnGuess').addEventListener('click', () => { const v = $('guess').value.trim(); if (v) { $('guess').value = ''; act('guess', v); } });
+  $('guess').addEventListener('keydown', e => { if (e.key === 'Enter') $('btnGuess').click(); });
+  $('btnHint').addEventListener('click', () => act('clue'));
+  $('btnShare').addEventListener('click', () => {
+    cancelAutoNext();
+    const head = S.key.startsWith('e-') ? 'Composerdle encore' : `Composerdle No. ${S.day + 1}`;
+    const score = S.state.won ? `${S.state.marks.length}/${MAX}` : `X/${MAX}`;
+    navigator.clipboard.writeText(`🎼 ${head} — ${score}\n${grid()}\nhttps://composerdle-eta.vercel.app`);
+    $('btnShare').textContent = 'Copied!'; setTimeout(() => $('btnShare').textContent = 'Share', 1500);
+  });
+  $('btnEncore').addEventListener('click', () => { cancelAutoNext(); load({ nonce: Math.random().toString(36).slice(2, 10) }); });
+  ['lnkStats', 'lnkHowto'].forEach(id => $(id).addEventListener('click', cancelAutoNext));
+
+  $('lnkHowto').addEventListener('click', () => $('dlgHowto').showModal());
+  $('dlgHowtoClose').addEventListener('click', () => $('dlgHowto').close());
+  $('lnkStats').addEventListener('click', async () => { await statsRender(); $('dlgStats').showModal(); });
+  $('dlgStatsClose').addEventListener('click', () => $('dlgStats').close());
+  lbNamePrompt(() => {
+    try { if (!localStorage.getItem('cdle-howto')) { $('dlgHowto').showModal(); localStorage.setItem('cdle-howto', '1'); } } catch (e) {}
+  });
+
+  async function load(extra) {
+    try {
+      const p = new URLSearchParams({ mode: 'facts', tier: LEVEL });
+      if (DAY !== null && !extra) p.set('day', DAY);
+      if (extra && extra.nonce) p.set('nonce', extra.nonce);
+      S = await apiGet('/api/daily?' + p);
+      $('game').hidden = false; $('err').hidden = true;
+      $('hints').dataset.n = 0;            // fresh game → let the first clue animate in
+      buildList();
+      renderMeta(); render();
+      if (S.state.done) startAutoNext(); // finished already → flow into the next composer
+    } catch (e) {
+      $('game').hidden = true;
+      $('err').hidden = false;
+      $('err').textContent = 'The concert hall is unreachable — check your connection and refresh.';
+    }
+  }
+
+  lbNameBar(() => lbRender());
+  lbRender();
+  // By Facts is an endless practice game: a fresh random composer every visit.
+  // (The scored daily lives in By Ear; ?day= still opens a specific archived opus.)
+  load(DAY !== null ? null : { nonce: Math.random().toString(36).slice(2, 10) });
+})();
+</script>
+</body>
+</html>

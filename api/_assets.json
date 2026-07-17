@@ -1,0 +1,671 @@
+{
+  "Toccata and Fugue in D minor, BWV 565": {
+    "id": "p01",
+    "tier": "easy",
+    "pages": [
+      "s/p01/1.webp",
+      "s/p01/2.webp",
+      "s/p01/3.webp",
+      "s/p01/4.webp",
+      "s/p01/5.webp",
+      "s/p01/6.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p01.mp3"
+  },
+  "Symphony No. 5 in C minor, Op. 67 — I. Allegro con brio": {
+    "id": "p02",
+    "tier": "easy",
+    "pages": [
+      "s/p02/1.webp",
+      "s/p02/2.webp",
+      "s/p02/3.webp",
+      "s/p02/4.webp",
+      "s/p02/5.webp",
+      "s/p02/6.webp",
+      "s/p02/7.webp",
+      "s/p02/8.webp",
+      "s/p02/9.webp",
+      "s/p02/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p02.mp3"
+  },
+  "Eine kleine Nachtmusik, K. 525 — I. Allegro": {
+    "id": "p03",
+    "tier": "easy",
+    "pages": [
+      "s/p03/1.webp",
+      "s/p03/2.webp",
+      "s/p03/3.webp",
+      "s/p03/4.webp",
+      "s/p03/5.webp",
+      "s/p03/6.webp",
+      "s/p03/7.webp",
+      "s/p03/8.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p03.mp3"
+  },
+  "The Four Seasons — “Spring”, RV 269, I. Allegro": {
+    "id": "p04",
+    "tier": "easy",
+    "pages": [
+      "s/p04/1.webp",
+      "s/p04/2.webp",
+      "s/p04/3.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p04.mp3"
+  },
+  "Symphony No. 94 “Surprise” — II. Andante": {
+    "id": "p05",
+    "tier": "easy",
+    "pages": [
+      "s/p05/1.webp",
+      "s/p05/2.webp",
+      "s/p05/3.webp",
+      "s/p05/4.webp",
+      "s/p05/5.webp",
+      "s/p05/6.webp",
+      "s/p05/7.webp",
+      "s/p05/8.webp",
+      "s/p05/9.webp",
+      "s/p05/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p05.mp3"
+  },
+  "In the Hall of the Mountain King (Peer Gynt Suite No. 1)": {
+    "id": "p06",
+    "tier": "easy",
+    "pages": [
+      "s/p06/1.webp",
+      "s/p06/2.webp",
+      "s/p06/3.webp",
+      "s/p06/4.webp",
+      "s/p06/5.webp",
+      "s/p06/6.webp",
+      "s/p06/7.webp",
+      "s/p06/8.webp",
+      "s/p06/9.webp",
+      "s/p06/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p06.mp3"
+  },
+  "Swan Lake, Op. 20 — Scène (the swan theme)": {
+    "id": "p07",
+    "tier": "easy",
+    "pages": [
+      "s/p07/1.webp",
+      "s/p07/2.webp",
+      "s/p07/3.webp",
+      "s/p07/4.webp",
+      "s/p07/5.webp",
+      "s/p07/6.webp",
+      "s/p07/7.webp",
+      "s/p07/8.webp",
+      "s/p07/9.webp",
+      "s/p07/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p07.mp3"
+  },
+  "Piano Sonata No. 2, Op. 35 — III. Marche funèbre": {
+    "id": "p08",
+    "tier": "easy",
+    "pages": [
+      "s/p08/1.webp",
+      "s/p08/2.webp",
+      "s/p08/3.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p08.mp3"
+  },
+  "Ride of the Valkyries (Die Walküre, Act III)": {
+    "id": "p09",
+    "tier": "easy",
+    "pages": [
+      "s/p09/1.webp",
+      "s/p09/2.webp",
+      "s/p09/3.webp",
+      "s/p09/4.webp",
+      "s/p09/5.webp",
+      "s/p09/6.webp",
+      "s/p09/7.webp",
+      "s/p09/8.webp",
+      "s/p09/9.webp",
+      "s/p09/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p09.mp3"
+  },
+  "Gymnopédie No. 1": {
+    "id": "p10",
+    "tier": "easy",
+    "pages": [
+      "s/p10/1.webp",
+      "s/p10/2.webp",
+      "s/p10/3.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p10.mp3"
+  },
+  "Hungarian Dance No. 5": {
+    "id": "p11",
+    "tier": "medium",
+    "pages": [
+      "s/p11/1.webp",
+      "s/p11/2.webp",
+      "s/p11/3.webp",
+      "s/p11/4.webp",
+      "s/p11/5.webp",
+      "s/p11/6.webp",
+      "s/p11/7.webp",
+      "s/p11/8.webp",
+      "s/p11/9.webp",
+      "s/p11/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p11.mp3"
+  },
+  "Clair de lune (Suite bergamasque)": {
+    "id": "p12",
+    "tier": "medium",
+    "pages": [
+      "s/p12/1.webp",
+      "s/p12/2.webp",
+      "s/p12/3.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p12.mp3"
+  },
+  "Water Music — Alla Hornpipe": {
+    "id": "p13",
+    "tier": "medium",
+    "pages": [
+      "s/p13/1.webp",
+      "s/p13/2.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p13.mp3"
+  },
+  "Ave Maria (Ellens Gesang III, D. 839)": {
+    "id": "p14",
+    "tier": "medium",
+    "pages": [
+      "s/p14/1.webp",
+      "s/p14/2.webp",
+      "s/p14/3.webp",
+      "s/p14/4.webp",
+      "s/p14/5.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p14.mp3"
+  },
+  "Hungarian Rhapsody No. 2": {
+    "id": "p15",
+    "tier": "medium",
+    "pages": [
+      "s/p15/1.webp",
+      "s/p15/2.webp",
+      "s/p15/3.webp",
+      "s/p15/4.webp",
+      "s/p15/5.webp",
+      "s/p15/6.webp",
+      "s/p15/7.webp",
+      "s/p15/8.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p15.mp3"
+  },
+  "La donna è mobile (Rigoletto)": {
+    "id": "p16",
+    "tier": "medium",
+    "pages": [
+      "s/p16/1.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p16.mp3"
+  },
+  "Wedding March (A Midsummer Night’s Dream)": {
+    "id": "p17",
+    "tier": "medium",
+    "pages": [
+      "s/p17/1.webp",
+      "s/p17/2.webp",
+      "s/p17/3.webp",
+      "s/p17/4.webp",
+      "s/p17/5.webp",
+      "s/p17/6.webp",
+      "s/p17/7.webp",
+      "s/p17/8.webp",
+      "s/p17/9.webp",
+      "s/p17/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p17.mp3"
+  },
+  "The Swan (Carnival of the Animals)": {
+    "id": "p18",
+    "tier": "medium",
+    "pages": [
+      "s/p18/1.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p18.mp3"
+  },
+  "Träumerei (Kinderszenen, Op. 15 No. 7)": {
+    "id": "p19",
+    "tier": "medium",
+    "pages": [
+      "s/p19/1.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p19.mp3"
+  },
+  "Caprice No. 24 in A minor": {
+    "id": "p20",
+    "tier": "hard",
+    "pages": [
+      "s/p20/1.webp",
+      "s/p20/2.webp",
+      "s/p20/3.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p20.mp3"
+  },
+  "Sì, mi chiamano Mimì (La bohème)": {
+    "id": "p21",
+    "tier": "hard",
+    "pages": [
+      "s/p21/1.webp",
+      "s/p21/2.webp",
+      "s/p21/3.webp",
+      "s/p21/4.webp",
+      "s/p21/5.webp",
+      "s/p21/6.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p21.mp3"
+  },
+  "Symphony No. 5 — IV. Adagietto": {
+    "id": "p22",
+    "tier": "hard",
+    "pages": [
+      "s/p22/1.webp",
+      "s/p22/2.webp",
+      "s/p22/3.webp",
+      "s/p22/4.webp",
+      "s/p22/5.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p22.mp3"
+  },
+  "Holberg Suite — I. Praeludium": {
+    "id": "p23",
+    "tier": "hard",
+    "pages": [
+      "s/p23/1.webp",
+      "s/p23/2.webp",
+      "s/p23/3.webp",
+      "s/p23/4.webp",
+      "s/p23/5.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p23.mp3"
+  },
+  "Passacaglia and Fugue in C minor, BWV 582": {
+    "id": "p24",
+    "tier": "hard",
+    "pages": [
+      "s/p24/1.webp",
+      "s/p24/2.webp",
+      "s/p24/3.webp",
+      "s/p24/4.webp",
+      "s/p24/5.webp",
+      "s/p24/6.webp",
+      "s/p24/7.webp",
+      "s/p24/8.webp",
+      "s/p24/9.webp",
+      "s/p24/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p24.mp3"
+  },
+  "Egmont Overture, Op. 84": {
+    "id": "p25",
+    "tier": "hard",
+    "pages": [
+      "s/p25/1.webp",
+      "s/p25/2.webp",
+      "s/p25/3.webp",
+      "s/p25/4.webp",
+      "s/p25/5.webp",
+      "s/p25/6.webp",
+      "s/p25/7.webp",
+      "s/p25/8.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p25.mp3"
+  },
+  "Slavonic Dance in E minor, Op. 72 No. 2": {
+    "id": "p26",
+    "tier": "hard",
+    "pages": [
+      "s/p26/1.webp",
+      "s/p26/2.webp",
+      "s/p26/3.webp",
+      "s/p26/4.webp",
+      "s/p26/5.webp",
+      "s/p26/6.webp",
+      "s/p26/7.webp",
+      "s/p26/8.webp",
+      "s/p26/9.webp",
+      "s/p26/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p26.mp3"
+  },
+  "Danse macabre, Op. 40": {
+    "id": "p27",
+    "tier": "hard",
+    "pages": [
+      "s/p27/1.webp",
+      "s/p27/2.webp",
+      "s/p27/3.webp",
+      "s/p27/4.webp",
+      "s/p27/5.webp",
+      "s/p27/6.webp",
+      "s/p27/7.webp",
+      "s/p27/8.webp",
+      "s/p27/9.webp",
+      "s/p27/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p27.mp3"
+  },
+  "Rondo alla turca (Piano Sonata K. 331)": {
+    "id": "p28",
+    "tier": "easy",
+    "pages": [
+      "s/p28/1.webp",
+      "s/p28/2.webp",
+      "s/p28/3.webp",
+      "s/p28/4.webp",
+      "s/p28/5.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p28.mp3"
+  },
+  "Nocturne in E-flat major, Op. 9 No. 2": {
+    "id": "p29",
+    "tier": "medium",
+    "pages": [
+      "s/p29/1.webp",
+      "s/p29/2.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p29.mp3"
+  },
+  "Cello Suite No. 1 in G major — Prélude": {
+    "id": "p30",
+    "tier": "medium",
+    "pages": [
+      "s/p30/1.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p30.mp3"
+  },
+  "Liebestraum No. 3 in A-flat major": {
+    "id": "p31",
+    "tier": "medium",
+    "pages": [
+      "s/p31/1.webp",
+      "s/p31/2.webp",
+      "s/p31/3.webp",
+      "s/p31/4.webp",
+      "s/p31/5.webp",
+      "s/p31/6.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p31.mp3"
+  },
+  "Piano Concerto No. 1 in B-flat minor — I.": {
+    "id": "p32",
+    "tier": "medium",
+    "pages": [
+      "s/p32/1.webp",
+      "s/p32/2.webp",
+      "s/p32/3.webp",
+      "s/p32/4.webp",
+      "s/p32/5.webp",
+      "s/p32/6.webp",
+      "s/p32/7.webp",
+      "s/p32/8.webp",
+      "s/p32/9.webp",
+      "s/p32/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p32.mp3"
+  },
+  "Rhapsody in Blue": {
+    "id": "p33",
+    "tier": "medium",
+    "pages": [
+      "s/p33/1.webp",
+      "s/p33/2.webp",
+      "s/p33/3.webp",
+      "s/p33/4.webp",
+      "s/p33/5.webp",
+      "s/p33/6.webp",
+      "s/p33/7.webp",
+      "s/p33/8.webp",
+      "s/p33/9.webp",
+      "s/p33/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p33.mp3"
+  },
+  "Prelude in C-sharp minor, Op. 3 No. 2": {
+    "id": "p34",
+    "tier": "hard",
+    "pages": [
+      "s/p34/1.webp",
+      "s/p34/2.webp",
+      "s/p34/3.webp",
+      "s/p34/4.webp",
+      "s/p34/5.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p34.mp3"
+  },
+  "Symphony No. 8 “Unfinished” — I. Allegro moderato": {
+    "id": "p35",
+    "tier": "hard",
+    "pages": [
+      "s/p35/1.webp",
+      "s/p35/2.webp",
+      "s/p35/3.webp",
+      "s/p35/4.webp",
+      "s/p35/5.webp",
+      "s/p35/6.webp",
+      "s/p35/7.webp",
+      "s/p35/8.webp",
+      "s/p35/9.webp",
+      "s/p35/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p35.mp3"
+  },
+  "Piano Sonata No. 14 “Moonlight” — I. Adagio sostenuto": {
+    "id": "p36",
+    "tier": "easy",
+    "pages": [
+      "s/p36/1.webp",
+      "s/p36/2.webp",
+      "s/p36/3.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p36.mp3"
+  },
+  "Symphony No. 9 “From the New World” — II. Largo": {
+    "id": "p37",
+    "tier": "easy",
+    "pages": [
+      "s/p37/1.webp",
+      "s/p37/2.webp",
+      "s/p37/3.webp",
+      "s/p37/4.webp",
+      "s/p37/5.webp",
+      "s/p37/6.webp",
+      "s/p37/7.webp",
+      "s/p37/8.webp",
+      "s/p37/9.webp",
+      "s/p37/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p37.mp3"
+  },
+  "Messiah — Hallelujah chorus": {
+    "id": "p38",
+    "tier": "easy",
+    "pages": [
+      "s/p38/1.webp",
+      "s/p38/2.webp",
+      "s/p38/3.webp",
+      "s/p38/4.webp",
+      "s/p38/5.webp",
+      "s/p38/6.webp",
+      "s/p38/7.webp",
+      "s/p38/8.webp",
+      "s/p38/9.webp",
+      "s/p38/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p38.mp3"
+  },
+  "Symphony No. 40 in G minor — I. Molto allegro": {
+    "id": "p39",
+    "tier": "medium",
+    "pages": [
+      "s/p39/1.webp",
+      "s/p39/2.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p39.mp3"
+  },
+  "Symphony No. 9 — Finale (Ode to Joy)": {
+    "id": "p40",
+    "tier": "easy",
+    "pages": [
+      "s/p40/1.webp",
+      "s/p40/2.webp",
+      "s/p40/3.webp",
+      "s/p40/4.webp",
+      "s/p40/5.webp",
+      "s/p40/6.webp",
+      "s/p40/7.webp",
+      "s/p40/8.webp",
+      "s/p40/9.webp",
+      "s/p40/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p40.mp3"
+  },
+  "The Nutcracker — March": {
+    "id": "p41",
+    "tier": "easy",
+    "pages": [
+      "s/p41/1.webp",
+      "s/p41/2.webp",
+      "s/p41/3.webp",
+      "s/p41/4.webp",
+      "s/p41/5.webp",
+      "s/p41/6.webp",
+      "s/p41/7.webp",
+      "s/p41/8.webp",
+      "s/p41/9.webp",
+      "s/p41/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p41.mp3"
+  },
+  "Morning Mood (Peer Gynt Suite No. 1)": {
+    "id": "p42",
+    "tier": "easy",
+    "pages": [
+      "s/p42/1.webp",
+      "s/p42/2.webp",
+      "s/p42/3.webp",
+      "s/p42/4.webp",
+      "s/p42/5.webp",
+      "s/p42/6.webp",
+      "s/p42/7.webp",
+      "s/p42/8.webp",
+      "s/p42/9.webp",
+      "s/p42/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p42.mp3"
+  },
+  "The Marriage of Figaro — Overture": {
+    "id": "p43",
+    "tier": "medium",
+    "pages": [
+      "s/p43/1.webp",
+      "s/p43/2.webp",
+      "s/p43/3.webp",
+      "s/p43/4.webp",
+      "s/p43/5.webp",
+      "s/p43/6.webp",
+      "s/p43/7.webp",
+      "s/p43/8.webp",
+      "s/p43/9.webp",
+      "s/p43/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p43.mp3"
+  },
+  "Marche militaire No. 1": {
+    "id": "p44",
+    "tier": "medium",
+    "pages": [
+      "s/p44/1.webp",
+      "s/p44/2.webp",
+      "s/p44/3.webp",
+      "s/p44/4.webp",
+      "s/p44/5.webp",
+      "s/p44/6.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p44.mp3"
+  },
+  "Air on the G String (Orchestral Suite No. 3)": {
+    "id": "p45",
+    "tier": "medium",
+    "pages": [
+      "s/p45/1.webp",
+      "s/p45/2.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p45.mp3"
+  },
+  "The Planets — IV. Jupiter": {
+    "id": "p46",
+    "tier": "medium",
+    "pages": [
+      "s/p46/1.webp",
+      "s/p46/2.webp",
+      "s/p46/3.webp",
+      "s/p46/4.webp",
+      "s/p46/5.webp",
+      "s/p46/6.webp",
+      "s/p46/7.webp",
+      "s/p46/8.webp",
+      "s/p46/9.webp",
+      "s/p46/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p46.mp3"
+  },
+  "1812 Overture": {
+    "id": "p47",
+    "tier": "medium",
+    "pages": [
+      "s/p47/1.webp",
+      "s/p47/2.webp",
+      "s/p47/3.webp",
+      "s/p47/4.webp",
+      "s/p47/5.webp",
+      "s/p47/6.webp",
+      "s/p47/7.webp",
+      "s/p47/8.webp",
+      "s/p47/9.webp",
+      "s/p47/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p47.mp3"
+  },
+  "The Four Seasons — “Winter”, RV 297, I.": {
+    "id": "p48",
+    "tier": "hard",
+    "pages": [
+      "s/p48/1.webp",
+      "s/p48/2.webp",
+      "s/p48/3.webp",
+      "s/p48/4.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p48.mp3"
+  },
+  "Anvil Chorus (Il trovatore)": {
+    "id": "p49",
+    "tier": "hard",
+    "pages": [
+      "s/p49/1.webp",
+      "s/p49/2.webp",
+      "s/p49/3.webp",
+      "s/p49/4.webp",
+      "s/p49/5.webp",
+      "s/p49/6.webp",
+      "s/p49/7.webp",
+      "s/p49/8.webp",
+      "s/p49/9.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p49.mp3"
+  }
+}
