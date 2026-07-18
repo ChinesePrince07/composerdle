@@ -762,5 +762,183 @@
       "s/p55/5.webp"
     ],
     "audioLocal": "tools/audio-cache/p55.mp3"
+  },
+  "Carmen — Prelude": {
+    "id": "p56",
+    "tier": "easy",
+    "pages": [
+      "s/p56/1.webp",
+      "s/p56/2.webp",
+      "s/p56/3.webp",
+      "s/p56/4.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p56.mp3"
+  },
+  "Flight of the Bumblebee": {
+    "id": "p57",
+    "tier": "easy",
+    "pages": [
+      "s/p57/1.webp",
+      "s/p57/2.webp",
+      "s/p57/3.webp",
+      "s/p57/4.webp",
+      "s/p57/5.webp",
+      "s/p57/6.webp",
+      "s/p57/7.webp",
+      "s/p57/8.webp",
+      "s/p57/9.webp",
+      "s/p57/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p57.mp3"
+  },
+  "Canon in D": {
+    "id": "p58",
+    "tier": "easy",
+    "pages": [
+      "s/p58/1.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p58.mp3"
+  },
+  "Orpheus in the Underworld — Can-Can (Galop infernal)": {
+    "id": "p59",
+    "tier": "easy",
+    "pages": [
+      "s/p59/1.webp",
+      "s/p59/2.webp",
+      "s/p59/3.webp",
+      "s/p59/4.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p59.mp3"
+  },
+  "Finlandia": {
+    "id": "p60",
+    "tier": "medium",
+    "pages": [
+      "s/p60/1.webp",
+      "s/p60/2.webp",
+      "s/p60/3.webp",
+      "s/p60/4.webp",
+      "s/p60/5.webp",
+      "s/p60/6.webp",
+      "s/p60/7.webp",
+      "s/p60/8.webp",
+      "s/p60/9.webp",
+      "s/p60/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p60.mp3"
+  },
+  "Night on Bald Mountain": {
+    "id": "p61",
+    "tier": "medium",
+    "pages": [
+      "s/p61/1.webp",
+      "s/p61/2.webp",
+      "s/p61/3.webp",
+      "s/p61/4.webp",
+      "s/p61/5.webp",
+      "s/p61/6.webp",
+      "s/p61/7.webp",
+      "s/p61/8.webp",
+      "s/p61/9.webp",
+      "s/p61/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p61.mp3"
+  },
+  "Brandenburg Concerto No. 3 — I. Allegro": {
+    "id": "p62",
+    "tier": "medium",
+    "pages": [
+      "s/p62/1.webp",
+      "s/p62/2.webp",
+      "s/p62/3.webp",
+      "s/p62/4.webp",
+      "s/p62/5.webp",
+      "s/p62/6.webp",
+      "s/p62/7.webp",
+      "s/p62/8.webp",
+      "s/p62/9.webp",
+      "s/p62/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p62.mp3"
+  },
+  "Symphony No. 7 — II. Allegretto": {
+    "id": "p63",
+    "tier": "medium",
+    "pages": [
+      "s/p63/1.webp",
+      "s/p63/2.webp",
+      "s/p63/3.webp",
+      "s/p63/4.webp",
+      "s/p63/5.webp",
+      "s/p63/6.webp",
+      "s/p63/7.webp",
+      "s/p63/8.webp",
+      "s/p63/9.webp",
+      "s/p63/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p63.mp3"
+  },
+  "Fantaisie-Impromptu, Op. 66": {
+    "id": "p64",
+    "tier": "medium",
+    "pages": [
+      "s/p64/1.webp",
+      "s/p64/2.webp",
+      "s/p64/3.webp",
+      "s/p64/4.webp",
+      "s/p64/5.webp",
+      "s/p64/6.webp",
+      "s/p64/7.webp",
+      "s/p64/8.webp",
+      "s/p64/9.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p64.mp3"
+  },
+  "Lacrimosa (Requiem, K. 626)": {
+    "id": "p65",
+    "tier": "medium",
+    "pages": [
+      "s/p65/1.webp",
+      "s/p65/2.webp",
+      "s/p65/3.webp",
+      "s/p65/4.webp",
+      "s/p65/5.webp",
+      "s/p65/6.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p65.mp3"
+  },
+  "Symphonie fantastique — IV. March to the Scaffold": {
+    "id": "p66",
+    "tier": "hard",
+    "pages": [
+      "s/p66/1.webp",
+      "s/p66/2.webp",
+      "s/p66/3.webp",
+      "s/p66/4.webp",
+      "s/p66/5.webp",
+      "s/p66/6.webp",
+      "s/p66/7.webp",
+      "s/p66/8.webp",
+      "s/p66/9.webp",
+      "s/p66/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p66.mp3"
+  },
+  "Pavane, Op. 50": {
+    "id": "p67",
+    "tier": "hard",
+    "pages": [
+      "s/p67/1.webp",
+      "s/p67/2.webp",
+      "s/p67/3.webp",
+      "s/p67/4.webp",
+      "s/p67/5.webp",
+      "s/p67/6.webp",
+      "s/p67/7.webp",
+      "s/p67/8.webp",
+      "s/p67/9.webp",
+      "s/p67/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p67.mp3"
   }
 }
