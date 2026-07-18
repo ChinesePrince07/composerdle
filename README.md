@@ -64,7 +64,5 @@ test.js       logic self-check  →  node test.js
 The public-domain score images and audio are **not** committed (they're chunky, and the audio lives in Vercel Blob); `tools/localize-assets.js` regenerates them from their sources.
 
 ## 🙇 Credit where it's due
-
-The **idea** is [TwoSet Violin](https://www.youtube.com/@twosetviolin)'s. The bugs are mine. If you're here to file an issue about the Marche militaire being the orchestral arrangement over a piano-4-hands score — I know, I know, the good scan doesn't exist yet.
-
+The **idea** is [TwoSet Violin](https://www.youtube.com/@twosetviolin)'s. The bugs are mine. 
 *Now go practice. 🎻*
