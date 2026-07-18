@@ -262,7 +262,13 @@
   <button id="dlgStatsClose">Close</button>
 </dialog>
 <dialog id="dlgName">
-  <h2>Welcome to the hall</h2>
+  <h2>Welcome to Composerdle</h2>
+  <ul>
+    <li><b>Six tries</b> to name the mystery composer — surname is enough. Hints and extra clues each cost a try.</li>
+    <li><b>By Facts</b> is endless practice: six fun-fact clues, cryptic first, obvious last.</li>
+    <li><b>By Ear</b> is the scored daily: a real recording and its engraved score, name inked out. Naming the <b>piece</b> too is optional — right = points <b>doubled</b>.</li>
+    <li><b>Scoring:</b> fewer tries = more points (up to 6 a game), Medium ×2, Hard ×3. Dailies build your career score and streak on the leaderboard.</li>
+  </ul>
   <p>Every performer needs a stage name — it is how your scores appear on the leaderboard.</p>
   <input id="dlgNameInput" maxlength="24" placeholder="e.g. Maestro Fortissimo" autocomplete="nickname" aria-label="Stage name">
   <button id="dlgNameSave">Take the stage</button>
@@ -473,9 +479,8 @@
   $('dlgHowtoClose').addEventListener('click', () => $('dlgHowto').close());
   $('lnkStats').addEventListener('click', async () => { await statsRender(); $('dlgStats').showModal(); });
   $('dlgStatsClose').addEventListener('click', () => $('dlgStats').close());
-  lbNamePrompt(() => {
-    try { if (!localStorage.getItem('cdle-howto')) { $('dlgHowto').showModal(); localStorage.setItem('cdle-howto', '1'); } } catch (e) {}
-  });
+  // first boot: one centered welcome popup carries the rules, scoring, and the name prompt
+  lbNamePrompt();
 
   // ---------- load ----------
   async function load(extra) {
