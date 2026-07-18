@@ -463,6 +463,61 @@ const COMPOSERS = [
       'French operetta king whose "Orpheus in the Underworld" gave us the Can-Can; first name Jacques.',
     ],
   },
+  {
+    name: 'Domenico Scarlatti', years: '1685–1757', alt: [],
+    facts: [
+      'Born the same year as Bach and Handel, he was one of a remarkable trio of Baroque genius.',
+      'He spent most of his career far from his Italian homeland, at the royal courts of Portugal and then Spain.',
+      'As harpsichord teacher to a princess who became Queen of Spain, he wrote hundreds of pieces for her alone.',
+      'His daring keyboard writing demanded hand-crossings and lightning repeated notes that dazzle players still.',
+      'One of his sonatas is nicknamed the "Cat\'s Fugue," after a theme a cat supposedly walked out on his keyboard.',
+      'Italian Baroque master of 555 single-movement keyboard sonatas; first name Domenico.',
+    ],
+  },
+  {
+    name: 'Jean-Baptiste Lully', years: '1632–1687', alt: ['lulli'],
+    facts: [
+      'Born in Florence, he came to France as a teenager to help a noblewoman practise her Italian — and stayed to rule its music.',
+      'He clawed his way to become the most powerful musician at the court of the Sun King, Louis XIV.',
+      'His royal monopoly on opera was so tight that rivals could barely stage a note without his permission.',
+      'With the playwright Molière he invented the comédie-ballet, fusing spoken theatre, dance, and music.',
+      'He died of gangrene after stabbing his own foot with the heavy staff he pounded to keep time.',
+      'Italian-born founder of French opera and Louis XIV\'s court composer; first name Jean-Baptiste.',
+    ],
+  },
+  {
+    name: 'Max Bruch', years: '1838–1920', alt: [],
+    facts: [
+      'A German Romantic, he was a respected conductor across Europe and later a revered professor of composition in Berlin.',
+      'He poured his heart into grand choral works and operas, certain they would be his legacy.',
+      'Instead the public adored a single early violin concerto so much that it eclipsed everything else he wrote.',
+      'Bitterly, he had sold that concerto\'s rights cheaply and earned almost nothing from its enormous success.',
+      'His setting of a Jewish prayer for cello led the Nazis to wrongly assume he was Jewish and ban his music.',
+      'German Romantic famed for his First Violin Concerto in G minor and "Kol Nidrei"; first name Max.',
+    ],
+  },
+  {
+    name: 'Anton Bruckner', years: '1824–1896', alt: [],
+    facts: [
+      'A devout Austrian Catholic of humble village roots, he began as a schoolteacher and church organist.',
+      'A renowned organ improviser, he thrilled audiences in Paris and London though he published little for the instrument.',
+      'He idolised Wagner so completely that he dedicated a symphony to him as "the master of all masters."',
+      'Wracked by self-doubt, he revised his vast symphonies over and over, leaving scholars tangled in rival versions.',
+      'He suffered a counting obsession, compulsively tallying windows, stars, and even bars of music.',
+      'Austrian symphonist and devout organist of the towering Seventh and unfinished Ninth; first name Anton.',
+    ],
+  },
+  {
+    name: 'Eugène Ysaÿe', years: '1858–1931', alt: [],
+    facts: [
+      'A Belgian violin virtuoso, in his prime he was hailed across the world as the "King of the Violin."',
+      'Composers lined up to write for him: César Franck\'s Violin Sonata was a wedding gift to him.',
+      'Chausson\'s "Poème" and Debussy\'s String Quartet were premiered or inspired by his playing.',
+      'A shaking bow arm and failing health slowly pushed him from soloing toward conducting and composing.',
+      'Late in life he wrote six unaccompanied violin sonatas, each dedicated to a great violinist friend.',
+      'Belgian "King of the Violin" and composer of six solo violin sonatas; first name Eugène.',
+    ],
+  },
 ];
 
 // Three extra facts per composer, slotted hard / medium / easy, so each game can
@@ -677,6 +732,31 @@ const EXTRA = {
     'Saint-Saëns borrowed his galloping Can-Can tune, slowed it to a crawl, and made it the plodding "Tortoises" in "The Carnival of the Animals."',
     'He died months before the premiere of his one grand opera, the work he hoped would outlast his comedies.',
     'That breakneck "Can-Can" galop is his most recognized music, a shorthand for Parisian cabaret.',
+  ],
+  'Domenico Scarlatti': [
+    'He and Handel reportedly held a friendly contest in Rome — Handel judged the finer organist, he the finer harpsichordist.',
+    'Only a small handful of his sonatas appeared in print in his lifetime, in a 1738 collection called "Essercizi."',
+    'His own father was a towering opera composer, casting a long shadow over his early career.',
+  ],
+  'Jean-Baptiste Lully': [
+    'A superb dancer, he performed alongside the young king himself in lavish court ballets.',
+    'He essentially created the French overture, its stately dotted rhythms giving way to a lively fugue.',
+    'Ambitious and ruthless, he made powerful enemies even as he amassed a fortune and noble titles.',
+  ],
+  'Max Bruch': [
+    'He also wrote a "Scottish Fantasy" for violin, weaving in real Scottish folk tunes.',
+    'A Protestant, his interest in that Jewish prayer melody was purely musical, not religious.',
+    'He grew to resent violinists who only ever wanted to play that one famous concerto.',
+  ],
+  'Anton Bruckner': [
+    'He numbered a discarded early symphony "0" — "Die Nullte" — and an even earlier one "00."',
+    'He dedicated his final, unfinished symphony "to dear God."',
+    'His grand, slow-building symphonies were often mocked in Vienna by critics loyal to Brahms.',
+  ],
+  'Eugène Ysaÿe': [
+    'He led the Cincinnati Symphony Orchestra for several seasons in the 1910s and 1920s.',
+    'His first solo sonata answers Bach\'s; another, titled "Obsession," is haunted by the "Dies irae."',
+    'Near the end of his life he wrote an opera in the Walloon dialect of his native Liège.',
   ],
 };
 // Interleave: [f0, x0, f1, f2, x1, f3, f4, x2, f5] keeps the cryptic-to-giveaway slope.
