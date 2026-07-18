@@ -240,7 +240,7 @@ function applyFactsAction(composer, g, action, value, key) {
     if (!norm(gv)) return { error: 'empty guess' };
     if (matchGuess(gv, composer)) {
       g.marks.push('win'); g.done = true; g.won = true;
-      g.pts = g.scored ? MAX + 1 - g.marks.length : 0;
+      g.pts = g.scored ? (MAX + 1 - g.marks.length) * MULT[g.tier || 'easy'] : 0;
     } else {
       g.marks.push('wrong'); g.wrong.push(gv);
       const hit = COMPOSERS.find(c => matchGuess(gv, c));
@@ -269,13 +269,18 @@ async function settleGame(token, key, g, day, isToday, name) {
   // rename is applied in place and can't be undone by a stale profile read (Blob ~60s cache)
   const nm = String(name || '').trim().slice(0, 24);
   if (nm) prof.name = nm;
-  if (prof.results[key] !== undefined) return prof; // already settled
+  if (prof.results[key] !== undefined) return prof; // already settled (also the replay guard for practice)
+  const daily = /^\d+-/.test(key);
   prof.games++;
   if (g.won) { prof.wins++; prof.dist[g.marks.length] = (prof.dist[g.marks.length] || 0) + 1; }
   else prof.dist.x = (prof.dist.x || 0) + 1;
   prof.career += g.pts;
-  prof.results[key] = { pts: g.pts, marks: g.marks, won: g.won, pieceFound: !!g.pieceFound };
-  if (isToday && g.won) {
+  // dailies keep the full record (feeds the once-a-day lock); practice keeps a replay marker only
+  prof.results[key] = daily ? { pts: g.pts, marks: g.marks, won: g.won, pieceFound: !!g.pieceFound } : 1;
+  // bound the profile blob: prune the oldest practice markers past 200
+  const enc = Object.keys(prof.results).filter(k => k.startsWith('e-'));
+  if (enc.length > 200) for (const k of enc.slice(0, enc.length - 150)) delete prof.results[k];
+  if (daily && isToday && g.won) { // streaks stay a daily-puzzle thing
     prof.streak.cur = prof.streak.last === day - 1 ? prof.streak.cur + 1 : (prof.streak.last === day ? prof.streak.cur : 1);
     prof.streak.last = day;
     prof.streak.max = Math.max(prof.streak.max, prof.streak.cur);

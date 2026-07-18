@@ -250,8 +250,8 @@
     <li>You have <b>six tries</b> to name the <b>composer</b> (surname is enough). Naming the <b>piece</b> too is optional — get it right and your points <b>double</b>.</li>
     <li>A <b>hint</b> (year, era, genre) costs a try. Wrong composers are struck from the list.</li>
     <li>Cracked the composer but not the piece? Keep hunting it with your remaining tries — your earned points are safe — or <b>take the points</b> and move on. We'll tell you if you've at least got the right genre.</li>
-    <li>Fewer tries = more points. Harder tiers multiply them (×2, ×3). Dailies build your career score and streak — one attempt per day, so make it count.</li>
-    <li>Encores and challenges are for glory, not points.</li>
+    <li>Fewer tries = more points. Harder tiers multiply them (×2, ×3). <b>Every win</b> adds to your career score; the daily also builds your streak (one attempt per day).</li>
+    <li>Challenge links are friendly duels — honour only.</li>
   </ul>
   <p style="font-style:italic;text-align:center;font-size:13px;color:var(--ink-soft)">An idea by <a href="https://www.youtube.com/@twosetviolin" target="_blank" rel="noopener">TwoSet Violin</a>, brought to the web.</p>
   <button id="dlgHowtoClose">To the stage</button>
@@ -266,8 +266,8 @@
   <ul>
     <li><b>Six tries</b> to name the mystery composer — surname is enough. Hints and extra clues each cost a try.</li>
     <li><b>By Facts</b> is endless practice: six fun-fact clues, cryptic first, obvious last.</li>
-    <li><b>By Ear</b> is the scored daily: a real recording and its engraved score, name inked out. Naming the <b>piece</b> too is optional — right = points <b>doubled</b>.</li>
-    <li><b>Scoring:</b> fewer tries = more points (up to 6 a game), Medium ×2, Hard ×3. Dailies build your career score and streak on the leaderboard.</li>
+    <li><b>By Ear</b> — a real recording and its engraved score, name inked out. Naming the <b>piece</b> too is optional — right = points <b>doubled</b>.</li>
+    <li><b>Scoring:</b> fewer tries = more points, Medium ×2, Hard ×3. <b>Every win</b> counts toward your career; the daily puzzle also builds your streak.</li>
   </ul>
   <p>Every performer needs a stage name — it is how your scores appear on the leaderboard.</p>
   <input id="dlgNameInput" maxlength="24" placeholder="e.g. Maestro Fortissimo" autocomplete="nickname" aria-label="Stage name">
@@ -331,8 +331,8 @@
   function tierLabel() { return MODE[0].toUpperCase() + MODE.slice(1); }
   function renderMeta() {
     if (CHALLENGE) { $('meta').textContent = 'A challenge — unscored, honour only'; $('archive').innerHTML = ''; return; }
-    if (S.key.startsWith('e-')) { $('meta').textContent = `${tierLabel()} · practice — for glory, not points`; return; }
-    $('meta').textContent = `${tierLabel()} · today's puzzle — scored`;
+    if (S.key.startsWith('e-')) { $('meta').textContent = `${tierLabel()} · a random piece — scored`; return; }
+    $('meta').textContent = `${tierLabel()} · today's puzzle — scored, builds your streak`;
     const prev = S.day > 0 ? `<a href="?mode=${MODE}&day=${S.day - 1}">‹ yesterday</a>` : '';
     const next = S.day < S.today ? `<a href="?mode=${MODE}&day=${S.day + 1}">tomorrow ›</a>` : '';
     $('archive').innerHTML = prev + next;

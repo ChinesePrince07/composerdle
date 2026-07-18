@@ -20,10 +20,9 @@ module.exports = async (req, res) => {
   } else if (q.nonce) {
     const nonce = String(q.nonce).slice(0, 16).replace(/[^a-z0-9]/g, '');
     if (!nonce) return res.status(400).json({ error: 'bad nonce' });
-    key = `e-${mode}-${nonce}`; scored = false;
+    key = `e-${mode}-${nonce}`; // encores score too — every win counts toward career
   } else {
     key = `${day}-${mode}` + (mode === 'ear' ? `-${tier}` : '');
-    if (mode === 'facts') scored = false; // By Facts is practice-only
   }
 
   let g = E.newGame(mode, scored);

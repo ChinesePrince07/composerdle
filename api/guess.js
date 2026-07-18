@@ -25,8 +25,8 @@ module.exports = async (req, res) => {
   if (g.done) {
     resp.state.result = ctx.mode === 'ear' ? E.earResult(ctx.piece, g) : E.factsResult(ctx.composer, g);
     if (ctx.mode === 'ear') resp.state.result.challengeId = E.assets(ctx.piece).id;
-    // settle scored ear dailies only — the single profile write per game
-    if (g.scored && ctx.mode === 'ear') {
+    // settle every scored game — the single profile write per game
+    if (g.scored) {
       const today = E.utcDay();
       const isToday = (ctx.day ?? today) === today;
       const prof = await E.settleGame(token, key, g, ctx.day ?? today, isToday, b.name);
