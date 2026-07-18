@@ -325,7 +325,7 @@
   function tierLabel() { return MODE[0].toUpperCase() + MODE.slice(1); }
   function renderMeta() {
     if (CHALLENGE) { $('meta').textContent = 'A challenge — unscored, honour only'; $('archive').innerHTML = ''; return; }
-    if (S.key.startsWith('e-')) { $('meta').textContent = `Encore · ${tierLabel()} · practice, no points`; return; }
+    if (S.key.startsWith('e-')) { $('meta').textContent = `${tierLabel()} · a random piece`; return; }
     $('meta').textContent = `${tierLabel()} · today's puzzle`;
     const prev = S.day > 0 ? `<a href="?mode=${MODE}&day=${S.day - 1}">‹ yesterday</a>` : '';
     const next = S.day < S.today ? `<a href="?mode=${MODE}&day=${S.day + 1}">tomorrow ›</a>` : '';
@@ -485,7 +485,9 @@
 
   lbNameBar(() => lbRender());
   lbRender();
-  load();
+  // Boot to a fresh random piece every visit (like By Facts). Challenge links and ?day=
+  // still open their specific puzzle; the scored daily is reachable via ?day=<today>.
+  load(CHALLENGE || DAY !== null ? null : { nonce: Math.random().toString(36).slice(2, 10) });
 })();
 </script>
 </body>

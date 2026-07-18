@@ -667,5 +667,100 @@
       "s/p49/9.webp"
     ],
     "audioLocal": "tools/audio-cache/p49.mp3"
+  },
+  "William Tell Overture": {
+    "id": "p50",
+    "tier": "easy",
+    "pages": [
+      "s/p50/1.webp",
+      "s/p50/2.webp",
+      "s/p50/3.webp",
+      "s/p50/4.webp",
+      "s/p50/5.webp",
+      "s/p50/6.webp",
+      "s/p50/7.webp",
+      "s/p50/8.webp",
+      "s/p50/9.webp",
+      "s/p50/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p50.mp3"
+  },
+  "The Blue Danube": {
+    "id": "p51",
+    "tier": "easy",
+    "pages": [
+      "s/p51/1.webp",
+      "s/p51/2.webp",
+      "s/p51/3.webp",
+      "s/p51/4.webp",
+      "s/p51/5.webp",
+      "s/p51/6.webp",
+      "s/p51/7.webp",
+      "s/p51/8.webp",
+      "s/p51/9.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p51.mp3"
+  },
+  "Dance of the Sugar Plum Fairy": {
+    "id": "p52",
+    "tier": "easy",
+    "pages": [
+      "s/p52/1.webp",
+      "s/p52/2.webp",
+      "s/p52/3.webp",
+      "s/p52/4.webp",
+      "s/p52/5.webp",
+      "s/p52/6.webp",
+      "s/p52/7.webp",
+      "s/p52/8.webp",
+      "s/p52/9.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p52.mp3"
+  },
+  "Pomp and Circumstance March No. 1": {
+    "id": "p53",
+    "tier": "medium",
+    "pages": [
+      "s/p53/1.webp",
+      "s/p53/2.webp",
+      "s/p53/3.webp",
+      "s/p53/4.webp",
+      "s/p53/5.webp",
+      "s/p53/6.webp",
+      "s/p53/7.webp",
+      "s/p53/8.webp",
+      "s/p53/9.webp",
+      "s/p53/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p53.mp3"
+  },
+  "The Moldau": {
+    "id": "p54",
+    "tier": "medium",
+    "pages": [
+      "s/p54/1.webp",
+      "s/p54/2.webp",
+      "s/p54/3.webp",
+      "s/p54/4.webp",
+      "s/p54/5.webp",
+      "s/p54/6.webp",
+      "s/p54/7.webp",
+      "s/p54/8.webp",
+      "s/p54/9.webp",
+      "s/p54/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p54.mp3"
+  },
+  "Arabesque No. 1": {
+    "id": "p55",
+    "tier": "medium",
+    "pages": [
+      "s/p55/1.webp",
+      "s/p55/2.webp",
+      "s/p55/3.webp",
+      "s/p55/4.webp",
+      "s/p55/5.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p55.mp3"
   }
 }

@@ -190,6 +190,37 @@ const EASY = [
     crop: 0.2,
     pages: local('morningmood', 10),
   },
+  {
+    composer: 'Gioachino Rossini',
+    title: 'William Tell Overture',
+    audio: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/4/43/Gioachino_Rossini%2C_William_Tell_Overture_%28military_band_version%2C_2000%29.ogg/Gioachino_Rossini%2C_William_Tell_Overture_%28military_band_version%2C_2000%29.ogg.mp3',
+    performer: 'United States Marine Band',
+    license: 'public domain (US federal)',
+    scoreNote: 'Breitkopf & Härtel full orchestral score, 1899',
+    crop: 0,
+    cropBottom: 0.05,
+    pages: local('williamtell', 10),
+  },
+  {
+    composer: 'Johann Strauss II',
+    title: 'The Blue Danube',
+    audio: 'https://upload.wikimedia.org/wikipedia/commons/d/d4/%22An_der_sch%C3%B6nen%2C_blauen_Donau%22_performed_by_the_U.S._Marine_Band.mp3',
+    performer: 'U.S. Marine Band',
+    license: 'public domain (US federal)',
+    scoreNote: 'Period piano arrangement, Op. 314',
+    crop: 0.18,
+    pages: local('bluedanube', 9),
+  },
+  {
+    composer: 'Pyotr Ilyich Tchaikovsky',
+    title: 'Dance of the Sugar Plum Fairy',
+    audio: 'https://ia800404.us.archive.org/29/items/78_dance-of-the-sugar-plum-fairy_tchaikovsky_gbia0546108b/DANCE%20OF%20THE%20SUGAR-PLUM%20FAIRY%20-%20Tchaikovsky.mp3',
+    performer: 'orchestra (Children’s Record Guild 78 rpm disc)',
+    license: 'public domain',
+    scoreNote: 'Eulenburg miniature full score (Nutcracker Suite)',
+    crop: 0.09,
+    pages: local('sugarplum', 9),
+  },
 ];
 
 const MEDIUM = [
@@ -393,6 +424,36 @@ const MEDIUM = [
     crop: 0.11,
     pages: local('1812', 10),
   },
+  {
+    composer: 'Edward Elgar',
+    title: 'Pomp and Circumstance March No. 1',
+    audio: 'https://upload.wikimedia.org/wikipedia/commons/2/28/ELGAR_Pomp_and_Circumstance_in_D%2C_Opus_39%2C_No._1_-_United_States_Marine_Band.mp3',
+    performer: 'United States Marine Band',
+    license: 'public domain (US federal)',
+    scoreNote: 'Boosey full orchestral score',
+    crop: 0.17,
+    pages: local('pomp', 10),
+  },
+  {
+    composer: 'Bedřich Smetana',
+    title: 'The Moldau',
+    audio: `${UP}/transcoded/3/39/Smetana%2C_M%C3%A1_vlast_-_Vltava_-_The_Moldau.ogg/Smetana%2C_M%C3%A1_vlast_-_Vltava_-_The_Moldau.ogg.mp3`,
+    performer: 'Musopen Symphony Orchestra',
+    license: 'CC0 · Musopen',
+    scoreNote: 'Eulenburg miniature full score, 1914',
+    crop: 0.14,
+    pages: local('moldau', 10),
+  },
+  {
+    composer: 'Claude Debussy',
+    title: 'Arabesque No. 1',
+    audio: `${UP}/transcoded/0/0f/Claude_Debussy_-_Premi%C3%A8re_Arabesque_-_Patrizia_Prati.ogg/Claude_Debussy_-_Premi%C3%A8re_Arabesque_-_Patrizia_Prati.ogg.mp3`,
+    performer: 'Patrizia Prati (piano)',
+    license: 'CC BY-SA 4.0',
+    scoreNote: 'Durand first edition, 1904',
+    crop: 0.25,
+    pages: local('arabesque', 5),
+  },
 ];
 
 const HARD = [
@@ -575,6 +636,12 @@ const META = {
   '1812 Overture': { year: 1880, genre: 'overture', genreWords: ['overture', 'ouverture'], keys: ['1812'] },
   'The Four Seasons — “Winter”, RV 297, I.': { year: 1723, genre: 'violin concerto', genreWords: ['concerto', 'seasons'], keys: ['winter', 'inverno', 'fourseasons'] },
   'Anvil Chorus (Il trovatore)': { year: 1853, genre: 'opera', genreWords: ['opera', 'chorus', 'choral'], keys: ['anvil', 'trovatore'] },
+  'William Tell Overture': { year: 1829, genre: 'overture', genreWords: ['overture', 'ouverture'], keys: ['williamtell', 'tell', 'guillaumetell'] },
+  'The Blue Danube': { year: 1867, genre: 'waltz', genreWords: ['waltz', 'walzer', 'danube', 'donau'], keys: ['bluedanube', 'danube', 'donau'] },
+  'Dance of the Sugar Plum Fairy': { year: 1892, genre: 'ballet', genreWords: ['ballet', 'nutcracker', 'suite'], keys: ['sugarplumfairy', 'sugarplum', 'nutcracker'] },
+  'Pomp and Circumstance March No. 1': { year: 1901, genre: 'march', genreWords: ['march', 'marche'], keys: ['pompandcircumstance', 'pomp'] },
+  'The Moldau': { year: 1874, genre: 'tone poem', genreWords: ['tonepoem', 'symphonicpoem', 'moldau', 'vltava'], keys: ['moldau', 'vltava'] },
+  'Arabesque No. 1': { year: 1888, genre: 'piano piece', genreWords: ['arabesque', 'piano'], keys: ['arabesque', 'arabesque1'] },
 };
 for (const pool of [EASY, MEDIUM, HARD]) for (const p of pool) Object.assign(p, META[p.title]);
 

@@ -331,6 +331,138 @@ const COMPOSERS = [
       'Russian composer of "Peter and the Wolf"; first name Sergei, surname not Rachmaninoff.',
     ],
   },
+  {
+    name: 'Georges Bizet', years: '1838–1875', alt: [],
+    facts: [
+      'He won the Prix de Rome at nineteen but spent much of his short life grinding out piano arrangements to pay the bills.',
+      'He wrote a dazzling symphony at seventeen, then shelved it; it went unperformed until 1935, sixty years after his death.',
+      'His masterpiece flopped at its 1875 premiere, dismissed by critics as scandalous and vulgar.',
+      'He died at just 36, three months after that premiere, never knowing the work would become one of the most performed operas ever.',
+      'That opera gave the world the "Habanera" and the "Toreador Song."',
+      'French composer of the opera "Carmen"; first name Georges.',
+    ],
+  },
+  {
+    name: 'Gioachino Rossini', years: '1792–1868', alt: ['gioacchinorossini'],
+    facts: [
+      'He wrote one famous overture so fast, legend says, that he tossed finished pages out the window to a copyist waiting below.',
+      'A famous gourmand, he retired from opera at 37 and spent his last decades inventing recipes; a rich beef dish still bears his name.',
+      'He supposedly composed one comic masterpiece in under three weeks.',
+      'His overtures are built on a trademark slow-building orchestral crescendo that audiences nicknamed after him.',
+      'One of his overtures — for an opera about a Swiss folk hero — became the galloping theme of "The Lone Ranger."',
+      'Italian opera composer of "The Barber of Seville" and "William Tell"; first name Gioachino.',
+    ],
+  },
+  {
+    name: 'Jean Sibelius', years: '1865–1957', alt: [],
+    facts: [
+      'For the last thirty years of his life he published almost nothing, in what admirers call his "silence."',
+      'He reportedly burned the manuscript of his Eighth Symphony in his own dining-room fireplace.',
+      'His government granted him a lifetime pension at 32 so he could compose without teaching.',
+      'His tone poems draw on the "Kalevala," his country\'s national epic.',
+      'One of his patriotic tone poems became an unofficial anthem of his country\'s independence, its hymn-like tune sung the world over.',
+      'Finland\'s national composer, of "Finlandia" and "Valse triste"; first name Jean.',
+    ],
+  },
+  {
+    name: 'Nikolai Rimsky-Korsakov', years: '1844–1908', alt: ['rimskykorsakov', 'korsakov', 'rimsky'],
+    facts: [
+      'He began his career as a naval officer, composing his first symphony during a three-year voyage at sea.',
+      'A master of orchestral colour, he wrote the textbook on orchestration that generations of composers learned from.',
+      'He belonged to a nationalist group of five Russian composers and tidied up the unfinished scores his friends left behind.',
+      'He taught the young Stravinsky, and his symphonic suite retells "One Thousand and One Nights."',
+      'His whirring showpiece depicting a certain insect\'s frantic flight is a rite of passage for virtuosos.',
+      'Russian orchestral wizard of "Scheherazade" and "Flight of the Bumblebee"; first name Nikolai.',
+    ],
+  },
+  {
+    name: 'Modest Mussorgsky', years: '1839–1881', alt: ['moussorgsky', 'musorgsky'],
+    facts: [
+      'A member of a nationalist circle, he had almost no formal training and worked as a low-ranking civil servant.',
+      'Alcoholism wrecked his health; a famous portrait, painted days before his death at 42, shows him bloated and red-nosed.',
+      'His rough-hewn masterpieces were "corrected" and re-orchestrated by his tidier friend, who thought them crude.',
+      'He wrote a piano suite depicting a walk through a friend\'s memorial art show, later famously orchestrated by Ravel.',
+      'His witches\'-sabbath tone poem became a Halloween staple after Disney used it in "Fantasia."',
+      'Russian composer of "Pictures at an Exhibition" and "Night on Bald Mountain"; first name Modest.',
+    ],
+  },
+  {
+    name: 'Edward Elgar', years: '1857–1934', alt: [],
+    facts: [
+      'Largely self-taught, he worked for years as a small-town bandmaster and violin teacher before fame found him in his forties.',
+      'A keen amateur chemist, he once blew up a homemade contraption in his backyard "laboratory."',
+      'His breakthrough was a set of orchestral variations, each portraying a friend behind a musical riddle he never fully explained.',
+      'One of those variations, "Nimrod," is now a fixture at British funerals and memorials.',
+      'The grand tune of his first "Pomp and Circumstance" march became "Land of Hope and Glory" and every graduation processional.',
+      'English composer of the "Enigma Variations" and the "Pomp and Circumstance" marches; first name Edward.',
+    ],
+  },
+  {
+    name: 'Johann Strauss II', years: '1825–1899', alt: ['strauss', 'johannstrauss', 'straussii'],
+    facts: [
+      'His father, a famous musician of the same name, forbade him a musical career — so his mother secretly encouraged the boy.',
+      'He turned dance music into an art form, conducting his own orchestra while playing violin, and toured as far as Boston.',
+      'He wrote an operetta about a masked-ball prank, "Die Fledermaus," still a New Year\'s Eve staple.',
+      'Vienna crowned him with a royal nickname for his mastery of one whirling three-beat dance.',
+      'His most famous waltz, evoking a great blue river, is practically Austria\'s second anthem.',
+      'The "Waltz King," composer of "The Blue Danube"; first name Johann.',
+    ],
+  },
+  {
+    name: 'Hector Berlioz', years: '1803–1869', alt: [],
+    facts: [
+      'He trained as a medical student, fainting at his first dissection, before abandoning medicine for music against his family\'s wishes.',
+      'He fell obsessively in love with a Shakespearean actress after seeing her onstage, and poured the obsession into a symphony before they had even met.',
+      'That symphony tells a story: an artist poisons himself with opium and dreams he is executed for murdering his beloved.',
+      'A visionary orchestrator, he wrote a Requiem calling for four brass bands at the corners of the orchestra.',
+      'His "Symphonie fantastique" turns his beloved into a recurring melody, the idée fixe, that haunts all five movements.',
+      'French Romantic pioneer of the "Symphonie fantastique"; first name Hector.',
+    ],
+  },
+  {
+    name: 'Bedřich Smetana', years: '1824–1884', alt: ['smetana'],
+    facts: [
+      'Like Beethoven, he went completely deaf yet kept composing some of his greatest music in total silence.',
+      'He grew up speaking German and had to learn to write his native language properly as an adult nationalist.',
+      'He is considered the founding father of his country\'s national music, celebrated in a cycle of six patriotic tone poems.',
+      'His comic opera "The Bartered Bride" is a cornerstone of Czech theatre.',
+      'One tone poem traces a river from two mountain springs down to the great city, its flowing main theme instantly recognizable.',
+      'Czech nationalist composer of "The Moldau"; first name Bedřich.',
+    ],
+  },
+  {
+    name: 'Johann Pachelbel', years: '1653–1706', alt: [],
+    facts: [
+      'A German Baroque organist, he taught members of the Bach family and shaped the young Johann Sebastian.',
+      'He wrote hundreds of works — chorales, fugues, and organ pieces — nearly all of them forgotten today.',
+      'He is remembered essentially for a single piece, rediscovered and made wildly popular in the 1970s.',
+      'That piece, for three violins over a repeating bass, cycles the same eight-note pattern nearly thirty times.',
+      'His most famous work is the most-requested processional at weddings the world over.',
+      'German Baroque composer of the ubiquitous wedding "Canon in D"; first name Johann.',
+    ],
+  },
+  {
+    name: 'Gabriel Fauré', years: '1845–1924', alt: ['faure'],
+    facts: [
+      'As director of the Paris Conservatoire he shook up its stuffy traditions, earning the nickname "Robespierre."',
+      'Like Beethoven and Smetana, he grew tragically deaf in later years — and the deafness distorted pitch, so his own music sounded sour to him.',
+      'He taught Ravel and a whole generation of French composers, bridging Romanticism and the modern age.',
+      'His serene Requiem deliberately omits the terrifying "Dies irae," offering a lullaby of death instead.',
+      'His stately, melancholy "Pavane" began as a piano piece and became one of his best-loved works.',
+      'French composer of the "Pavane" and a gentle Requiem; first name Gabriel.',
+    ],
+  },
+  {
+    name: 'Jacques Offenbach', years: '1819–1880', alt: [],
+    facts: [
+      'German-born, he moved to Paris as a teenager and became the toast of the Second Empire, skewering it in satirical operettas.',
+      'He started out as a cello virtuoso, dazzling salons before he turned to the stage.',
+      'He practically invented the operetta, running his own theatre and churning out nearly a hundred stage works.',
+      'His opera "The Tales of Hoffmann," left unfinished at his death, gave the world the swooning "Barcarolle."',
+      'His "Galop infernal" is the frantic music every high-kicking Can-Can dancer moves to.',
+      'French operetta king whose "Orpheus in the Underworld" gave us the Can-Can; first name Jacques.',
+    ],
+  },
 ];
 
 // Three extra facts per composer, slotted hard / medium / easy, so each game can
@@ -485,6 +617,66 @@ const EXTRA = {
     'He fled revolution eastward — across Siberia and the Pacific — reaching America with a suitcase of scores.',
     'His opera "The Love for Three Oranges" premiered in Chicago; its march became a radio theme.',
     'He returned to Stalin\'s USSR in 1936 — the decision that framed the rest of his life.',
+  ],
+  'Georges Bizet': [
+    'A formidable pianist, he could reportedly sight-read anything; Liszt named him one of only a handful in Europe who could.',
+    'He married the daughter of his own composition teacher, the opera composer Fromental Halévy.',
+    'Nietzsche championed his sunlit, Mediterranean music as the perfect cure, he said, for Wagner\'s fog.',
+  ],
+  'Gioachino Rossini': [
+    'Crippling anxiety and depression shadowed his silent later years, even as he hosted glittering Saturday-night salons in Paris.',
+    'His comic masterpiece flopped on opening night, partly sabotaged by fans of a rival\'s setting of the same play.',
+    'He loved food so much that a lavish filet-and-foie-gras dish was named in his honour.',
+  ],
+  'Jean Sibelius': [
+    'His ear was so acute he claimed to hear chords in the flight of cranes passing over his forest home, Ainola.',
+    'A heavy drinker and heavy smoker, he outlived nearly all his contemporaries, dying at 91.',
+    'His homeland put his face on its money and named its national music academy after him.',
+  ],
+  'Nikolai Rimsky-Korsakov': [
+    'One of his operas was banned by the Tsar\'s censors for its satire and premiered only after his death.',
+    'He completed and orchestrated the operas his friends left unfinished when they died.',
+    'As a professor in St. Petersburg he taught the young Igor Stravinsky.',
+  ],
+  'Modest Mussorgsky': [
+    'His opera "Boris Godunov" anchors the Russian repertoire, though he left it in several conflicting versions.',
+    'He belonged to "The Mighty Handful," five Russians championing a national style over Western academicism.',
+    'Ravel\'s dazzling orchestration turned one of his solo-piano suites into a concert-hall blockbuster.',
+  ],
+  'Edward Elgar': [
+    'The "enigma" behind his variations — a hidden theme he claimed runs through them all — has never been definitively solved.',
+    'His late Cello Concerto, written in grief after the First World War, was reborn decades later through Jacqueline du Pré.',
+    'His bearded face appeared for years on the Bank of England twenty-pound note.',
+  ],
+  'Johann Strauss II': [
+    'At an 1872 Boston festival he "conducted" a chorus of twenty thousand with a hundred assistant conductors relaying his beat.',
+    'Brahms, an admirer, once autographed a lady\'s fan with a wistful joke that he wished he had written that famous waltz himself.',
+    'His dances are the beating heart of Vienna\'s New Year\'s Concert, broadcast to the world every January 1.',
+  ],
+  'Hector Berlioz': [
+    'Enraged by a broken engagement, he once set off across Europe disguised as a lady\'s maid, armed and plotting a double murder he thankfully abandoned.',
+    'He wrote the era\'s definitive treatise on orchestration and championed a huge, vividly coloured orchestra.',
+    'He eventually married the Shakespearean actress who had inspired his most famous symphony — and the marriage was miserable.',
+  ],
+  'Bedřich Smetana': [
+    'His autobiographical string quartet ends with a piercing sustained high note — the tinnitus that heralded his deafness.',
+    'He spent five years conducting in Sweden before returning home to lead his country\'s new national opera.',
+    'The main theme of his river tone poem shares an old folk tune that also underlies the Israeli anthem "Hatikvah."',
+  ],
+  'Johann Pachelbel': [
+    'Pop and rock guitarists know his repeating bass as the "four-chord progression" hiding inside countless hit songs.',
+    'He was godfather to one of Johann Sebastian Bach\'s sisters and taught Bach\'s eldest brother.',
+    'His three-hundred-year-old canon became inescapable at weddings after featuring in the 1980 film "Ordinary People."',
+  ],
+  'Gabriel Fauré': [
+    'He composed mostly in summers, squeezing creation around exhausting duties as a church organist and teacher.',
+    'A pillar of French song, he set the poems of Verlaine into some of the language\'s most beloved mélodies.',
+    'His dreamy "Sicilienne" and the song "Après un rêve" are among his most-recorded melodies.',
+  ],
+  'Jacques Offenbach': [
+    'Saint-Saëns borrowed his galloping Can-Can tune, slowed it to a crawl, and made it the plodding "Tortoises" in "The Carnival of the Animals."',
+    'He died months before the premiere of his one grand opera, the work he hoped would outlast his comedies.',
+    'That breakneck "Can-Can" galop is his most recognized music, a shorthand for Parisian cabaret.',
   ],
 };
 // Interleave: [f0, x0, f1, f2, x1, f3, f4, x2, f5] keeps the cryptic-to-giveaway slope.
