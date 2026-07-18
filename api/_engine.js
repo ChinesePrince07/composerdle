@@ -137,6 +137,7 @@ function earView(piece, g) {
     },
     state: publicState(g),
   };
+  if (g.comp && !g.done) v.state.composer = piece.composer; // piece hunt in progress — the composer is already earned
   if (g.done) v.state.result = earResult(piece, g);
   return v;
 }
@@ -149,7 +150,7 @@ function factsView(composer, g, key) {
   return v;
 }
 function publicState(g) {
-  return { marks: g.marks, hints: g.hintTexts || [], pieceFound: g.pieceFound, wrong: g.wrong, done: g.done, won: g.won };
+  return { marks: g.marks, hints: g.hintTexts || [], pieceFound: g.pieceFound, wrong: g.wrong, done: g.done, won: g.won, comp: !!g.comp };
 }
 function earResult(piece, g) {
   const c = COMPOSERS.find(c => c.name === piece.composer);
@@ -157,6 +158,8 @@ function earResult(piece, g) {
     composer: piece.composer, years: c.years, title: piece.title,
     performer: piece.performer, license: piece.license, scoreNote: piece.scoreNote,
     pts: g.pts, pieceFound: g.pieceFound,
+    // tries it took to name the composer — piece-hunt retries don't count against the verdict
+    ctries: g.won ? MAX + 1 - (g.base || (MAX + 1 - g.marks.length)) : g.marks.length,
   };
 }
 function factsResult(composer, g) {
@@ -168,11 +171,24 @@ function applyEarAction(piece, g, tier, action, value) {
   if (g.done) return { error: 'game over' };
   const out = {};
   if (action === 'guess') {
-    // combined guess: {c: composer, p: piece name} — both judged in the same try
+    // composer already named — every further guess hunts the piece for the ×2, costing a try each
+    if (g.comp) {
+      const pv = String((value && value.p) || (typeof value === 'string' ? value : '')).slice(0, 80);
+      const pn = normP(pv);
+      if (pn.length < 3) return { error: 'too short' };
+      if (piece.keys.some(k => pn.includes(k))) { g.pieceFound = true; out.piece = 'correct'; finishEar(piece, g, tier, true); }
+      else {
+        if (piece.genreWords.some(w => pn.includes(normP(w)))) { out.piece = 'genre'; out.genre = piece.genre; }
+        else out.piece = 'wrong';
+        g.marks.push('wrong');
+        if (g.marks.length >= MAX) finishEar(piece, g, tier, true); // composer stands — win on single points
+      }
+      return out;
+    }
+    // combined guess: {c: composer, p: optional piece name} — both judged in the same try
     const cv = String((value && value.c) || (typeof value === 'string' ? value : '')).slice(0, 60);
     const pv = String((value && value.p) || '').slice(0, 80);
     if (!norm(cv)) return { error: 'empty guess' };
-    if (!pv && !g.pieceFound) return { error: 'every guess needs a piece name too' };
     if (pv && !g.pieceFound) {
       const pn = normP(pv);
       if (pn.length >= 3) {
@@ -182,20 +198,20 @@ function applyEarAction(piece, g, tier, action, value) {
       }
     }
     if (matchGuess(cv, COMPOSERS.find(c => c.name === piece.composer))) {
-      g.marks.push('win'); finishEar(piece, g, tier, true);
+      g.marks.push('win');
+      g.base = MAX + 1 - g.marks.length; // points locked at the composer-naming try
+      if (g.pieceFound || g.marks.length >= MAX) finishEar(piece, g, tier, true);
+      else { g.comp = true; out.composer = piece.composer; } // piece pending: retry with remaining tries, or bank
     } else {
       g.marks.push('wrong'); g.wrong.push(cv);
       const hit = COMPOSERS.find(c => matchGuess(cv, c));
       if (hit) out.strike = hit.name;
       if (g.marks.length >= MAX) finishEar(piece, g, tier, false);
     }
-  } else if (action === 'piece') {
-    const pv = normP(value || '');
-    if (pv.length < 3) return { error: 'too short' };
-    if (g.pieceFound) return { error: 'already found' };
-    if (piece.keys.some(k => pv.includes(k))) { g.pieceFound = true; out.piece = 'correct'; }
-    else if (piece.genreWords.some(w => pv.includes(normP(w)))) { out.piece = 'genre'; out.genre = piece.genre; }
-    else out.piece = 'wrong';
+  } else if (action === 'bank') {
+    // composer named, piece still open — take the single points and move on
+    if (!g.comp) return { error: 'nothing to bank' };
+    finishEar(piece, g, tier, true);
   } else if (action === 'hint') {
     if (g.hints >= 3 || g.marks.length >= MAX - 1) return { error: 'no hints left' };
     const c = COMPOSERS.find(c => c.name === piece.composer);
@@ -205,13 +221,15 @@ function applyEarAction(piece, g, tier, action, value) {
     g.marks.push('skip');
     out.hint = g.hintTexts[g.hintTexts.length - 1];
   } else if (action === 'quit') {
-    g.marks.push('skip'); finishEar(piece, g, tier, false);
+    if (g.comp) { finishEar(piece, g, tier, true); } // composer already named — quitting just banks
+    else { g.marks.push('skip'); finishEar(piece, g, tier, false); }
   } else return { error: 'unknown action' };
   return out;
 }
 function finishEar(piece, g, tier, won) {
   g.done = true; g.won = won;
-  g.pts = won && g.scored ? (MAX + 1 - g.marks.length) * MULT[tier] * (g.pieceFound ? 2 : 1) : 0;
+  // base was locked at the composer-naming try, so piece retries never cost earned points
+  g.pts = won && g.scored ? (g.base || (MAX + 1 - g.marks.length)) * MULT[tier] * (g.pieceFound ? 2 : 1) : 0;
 }
 
 function applyFactsAction(composer, g, action, value, key) {

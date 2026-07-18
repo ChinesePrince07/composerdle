@@ -15,21 +15,34 @@ function cdToken() {
 function cdName() { try { return localStorage.getItem('cdle-name') || ''; } catch (e) { return ''; } }
 function cdSetName(v) { try { localStorage.setItem('cdle-name', v); } catch (e) {} }
 
-async function apiGet(path) {
-  const r = await fetch(path + (path.includes('?') ? '&' : '?') + 'token=' + cdToken());
-  const j = await r.json().catch(() => ({}));
-  if (!r.ok) throw Object.assign(new Error(j.error || 'api error'), { data: j });
-  return j;
+// every call gets a hard timeout — a hung request must never leave the UI stuck busy.
+// The timer stays armed through the BODY read too: headers can arrive and the body still stall.
+async function apiFetch(path, opts) {
+  const ctl = new AbortController();
+  const t = setTimeout(() => ctl.abort(), 12000);
+  try {
+    let r;
+    try { r = await fetch(path, { ...opts, signal: ctl.signal }); }
+    catch (e) { throw new Error('the hall did not answer — try again'); }
+    let j;
+    try { j = await r.json(); }
+    catch (e) {
+      if (ctl.signal.aborted) throw new Error('the hall did not answer — try again');
+      j = {};
+    }
+    if (!r.ok) throw Object.assign(new Error(j.error || 'api error'), { data: j });
+    return j;
+  } finally { clearTimeout(t); }
 }
-async function apiPost(path, body) {
-  const r = await fetch(path, {
+function apiGet(path) {
+  return apiFetch(path + (path.includes('?') ? '&' : '?') + 'token=' + cdToken());
+}
+function apiPost(path, body) {
+  return apiFetch(path, {
     method: 'POST', headers: { 'content-type': 'application/json' },
     // the current name rides every POST so a settle racing a rename can't resurrect the old name
     body: JSON.stringify({ token: cdToken(), ...(cdName() ? { name: cdName() } : {}), ...body }),
   });
-  const j = await r.json().catch(() => ({}));
-  if (!r.ok) throw Object.assign(new Error(j.error || 'api error'), { data: j });
-  return j;
 }
 
 const lbEsc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
