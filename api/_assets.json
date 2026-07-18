@@ -248,7 +248,7 @@
   },
   "Caprice No. 24 in A minor": {
     "id": "p20",
-    "tier": "hard",
+    "tier": "medium",
     "pages": [
       "s/p20/1.webp",
       "s/p20/2.webp",
@@ -258,7 +258,7 @@
   },
   "Sì, mi chiamano Mimì (La bohème)": {
     "id": "p21",
-    "tier": "hard",
+    "tier": "medium",
     "pages": [
       "s/p21/1.webp",
       "s/p21/2.webp",
@@ -271,7 +271,7 @@
   },
   "Symphony No. 5 — IV. Adagietto": {
     "id": "p22",
-    "tier": "hard",
+    "tier": "medium",
     "pages": [
       "s/p22/1.webp",
       "s/p22/2.webp",
@@ -327,7 +327,7 @@
   },
   "Slavonic Dance in E minor, Op. 72 No. 2": {
     "id": "p26",
-    "tier": "hard",
+    "tier": "medium",
     "pages": [
       "s/p26/1.webp",
       "s/p26/2.webp",
@@ -344,7 +344,7 @@
   },
   "Danse macabre, Op. 40": {
     "id": "p27",
-    "tier": "hard",
+    "tier": "medium",
     "pages": [
       "s/p27/1.webp",
       "s/p27/2.webp",
@@ -437,7 +437,7 @@
   },
   "Prelude in C-sharp minor, Op. 3 No. 2": {
     "id": "p34",
-    "tier": "hard",
+    "tier": "medium",
     "pages": [
       "s/p34/1.webp",
       "s/p34/2.webp",
@@ -449,7 +449,7 @@
   },
   "Symphony No. 8 “Unfinished” — I. Allegro moderato": {
     "id": "p35",
-    "tier": "hard",
+    "tier": "medium",
     "pages": [
       "s/p35/1.webp",
       "s/p35/2.webp",
@@ -643,7 +643,7 @@
   },
   "The Four Seasons — “Winter”, RV 297, I.": {
     "id": "p48",
-    "tier": "hard",
+    "tier": "medium",
     "pages": [
       "s/p48/1.webp",
       "s/p48/2.webp",
@@ -654,7 +654,7 @@
   },
   "Anvil Chorus (Il trovatore)": {
     "id": "p49",
-    "tier": "hard",
+    "tier": "medium",
     "pages": [
       "s/p49/1.webp",
       "s/p49/2.webp",
@@ -926,7 +926,7 @@
   },
   "Pavane, Op. 50": {
     "id": "p67",
-    "tier": "hard",
+    "tier": "medium",
     "pages": [
       "s/p67/1.webp",
       "s/p67/2.webp",
@@ -940,5 +940,264 @@
       "s/p67/10.webp"
     ],
     "audioLocal": "tools/audio-cache/p67.mp3"
+  },
+  "Sarabande in D minor, HWV 437": {
+    "id": "p70",
+    "tier": "medium",
+    "pages": [
+      "s/p70/1.webp",
+      "s/p70/2.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p70.mp3"
+  },
+  "Piano Concerto in A minor, Op. 16 — I. Allegro molto moderato": {
+    "id": "p71",
+    "tier": "medium",
+    "pages": [
+      "s/p71/1.webp",
+      "s/p71/2.webp",
+      "s/p71/3.webp",
+      "s/p71/4.webp",
+      "s/p71/5.webp",
+      "s/p71/6.webp",
+      "s/p71/7.webp",
+      "s/p71/8.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p71.mp3"
+  },
+  "The Four Seasons — “Summer”, RV 315, III. Presto": {
+    "id": "p72",
+    "tier": "medium",
+    "pages": [
+      "s/p72/1.webp",
+      "s/p72/2.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p72.mp3"
+  },
+  "Pavane pour une infante défunte": {
+    "id": "p73",
+    "tier": "hard",
+    "pages": [
+      "s/p73/1.webp",
+      "s/p73/2.webp",
+      "s/p73/3.webp",
+      "s/p73/4.webp",
+      "s/p73/5.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p73.mp3"
+  },
+  "The Firebird — Infernal Dance": {
+    "id": "p74",
+    "tier": "hard",
+    "pages": [
+      "s/p74/1.webp",
+      "s/p74/2.webp",
+      "s/p74/3.webp",
+      "s/p74/4.webp",
+      "s/p74/5.webp",
+      "s/p74/6.webp",
+      "s/p74/7.webp",
+      "s/p74/8.webp",
+      "s/p74/9.webp",
+      "s/p74/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p74.mp3"
+  },
+  "Enigma Variations — IX. Nimrod": {
+    "id": "p76",
+    "tier": "hard",
+    "pages": [
+      "s/p76/1.webp",
+      "s/p76/2.webp",
+      "s/p76/3.webp",
+      "s/p76/4.webp",
+      "s/p76/5.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p76.mp3"
+  },
+  "Mephisto Waltz No. 1": {
+    "id": "p78",
+    "tier": "hard",
+    "pages": [
+      "s/p78/1.webp",
+      "s/p78/2.webp",
+      "s/p78/3.webp",
+      "s/p78/4.webp",
+      "s/p78/5.webp",
+      "s/p78/6.webp",
+      "s/p78/7.webp",
+      "s/p78/8.webp",
+      "s/p78/9.webp",
+      "s/p78/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p78.mp3"
+  },
+  "The Hebrides (Fingal’s Cave) Overture, Op. 26": {
+    "id": "p79",
+    "tier": "hard",
+    "pages": [
+      "s/p79/1.webp",
+      "s/p79/2.webp",
+      "s/p79/3.webp",
+      "s/p79/4.webp",
+      "s/p79/5.webp",
+      "s/p79/6.webp",
+      "s/p79/7.webp",
+      "s/p79/8.webp",
+      "s/p79/9.webp",
+      "s/p79/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p79.mp3"
+  },
+  "Scheherazade, Op. 35 — I. The Sea and Sinbad’s Ship": {
+    "id": "p80",
+    "tier": "hard",
+    "pages": [
+      "s/p80/1.webp",
+      "s/p80/2.webp",
+      "s/p80/3.webp",
+      "s/p80/4.webp",
+      "s/p80/5.webp",
+      "s/p80/6.webp",
+      "s/p80/7.webp",
+      "s/p80/8.webp",
+      "s/p80/9.webp",
+      "s/p80/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p80.mp3"
+  },
+  "Tannhäuser — Overture": {
+    "id": "p81",
+    "tier": "hard",
+    "pages": [
+      "s/p81/1.webp",
+      "s/p81/2.webp",
+      "s/p81/3.webp",
+      "s/p81/4.webp",
+      "s/p81/5.webp",
+      "s/p81/6.webp",
+      "s/p81/7.webp",
+      "s/p81/8.webp",
+      "s/p81/9.webp",
+      "s/p81/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p81.mp3"
+  },
+  "Carnival Overture, Op. 92": {
+    "id": "p82",
+    "tier": "hard",
+    "pages": [
+      "s/p82/1.webp",
+      "s/p82/2.webp",
+      "s/p82/3.webp",
+      "s/p82/4.webp",
+      "s/p82/5.webp",
+      "s/p82/6.webp",
+      "s/p82/7.webp",
+      "s/p82/8.webp",
+      "s/p82/9.webp",
+      "s/p82/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p82.mp3"
+  },
+  "Symphony No. 3 in F major, Op. 90 — III. Poco allegretto": {
+    "id": "p83",
+    "tier": "hard",
+    "pages": [
+      "s/p83/1.webp",
+      "s/p83/2.webp",
+      "s/p83/3.webp",
+      "s/p83/4.webp",
+      "s/p83/5.webp",
+      "s/p83/6.webp",
+      "s/p83/7.webp",
+      "s/p83/8.webp",
+      "s/p83/9.webp",
+      "s/p83/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p83.mp3"
+  },
+  "Bacchanale (Samson et Dalila)": {
+    "id": "p84",
+    "tier": "hard",
+    "pages": [
+      "s/p84/1.webp",
+      "s/p84/2.webp",
+      "s/p84/3.webp",
+      "s/p84/4.webp",
+      "s/p84/5.webp",
+      "s/p84/6.webp",
+      "s/p84/7.webp",
+      "s/p84/8.webp",
+      "s/p84/9.webp",
+      "s/p84/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p84.mp3"
+  },
+  "The Barber of Seville — Overture": {
+    "id": "p85",
+    "tier": "medium",
+    "pages": [
+      "s/p85/1.webp",
+      "s/p85/2.webp",
+      "s/p85/3.webp",
+      "s/p85/4.webp",
+      "s/p85/5.webp",
+      "s/p85/6.webp",
+      "s/p85/7.webp",
+      "s/p85/8.webp",
+      "s/p85/9.webp",
+      "s/p85/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p85.mp3"
+  },
+  "Barcarolle (The Tales of Hoffmann)": {
+    "id": "p86",
+    "tier": "medium",
+    "pages": [
+      "s/p86/1.webp",
+      "s/p86/2.webp",
+      "s/p86/3.webp",
+      "s/p86/4.webp",
+      "s/p86/5.webp",
+      "s/p86/6.webp",
+      "s/p86/7.webp",
+      "s/p86/8.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p86.mp3"
+  },
+  "March from The Love for Three Oranges, Op. 33": {
+    "id": "p87",
+    "tier": "hard",
+    "pages": [
+      "s/p87/1.webp",
+      "s/p87/2.webp",
+      "s/p87/3.webp",
+      "s/p87/4.webp",
+      "s/p87/5.webp",
+      "s/p87/6.webp",
+      "s/p87/7.webp",
+      "s/p87/8.webp",
+      "s/p87/9.webp",
+      "s/p87/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p87.mp3"
+  },
+  "Valse triste, Op. 44": {
+    "id": "p88",
+    "tier": "hard",
+    "pages": [
+      "s/p88/1.webp",
+      "s/p88/2.webp",
+      "s/p88/3.webp",
+      "s/p88/4.webp",
+      "s/p88/5.webp",
+      "s/p88/6.webp",
+      "s/p88/7.webp",
+      "s/p88/8.webp",
+      "s/p88/9.webp",
+      "s/p88/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p88.mp3"
   }
 }
