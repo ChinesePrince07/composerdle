@@ -29,7 +29,7 @@ module.exports = async (req, res) => {
     if (g.scored && ctx.mode === 'ear') {
       const today = E.utcDay();
       const isToday = (ctx.day ?? today) === today;
-      const prof = await E.settleGame(token, key, g, ctx.day ?? today, isToday);
+      const prof = await E.settleGame(token, key, g, ctx.day ?? today, isToday, b.name);
       if (prof) { resp.career = prof.career; resp.streak = prof.streak.cur; }
     }
   }

@@ -1,12 +1,19 @@
 // Composerdle shared client: device token, API helpers, name bar, leaderboard, stats.
 
+let _tok = null;
 function cdToken() {
+  if (_tok) return _tok;
   try {
     let t = localStorage.getItem('cdle-token');
     if (!t) { t = crypto.randomUUID(); localStorage.setItem('cdle-token', t); }
-    return t;
-  } catch (e) { return 'anon-' + String(Math.abs(Date.now() % 1e8)); }
+    _tok = t;
+  } catch (e) { _tok = 'anon-' + Math.random().toString(36).slice(2) + Date.now().toString(36); } // memoized: one page = one identity even without storage (no randomUUID dependency here)
+  return _tok;
 }
+
+// the browser's current stage name — kept locally so renames survive the server's stale reads
+function cdName() { try { return localStorage.getItem('cdle-name') || ''; } catch (e) { return ''; } }
+function cdSetName(v) { try { localStorage.setItem('cdle-name', v); } catch (e) {} }
 
 async function apiGet(path) {
   const r = await fetch(path + (path.includes('?') ? '&' : '?') + 'token=' + cdToken());
@@ -17,7 +24,8 @@ async function apiGet(path) {
 async function apiPost(path, body) {
   const r = await fetch(path, {
     method: 'POST', headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ token: cdToken(), ...body }),
+    // the current name rides every POST so a settle racing a rename can't resurrect the old name
+    body: JSON.stringify({ token: cdToken(), ...(cdName() ? { name: cdName() } : {}), ...body }),
   });
   const j = await r.json().catch(() => ({}));
   if (!r.ok) throw Object.assign(new Error(j.error || 'api error'), { data: j });
@@ -57,6 +65,10 @@ function sfx(kind) {
 let _profile = null;
 async function cdProfile(force) {
   if (!_profile || force) { try { _profile = await apiGet('/api/player'); } catch (e) { _profile = { name: '', career: 0, games: 0, wins: 0, dist: {}, streak: { cur: 0, max: 0 } }; } }
+  // local name wins over a possibly-stale server copy; backfill local from server for old players
+  const local = cdName();
+  if (local) _profile.name = local;
+  else if (_profile.name) cdSetName(_profile.name);
   return _profile;
 }
 
@@ -77,7 +89,8 @@ async function lbNameBar(onSet) {
     const save = async () => {
       const v = bar.querySelector('#nbInput').value.trim();
       if (!v) return;
-      try { await apiPost('/api/player', { name: v }); _profile.name = v; } catch (e) {}
+      cdSetName(v);
+      try { await apiPost('/api/player', { name: v }); _profile.name = v; } catch (e) { _profile.name = v; }
       render(); onSet && onSet();
     };
     bar.querySelector('#nbSave').addEventListener('click', save);
@@ -98,7 +111,8 @@ async function lbNamePrompt(next) {
   dlg.querySelector('#dlgNameSave').onclick = async () => {
     const v = input.value.trim();
     if (!v) return;
-    try { await apiPost('/api/player', { name: v }); _profile.name = v; } catch (e) {}
+    cdSetName(v);
+    try { await apiPost('/api/player', { name: v }); _profile.name = v; } catch (e) { _profile.name = v; }
     lbNameBar(); lbRender(); finish();
   };
   dlg.querySelector('#dlgNameSkip').onclick = e => {

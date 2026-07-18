@@ -242,11 +242,15 @@ function applyFactsAction(composer, g, action, value, key) {
 }
 
 // ---------- profile ----------
-async function settleGame(token, key, g, day, isToday) {
+async function settleGame(token, key, g, day, isToday, name) {
   if (!g.scored) return null;
   const prof = (await readJSON(profileKey(token))) || {
     name: '', career: 0, games: 0, wins: 0, dist: {}, streak: { last: -99, cur: 0, max: 0 }, results: {},
   };
+  // one browser = one identity: the client's current stage name rides every settle, so a
+  // rename is applied in place and can't be undone by a stale profile read (Blob ~60s cache)
+  const nm = String(name || '').trim().slice(0, 24);
+  if (nm) prof.name = nm;
   if (prof.results[key] !== undefined) return prof; // already settled
   prof.games++;
   if (g.won) { prof.wins++; prof.dist[g.marks.length] = (prof.dist[g.marks.length] || 0) + 1; }
