@@ -9,7 +9,10 @@ module.exports = async (req, res) => {
   const scope = q.scope === 'daily' ? 'daily' : 'career';
   const day = parseInt(q.day, 10) >= 0 ? parseInt(q.day, 10) : E.utcDay();
 
-  const { blobs } = await list({ prefix: 'u/', limit: 200 });
+  // Blob down/suspended → serve an empty board instead of 500ing the whole page.
+  let blobs = [];
+  try { ({ blobs } = await list({ prefix: 'u/', limit: 200 })); }
+  catch (e) { res.setHeader('Cache-Control', 'no-store'); return res.json({ scope, day, top: [], degraded: true }); }
   const profiles = (await Promise.all(blobs.map(async b => {
     try { return await (await fetch(`${b.url}?ts=${Date.now()}`, { cache: 'no-store' })).json(); }
     catch (e) { return null; }

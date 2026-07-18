@@ -5,8 +5,9 @@ const { COMPOSERS, matchGuess, norm, dayNumber } = require('./_game.js');
 const { PIECES } = require('./_pieces.js');
 const ASSETS = require('./_assets.json');
 
-// Filled in after `tools/upload-audio.sh` runs; opaque audio lives in Blob.
-const AUDIO_BASE = process.env.AUDIO_BASE || '';
+// Opaque audio host (decoupled from the profile-read base below). Unset → hotlink the
+// public-domain source URLs directly, which keeps audio working with zero Blob bandwidth.
+const AUDIO_HOST = process.env.AUDIO_HOST || '';
 
 const MAX = 6;
 const MULT = { easy: 1, medium: 2, hard: 3 };
@@ -17,14 +18,23 @@ const TIERS = ['easy', 'medium', 'hard'];
 // fetch avoids list()'s eventual consistency (which loses freshly written games)
 const BLOB_BASE = (process.env.AUDIO_BASE || '').replace(/\/$/, '');
 async function readJSON(pathname) {
-  const r = await fetch(`${BLOB_BASE}/${pathname}?ts=${Date.now()}`, { cache: 'no-store' });
-  return r.ok ? r.json() : null;
+  // Blob down/suspended must degrade to "no data", never throw — a read failure should not
+  // 500 a request; the caller treats null as a fresh player/game.
+  try {
+    const r = await fetch(`${BLOB_BASE}/${pathname}?ts=${Date.now()}`, { cache: 'no-store' });
+    return r.ok ? r.json() : null;
+  } catch (e) { return null; }
 }
 async function writeJSON(pathname, data) {
-  await put(pathname, JSON.stringify(data), {
-    access: 'public', addRandomSuffix: false, allowOverwrite: true,
-    contentType: 'application/json', cacheControlMaxAge: 0,
-  });
+  // Likewise a write failure (suspended store, quota) must not crash the guess response —
+  // the win still resolves; only persistence (career/streak/leaderboard) is skipped.
+  try {
+    await put(pathname, JSON.stringify(data), {
+      access: 'public', addRandomSuffix: false, allowOverwrite: true,
+      contentType: 'application/json', cacheControlMaxAge: 0,
+    });
+    return true;
+  } catch (e) { return false; }
 }
 const gameKey = (token, key) => `g/${token}/${key}.json`;
 const profileKey = token => `u/${token}.json`;
@@ -132,7 +142,7 @@ function earView(piece, g) {
   const a = assets(piece);
   const v = {
     puzzle: {
-      audio: AUDIO_BASE ? `${AUDIO_BASE}/a/${a.id}.mp3` : piece.audio,
+      audio: AUDIO_HOST ? `${AUDIO_HOST}/a/${a.id}.mp3` : piece.audio,
       pages: a.pages, crop: piece.crop || 0, cropBottom: piece.cropBottom || 0,
     },
     state: publicState(g),
