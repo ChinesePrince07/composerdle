@@ -1,7 +1,6 @@
 // GET /api/leaderboard?scope=career|daily&day= — aggregated from per-player profiles.
-// ponytail: lists + fetches up to 200 profile blobs per call, cached 30 s at the CDN;
-// move to a real KV when the hall outgrows a few hundred players.
-const { list } = require('@vercel/blob');
+// ponytail: reads up to 500 profile objects from R2 per call, cached 30 s at the CDN;
+// move to a single aggregated object if the hall ever outgrows a few hundred players.
 const E = require('./_engine.js');
 
 module.exports = async (req, res) => {
@@ -9,14 +8,8 @@ module.exports = async (req, res) => {
   const scope = q.scope === 'daily' ? 'daily' : 'career';
   const day = parseInt(q.day, 10) >= 0 ? parseInt(q.day, 10) : E.utcDay();
 
-  // Blob down/suspended → serve an empty board instead of 500ing the whole page.
-  let blobs = [];
-  try { ({ blobs } = await list({ prefix: 'u/', limit: 200 })); }
-  catch (e) { res.setHeader('Cache-Control', 'no-store'); return res.json({ scope, day, top: [], degraded: true }); }
-  const profiles = (await Promise.all(blobs.map(async b => {
-    try { return await (await fetch(`${b.url}?ts=${Date.now()}`, { cache: 'no-store' })).json(); }
-    catch (e) { return null; }
-  }))).filter(p => p && p.name);
+  // Store down → serve an empty board instead of 500ing the whole page.
+  const profiles = (await E.loadAllProfiles(500)).filter(p => p && p.name);
 
   const rows = profiles.map(p => ({
     name: p.name,

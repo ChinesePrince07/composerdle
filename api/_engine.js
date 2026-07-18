@@ -1,6 +1,7 @@
 // Server-authoritative game engine. Answers, facts, and scoring never leave this side.
-// Storage: Vercel Blob — one blob per game (single writer) and per player profile.
-const { put, list } = require('@vercel/blob');
+// Storage: Cloudflare R2 (S3-compatible) — one object per player profile. R2 has zero
+// egress fees, so heavy read traffic (leaderboard, audio) can't trip a bandwidth suspension.
+const { S3Client, GetObjectCommand, PutObjectCommand, ListObjectsV2Command } = require('@aws-sdk/client-s3');
 const { COMPOSERS, matchGuess, norm, dayNumber } = require('./_game.js');
 const { PIECES } = require('./_pieces.js');
 const ASSETS = require('./_assets.json');
@@ -13,28 +14,55 @@ const MAX = 6;
 const MULT = { easy: 1, medium: 2, hard: 3 };
 const TIERS = ['easy', 'medium', 'hard'];
 
-// ---------- storage ----------
-// blobs are written with addRandomSuffix:false → URLs are deterministic; a direct
-// fetch avoids list()'s eventual consistency (which loses freshly written games)
-const BLOB_BASE = (process.env.AUDIO_BASE || '').replace(/\/$/, '');
+// ---------- storage (Cloudflare R2 / S3) ----------
+// Namespaced under a prefix so Composerdle can share a bucket with other projects.
+const R2_BUCKET = process.env.R2_BUCKET;
+const R2_PREFIX = 'cdle/';
+const R2 = process.env.R2_S3_ENDPOINT ? new S3Client({
+  region: 'auto',
+  endpoint: process.env.R2_S3_ENDPOINT,
+  credentials: { accessKeyId: process.env.R2_ACCESS_KEY_ID, secretAccessKey: process.env.R2_SECRET_ACCESS_KEY },
+}) : null;
+const streamToString = async body => {
+  if (typeof body.transformToString === 'function') return body.transformToString();
+  const chunks = []; for await (const c of body) chunks.push(c); return Buffer.concat(chunks).toString('utf8');
+};
 async function readJSON(pathname) {
-  // Blob down/suspended must degrade to "no data", never throw — a read failure should not
-  // 500 a request; the caller treats null as a fresh player/game.
+  // Missing key or any failure → "no data" (fresh player/game); never throw / 500 a request.
+  if (!R2) return null;
   try {
-    const r = await fetch(`${BLOB_BASE}/${pathname}?ts=${Date.now()}`, { cache: 'no-store' });
-    return r.ok ? r.json() : null;
+    const r = await R2.send(new GetObjectCommand({ Bucket: R2_BUCKET, Key: R2_PREFIX + pathname }));
+    return JSON.parse(await streamToString(r.Body));
   } catch (e) { return null; }
 }
 async function writeJSON(pathname, data) {
-  // Likewise a write failure (suspended store, quota) must not crash the guess response —
-  // the win still resolves; only persistence (career/streak/leaderboard) is skipped.
+  // A write failure must not crash the guess response — the win still resolves; only
+  // persistence (career/streak/leaderboard) is skipped.
+  if (!R2) return false;
   try {
-    await put(pathname, JSON.stringify(data), {
-      access: 'public', addRandomSuffix: false, allowOverwrite: true,
-      contentType: 'application/json', cacheControlMaxAge: 0,
-    });
+    await R2.send(new PutObjectCommand({
+      Bucket: R2_BUCKET, Key: R2_PREFIX + pathname,
+      Body: JSON.stringify(data), ContentType: 'application/json',
+    }));
     return true;
   } catch (e) { return false; }
+}
+// Leaderboard source: list every profile object, read them in parallel. Returns [] on failure.
+async function loadAllProfiles(limit = 500) {
+  if (!R2) return [];
+  try {
+    const keys = [];
+    let ContinuationToken;
+    do {
+      const r = await R2.send(new ListObjectsV2Command({
+        Bucket: R2_BUCKET, Prefix: R2_PREFIX + 'u/', ContinuationToken, MaxKeys: 1000,
+      }));
+      for (const o of r.Contents || []) keys.push(o.Key.slice(R2_PREFIX.length));
+      ContinuationToken = r.IsTruncated ? r.NextContinuationToken : undefined;
+    } while (ContinuationToken && keys.length < limit);
+    const profs = await Promise.all(keys.slice(0, limit).map(k => readJSON(k)));
+    return profs.filter(Boolean);
+  } catch (e) { return []; }
 }
 const gameKey = (token, key) => `g/${token}/${key}.json`;
 const profileKey = token => `u/${token}.json`;
@@ -301,7 +329,7 @@ async function settleGame(token, key, g, day, isToday, name) {
 
 module.exports = {
   MAX, TIERS, utcDay, pieceForDay, composerForDay, pieceById, assets,
-  readJSON, writeJSON, gameKey, profileKey, cleanToken,
+  readJSON, writeJSON, loadAllProfiles, gameKey, profileKey, cleanToken,
   newGame, earView, factsView, publicState, earResult, factsResult,
   applyEarAction, applyFactsAction, settleGame, factIndices, factsFor,
   signGame, readGame, puzzleFor, gameFromResult,
