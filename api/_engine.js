@@ -9,6 +9,9 @@ const ASSETS = require('./_assets.json');
 // Opaque audio host (decoupled from the profile-read base below). Unset → hotlink the
 // public-domain source URLs directly, which keeps audio working with zero Blob bandwidth.
 const AUDIO_HOST = process.env.AUDIO_HOST || '';
+// Score pages served from R2 (zero-egress) so `git push` git-deploys — which lack the
+// gitignored s/ dir — can't 404 the scores. Unset → serve the in-deploy static files.
+const SCORE_HOST = (process.env.SCORE_HOST || '').replace(/\/$/, '');
 
 const MAX = 6;
 const MULT = { easy: 1, medium: 2, hard: 3 };
@@ -171,7 +174,7 @@ function earView(piece, g) {
   const v = {
     puzzle: {
       audio: AUDIO_HOST ? `${AUDIO_HOST}/a/${a.id}.mp3` : piece.audio,
-      pages: a.pages, crop: piece.crop || 0, cropBottom: piece.cropBottom || 0,
+      pages: SCORE_HOST ? a.pages.map(p => `${SCORE_HOST}/${p}`) : a.pages, crop: piece.crop || 0, cropBottom: piece.cropBottom || 0,
     },
     state: publicState(g),
   };

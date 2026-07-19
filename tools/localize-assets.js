@@ -47,3 +47,23 @@ for (const [tier, pool] of Object.entries(PIECES)) {
 }
 fs.writeFileSync(MAP_FILE, JSON.stringify(map, null, 2));
 console.log(failures.length ? `FAILURES: ${failures.join(' | ')}` : `done — ${Object.keys(map).length} pieces mapped`);
+
+// Score pages are served from R2 (env SCORE_HOST) because the gitignored s/ dir is absent
+// from git-triggered Vercel deploys. Sync every rendered webp to R2 so new pieces show up.
+// Loads creds from .env.local; skips silently if R2 isn't configured.
+(async () => {
+  const envFile = path.join(ROOT, '.env.local');
+  if (fs.existsSync(envFile)) for (const l of fs.readFileSync(envFile, 'utf8').split('\n')) {
+    const m = l.match(/^([A-Z0-9_]+)=(.*)$/); if (m && !process.env[m[1]]) process.env[m[1]] = m[2].replace(/^["']|["']$/g, '');
+  }
+  if (!process.env.R2_S3_ENDPOINT) return;
+  let S3, Put; try { ({ S3Client: S3, PutObjectCommand: Put } = require('@aws-sdk/client-s3')); } catch (e) { console.log('R2 sync skipped (no @aws-sdk/client-s3)'); return; }
+  const s3 = new S3({ region: 'auto', endpoint: process.env.R2_S3_ENDPOINT, credentials: { accessKeyId: process.env.R2_ACCESS_KEY_ID, secretAccessKey: process.env.R2_SECRET_ACCESS_KEY } });
+  const webps = [];
+  for (const d of fs.readdirSync(path.join(ROOT, 's'))) { const dir = path.join(ROOT, 's', d); if (!fs.statSync(dir).isDirectory()) continue; for (const f of fs.readdirSync(dir)) if (f.endsWith('.webp')) webps.push(`s/${d}/${f}`); }
+  let up = 0;
+  for (let i = 0; i < webps.length; i += 24) await Promise.all(webps.slice(i, i + 24).map(async f => {
+    await s3.send(new Put({ Bucket: process.env.R2_BUCKET, Key: `cdle/${f}`, Body: fs.readFileSync(path.join(ROOT, f)), ContentType: 'image/webp' })); up++;
+  }));
+  console.log(`R2: synced ${up} score pages`);
+})();

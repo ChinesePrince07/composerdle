@@ -1199,5 +1199,390 @@
       "s/p88/10.webp"
     ],
     "audioLocal": "tools/audio-cache/p88.mp3"
+  },
+  "Keyboard Sonata in E major, K. 380": {
+    "id": "p89",
+    "tier": "medium",
+    "pages": [
+      "s/p89/1.webp",
+      "s/p89/2.webp",
+      "s/p89/3.webp",
+      "s/p89/4.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p89.mp3"
+  },
+  "Violin Concerto No. 1 in G minor, Op. 26 — I. Vorspiel": {
+    "id": "p90",
+    "tier": "medium",
+    "pages": [
+      "s/p90/1.webp",
+      "s/p90/2.webp",
+      "s/p90/3.webp",
+      "s/p90/4.webp",
+      "s/p90/5.webp",
+      "s/p90/6.webp",
+      "s/p90/7.webp",
+      "s/p90/8.webp",
+      "s/p90/9.webp",
+      "s/p90/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p90.mp3"
+  },
+  "Clarinet Concerto in A major, K. 622 — II. Adagio": {
+    "id": "p91",
+    "tier": "medium",
+    "pages": [
+      "s/p91/1.webp",
+      "s/p91/2.webp",
+      "s/p91/3.webp",
+      "s/p91/4.webp",
+      "s/p91/5.webp",
+      "s/p91/6.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p91.mp3"
+  },
+  "The Four Seasons — “Autumn”, RV 293, I. Allegro": {
+    "id": "p92",
+    "tier": "medium",
+    "pages": [
+      "s/p92/1.webp",
+      "s/p92/2.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p92.mp3"
+  },
+  "Arrival of the Queen of Sheba (Solomon)": {
+    "id": "p93",
+    "tier": "medium",
+    "pages": [
+      "s/p93/1.webp",
+      "s/p93/2.webp",
+      "s/p93/3.webp",
+      "s/p93/4.webp",
+      "s/p93/5.webp",
+      "s/p93/6.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p93.mp3"
+  },
+  "Marche pour la cérémonie des Turcs": {
+    "id": "p94",
+    "tier": "hard",
+    "pages": [
+      "s/p94/1.webp",
+      "s/p94/2.webp",
+      "s/p94/3.webp",
+      "s/p94/4.webp",
+      "s/p94/5.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p94.mp3"
+  },
+  "Symphony No. 7 in E major — II. Adagio": {
+    "id": "p95",
+    "tier": "hard",
+    "pages": [
+      "s/p95/1.webp",
+      "s/p95/2.webp",
+      "s/p95/3.webp",
+      "s/p95/4.webp",
+      "s/p95/5.webp",
+      "s/p95/6.webp",
+      "s/p95/7.webp",
+      "s/p95/8.webp",
+      "s/p95/9.webp",
+      "s/p95/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p95.mp3"
+  },
+  "Violin Sonata No. 3 in D minor, Op. 27 “Ballade”": {
+    "id": "p96",
+    "tier": "hard",
+    "pages": [
+      "s/p96/1.webp",
+      "s/p96/2.webp",
+      "s/p96/3.webp",
+      "s/p96/4.webp",
+      "s/p96/5.webp",
+      "s/p96/6.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p96.mp3"
+  },
+  "Jeux d'eau": {
+    "id": "p97",
+    "tier": "hard",
+    "pages": [
+      "s/p97/1.webp",
+      "s/p97/2.webp",
+      "s/p97/3.webp",
+      "s/p97/4.webp",
+      "s/p97/5.webp",
+      "s/p97/6.webp",
+      "s/p97/7.webp",
+      "s/p97/8.webp",
+      "s/p97/9.webp",
+      "s/p97/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p97.mp3"
+  },
+  "Prélude à l’après-midi d’un faune": {
+    "id": "p98",
+    "tier": "hard",
+    "pages": [
+      "s/p98/1.webp",
+      "s/p98/2.webp",
+      "s/p98/3.webp",
+      "s/p98/4.webp",
+      "s/p98/5.webp",
+      "s/p98/6.webp",
+      "s/p98/7.webp",
+      "s/p98/8.webp",
+      "s/p98/9.webp",
+      "s/p98/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p98.mp3"
+  },
+  "The Planets — I. Mars, the Bringer of War": {
+    "id": "p99",
+    "tier": "hard",
+    "pages": [
+      "s/p99/1.webp",
+      "s/p99/2.webp",
+      "s/p99/3.webp",
+      "s/p99/4.webp",
+      "s/p99/5.webp",
+      "s/p99/6.webp",
+      "s/p99/7.webp",
+      "s/p99/8.webp",
+      "s/p99/9.webp",
+      "s/p99/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p99.mp3"
+  },
+  "Chaconne (Partita No. 2 in D minor, BWV 1004)": {
+    "id": "p100",
+    "tier": "hard",
+    "pages": [
+      "s/p100/1.webp",
+      "s/p100/2.webp",
+      "s/p100/3.webp",
+      "s/p100/4.webp",
+      "s/p100/5.webp",
+      "s/p100/6.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p100.mp3"
+  },
+  "Totentanz": {
+    "id": "p101",
+    "tier": "hard",
+    "pages": [
+      "s/p101/1.webp",
+      "s/p101/2.webp",
+      "s/p101/3.webp",
+      "s/p101/4.webp",
+      "s/p101/5.webp",
+      "s/p101/6.webp",
+      "s/p101/7.webp",
+      "s/p101/8.webp",
+      "s/p101/9.webp",
+      "s/p101/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p101.mp3"
+  },
+  "Romeo and Juliet — Overture-Fantasy": {
+    "id": "p102",
+    "tier": "hard",
+    "pages": [
+      "s/p102/1.webp",
+      "s/p102/2.webp",
+      "s/p102/3.webp",
+      "s/p102/4.webp",
+      "s/p102/5.webp",
+      "s/p102/6.webp",
+      "s/p102/7.webp",
+      "s/p102/8.webp",
+      "s/p102/9.webp",
+      "s/p102/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p102.mp3"
+  },
+  "Symphony No. 3 in C minor, Op. 78 “Organ” — Finale (Maestoso)": {
+    "id": "p103",
+    "tier": "hard",
+    "pages": [
+      "s/p103/1.webp",
+      "s/p103/2.webp",
+      "s/p103/3.webp",
+      "s/p103/4.webp",
+      "s/p103/5.webp",
+      "s/p103/6.webp",
+      "s/p103/7.webp",
+      "s/p103/8.webp",
+      "s/p103/9.webp",
+      "s/p103/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p103.mp3"
+  },
+  "Die Meistersinger von Nürnberg — Overture": {
+    "id": "p104",
+    "tier": "hard",
+    "pages": [
+      "s/p104/1.webp",
+      "s/p104/2.webp",
+      "s/p104/3.webp",
+      "s/p104/4.webp",
+      "s/p104/5.webp",
+      "s/p104/6.webp",
+      "s/p104/7.webp",
+      "s/p104/8.webp",
+      "s/p104/9.webp",
+      "s/p104/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p104.mp3"
+  },
+  "Piano Concerto in A minor, Op. 54 — I. Allegro affettuoso": {
+    "id": "p105",
+    "tier": "hard",
+    "pages": [
+      "s/p105/1.webp",
+      "s/p105/2.webp",
+      "s/p105/3.webp",
+      "s/p105/4.webp",
+      "s/p105/5.webp",
+      "s/p105/6.webp",
+      "s/p105/7.webp",
+      "s/p105/8.webp",
+      "s/p105/9.webp",
+      "s/p105/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p105.mp3"
+  },
+  "The Swan of Tuonela": {
+    "id": "p106",
+    "tier": "hard",
+    "pages": [
+      "s/p106/1.webp",
+      "s/p106/2.webp",
+      "s/p106/3.webp",
+      "s/p106/4.webp",
+      "s/p106/5.webp",
+      "s/p106/6.webp",
+      "s/p106/7.webp",
+      "s/p106/8.webp",
+      "s/p106/9.webp",
+      "s/p106/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p106.mp3"
+  },
+  "Capriccio Espagnol, Op. 34 — I. Alborada": {
+    "id": "p107",
+    "tier": "hard",
+    "pages": [
+      "s/p107/1.webp",
+      "s/p107/2.webp",
+      "s/p107/3.webp",
+      "s/p107/4.webp",
+      "s/p107/5.webp",
+      "s/p107/6.webp",
+      "s/p107/7.webp",
+      "s/p107/8.webp",
+      "s/p107/9.webp",
+      "s/p107/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p107.mp3"
+  },
+  "L'Arlésienne Suite No. 2 — IV. Farandole": {
+    "id": "p108",
+    "tier": "hard",
+    "pages": [
+      "s/p108/1.webp",
+      "s/p108/2.webp",
+      "s/p108/3.webp",
+      "s/p108/4.webp",
+      "s/p108/5.webp",
+      "s/p108/6.webp",
+      "s/p108/7.webp",
+      "s/p108/8.webp",
+      "s/p108/9.webp",
+      "s/p108/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p108.mp3"
+  },
+  "Sicilienne, Op. 78": {
+    "id": "p109",
+    "tier": "hard",
+    "pages": [
+      "s/p109/1.webp",
+      "s/p109/2.webp",
+      "s/p109/3.webp",
+      "s/p109/4.webp",
+      "s/p109/5.webp",
+      "s/p109/6.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p109.mp3"
+  },
+  "Ballade No. 1 in G minor, Op. 23": {
+    "id": "p110",
+    "tier": "hard",
+    "pages": [
+      "s/p110/1.webp",
+      "s/p110/2.webp",
+      "s/p110/3.webp",
+      "s/p110/4.webp",
+      "s/p110/5.webp",
+      "s/p110/6.webp",
+      "s/p110/7.webp",
+      "s/p110/8.webp",
+      "s/p110/9.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p110.mp3"
+  },
+  "La gazza ladra — Overture": {
+    "id": "p111",
+    "tier": "hard",
+    "pages": [
+      "s/p111/1.webp",
+      "s/p111/2.webp",
+      "s/p111/3.webp",
+      "s/p111/4.webp",
+      "s/p111/5.webp",
+      "s/p111/6.webp",
+      "s/p111/7.webp",
+      "s/p111/8.webp",
+      "s/p111/9.webp",
+      "s/p111/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p111.mp3"
+  },
+  "Wedding Day at Troldhaugen, Op. 65 No. 6": {
+    "id": "p112",
+    "tier": "hard",
+    "pages": [
+      "s/p112/1.webp",
+      "s/p112/2.webp",
+      "s/p112/3.webp",
+      "s/p112/4.webp",
+      "s/p112/5.webp",
+      "s/p112/6.webp",
+      "s/p112/7.webp",
+      "s/p112/8.webp",
+      "s/p112/9.webp",
+      "s/p112/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p112.mp3"
+  },
+  "Octet in E-flat major, Op. 20 — III. Scherzo": {
+    "id": "p113",
+    "tier": "hard",
+    "pages": [
+      "s/p113/1.webp",
+      "s/p113/2.webp",
+      "s/p113/3.webp",
+      "s/p113/4.webp",
+      "s/p113/5.webp",
+      "s/p113/6.webp",
+      "s/p113/7.webp",
+      "s/p113/8.webp",
+      "s/p113/9.webp",
+      "s/p113/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p113.mp3"
   }
 }
