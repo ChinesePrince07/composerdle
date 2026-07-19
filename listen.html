@@ -282,7 +282,7 @@
   const MAX = 6;
   const $ = id => document.getElementById(id);
   const qs = new URLSearchParams(location.search);
-  const MODE = ['easy', 'medium', 'hard'].includes(qs.get('mode')) ? qs.get('mode') : 'easy';
+  const MODE = ['easy', 'medium', 'hard'].includes(qs.get('mode')) ? qs.get('mode') : 'medium';
   const CHALLENGE = (qs.get('c') || '').replace(/[^a-z0-9]/g, '');
   const DAY = qs.get('day');
 
