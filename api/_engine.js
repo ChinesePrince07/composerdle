@@ -256,9 +256,23 @@ function applyEarAction(piece, g, tier, action, value) {
   } else if (action === 'hint') {
     if (g.hints >= 3 || g.marks.length >= MAX - 1) return { error: 'no hints left' };
     const c = COMPOSERS.find(c => c.name === piece.composer);
-    const hints = [`Composed around ${piece.year}.`, `Its composer lived ${c.years}.`, `You are listening to a ${piece.genre}.`];
+    const era = piece.year < 1600 ? 'Renaissance' : piece.year < 1750 ? 'Baroque'
+      : piece.year < 1820 ? 'Classical' : piece.year < 1910 ? 'Romantic' : 'Modern';
+    const fi = piece.composer.split(' ')[0][0];
+    const pool = [
+      `Composed around ${piece.year}.`,
+      `Its composer lived ${c.years}.`,
+      `You are listening to a ${piece.genre}.`,
+      `This is from the ${era} era.`,
+      `The composer's first name begins with “${fi}”.`,
+    ];
+    // deterministic per-piece order so the three hints shown vary between pieces
+    // (no more always-the-same trio) while staying stable within a single game
+    let h = 5381; for (const ch of piece.title) h = (h * 33 + ch.charCodeAt(0)) >>> 0;
+    const order = pool.map((_, i) => i).sort((a, b) =>
+      (((h ^ (a * 2654435761)) >>> 0) % 997) - (((h ^ (b * 2654435761)) >>> 0) % 997));
     g.hintTexts = g.hintTexts || [];
-    g.hintTexts.push(hints[g.hints++]);
+    g.hintTexts.push(pool[order[g.hints++]]);
     g.marks.push('skip');
     out.hint = g.hintTexts[g.hintTexts.length - 1];
   } else if (action === 'quit') {
