@@ -66,4 +66,24 @@ console.log(failures.length ? `FAILURES: ${failures.join(' | ')}` : `done — ${
     await s3.send(new Put({ Bucket: process.env.R2_BUCKET, Key: `cdle/${f}`, Body: fs.readFileSync(path.join(ROOT, f)), ContentType: 'image/webp' })); up++;
   }));
   console.log(`R2: synced ${up} score pages`);
+
+  // Audio too (env AUDIO_HOST serves cdle/a/<id>.mp3): upload any cached mp3 not yet on R2,
+  // with ID3 metadata stripped so the file doesn't leak the composer/title to cheaters.
+  const { ListObjectsV2Command: List } = require('@aws-sdk/client-s3');
+  const have = new Set();
+  let tok; do {
+    const r = await s3.send(new List({ Bucket: process.env.R2_BUCKET, Prefix: 'cdle/a/', ContinuationToken: tok }));
+    for (const o of r.Contents || []) have.add(path.basename(o.Key));
+    tok = r.IsTruncated ? r.NextContinuationToken : undefined;
+  } while (tok);
+  const os = require('os');
+  let aup = 0;
+  for (const f of fs.readdirSync(AUDIO_DIR)) {
+    if (!/^p\d+\.mp3$/.test(f) || have.has(f)) continue;
+    const tmp = path.join(os.tmpdir(), 'cdle-' + f);
+    execSync(`ffmpeg -hide_banner -loglevel error -y -i "${path.join(AUDIO_DIR, f)}" -map 0:a -c copy -map_metadata -1 -id3v2_version 3 "${tmp}"`, { timeout: 120000 });
+    await s3.send(new Put({ Bucket: process.env.R2_BUCKET, Key: `cdle/a/${f}`, Body: fs.readFileSync(tmp), ContentType: 'audio/mpeg', CacheControl: 'public, max-age=31536000, immutable' }));
+    fs.unlinkSync(tmp); aup++;
+  }
+  if (aup) console.log(`R2: synced ${aup} audio files`);
 })();
