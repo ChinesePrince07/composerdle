@@ -518,6 +518,28 @@ const COMPOSERS = [
       'Belgian "King of the Violin" and composer of six solo violin sonatas; first name Eugène.',
     ],
   },
+  {
+    name: 'Richard Strauss', years: '1864–1949', alt: [],
+    facts: [
+      'His father was Germany\'s foremost horn virtuoso, a fierce musical conservative who loathed Wagner even as his son fell under Wagner\'s spell.',
+      'A lifelong, almost fanatical devotee of the card game Skat, he dealt hands with fellow musicians between rehearsals.',
+      'He led the great opera houses of Munich, Weimar, Berlin, and Vienna across a conducting career spanning six decades.',
+      'His operas "Salome" and "Elektra" scandalised audiences with lurid stories and shrieking, near-atonal climaxes.',
+      'Grieving a world swept away by war, he closed his life with the radiant "Four Last Songs" and the string elegy "Metamorphosen."',
+      'German late-Romantic whose tone poem "Also sprach Zarathustra" opens the film "2001: A Space Odyssey"; first name Richard — surname shared with the Waltz King, but no relation.',
+    ],
+  },
+  {
+    name: 'Moritz Moszkowski', years: '1854–1925', alt: [],
+    facts: [
+      'Born in Prussian Breslau — today\'s Wrocław in Poland — he grew into one of Berlin\'s most sought-after piano teachers.',
+      'At his peak a famous saying held that, after Chopin, no one knew better how to write for the piano than he.',
+      'His sparkling "Spanish Dances" for piano four hands became a fixture of drawing rooms across Europe.',
+      'Shrewd stock investments made him wealthy — until the First World War wiped out his holdings and left him destitute.',
+      'Poor and ailing in his last Paris years, he was kept afloat by a grand benefit concert his fellow pianists organised.',
+      'Polish-German piano virtuoso of the dazzling encore "Étincelles" and the fifteen study-études of Op. 72; first name Moritz, surname Moszkowski.',
+    ],
+  },
 ];
 
 // Three extra facts per composer, slotted hard / medium / easy, so each game can
@@ -757,6 +779,16 @@ const EXTRA = {
     'He led the Cincinnati Symphony Orchestra for several seasons in the 1910s and 1920s.',
     'His first solo sonata answers Bach\'s; another, titled "Obsession," is haunted by the "Dies irae."',
     'Near the end of his life he wrote an opera in the Walloon dialect of his native Liège.',
+  ],
+  'Richard Strauss': [
+    'As a young conductor he preached the gospel of Wagner and Liszt, gaining a name as a dangerous modernist.',
+    'His tone poem "Till Eulenspiegel" paints a medieval prankster\'s mischief — and his gallows death — with a cackling clarinet and horn.',
+    'He liked to boast that he could set anything to music, even a restaurant menu or a spoon, so total was his command of the orchestra.',
+  ],
+  'Moritz Moszkowski': [
+    'A prodigy, he trained in Dresden and Berlin before touring Europe as a celebrated concert pianist.',
+    'Beyond salon miniatures he wrote a full-length opera, "Boabdil," and a Piano Concerto in E major.',
+    'As the strain of touring wore on him, he settled in Berlin — and later Paris — to teach and compose.',
   ],
 };
 // Interleave: [f0, x0, f1, f2, x1, f3, f4, x2, f5] keeps the cryptic-to-giveaway slope.

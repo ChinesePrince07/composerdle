@@ -38,10 +38,13 @@ for (const c of COMPOSERS) {
   }
 }
 
-// no alias collisions between composers
+// no alias collisions between composers — except surnames genuinely shared by two composers
+// (e.g. Johann vs Richard Strauss). The day's target is always known, so a bare surname is
+// only ever checked against it; the collision merely picks which name shows in a "wrong" strike.
+const SHARED_SURNAMES = new Set(['strauss']);
 const seen = new Map();
 for (const c of COMPOSERS) for (const a of aliases(c)) {
-  assert(!seen.has(a) || seen.get(a) === c.name, `alias collision: "${a}" (${seen.get(a)} vs ${c.name})`);
+  assert(SHARED_SURNAMES.has(a) || !seen.has(a) || seen.get(a) === c.name, `alias collision: "${a}" (${seen.get(a)} vs ${c.name})`);
   seen.set(a, c.name);
 }
 

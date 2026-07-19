@@ -1136,9 +1136,9 @@ const HARD = [
   {
     composer: 'Antonín Dvořák',
     title: 'Serenade for Strings in E major, Op. 22 — I. Moderato',
-    audio: 'https://imslp.org/images/7/71/PMLP59797-S%C3%A9r%C3%A9nade_pour_orchestre_%C3%A0_cordes%2C_op._22_%28Anton_Dvorak%29_CND_609.mp3',
-    performer: 'London Symphony Orchestra, cond. Alexander Paris',
-    license: 'public domain',
+    audio: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/d/d5/Dvorak_String_Serenade_I_Moderato.ogg/Dvorak_String_Serenade_I_Moderato.ogg.mp3',
+    performer: 'Reinhold Behringer',
+    license: 'CC BY-SA 4.0',
     scoreNote: 'Bote & Bock first-edition string-orchestra score, Berlin 1879',
     crop: 0.14,
     pages: local('dvorakserenade', 7),
