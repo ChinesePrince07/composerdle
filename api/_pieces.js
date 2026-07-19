@@ -654,6 +654,16 @@ const MEDIUM = [
     crop: 0.18,
     pages: local('sheba', 6),
   },
+  {
+    composer: 'Sergei Rachmaninoff',
+    title: 'Vocalise, Op. 34 No. 14',
+    audio: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/2/2c/Rachmaninoff_-_Vocalise_transcribed_for_Violin_and_Piano.ogg/Rachmaninoff_-_Vocalise_transcribed_for_Violin_and_Piano.ogg.mp3',
+    performer: 'Roxana Pavel Goldstein (violin), Monica Pavel (piano)',
+    license: 'CC BY-SA 2.0',
+    scoreNote: "Hawkes & Son 1919 full orchestral score (composer's own orchestration)",
+    crop: 0.2,
+    pages: local('paganinirhapsody', 10),
+  },
 ];
 
 const HARD = [
@@ -1123,6 +1133,16 @@ const HARD = [
     crop: 0.06,
     pages: local('octet', 10),
   },
+  {
+    composer: 'Antonín Dvořák',
+    title: 'Serenade for Strings in E major, Op. 22 — I. Moderato',
+    audio: 'https://imslp.org/images/7/71/PMLP59797-S%C3%A9r%C3%A9nade_pour_orchestre_%C3%A0_cordes%2C_op._22_%28Anton_Dvorak%29_CND_609.mp3',
+    performer: 'London Symphony Orchestra, cond. Alexander Paris',
+    license: 'public domain',
+    scoreNote: 'Bote & Bock first-edition string-orchestra score, Berlin 1879',
+    crop: 0.14,
+    pages: local('dvorakserenade', 7),
+  },
 ];
 
 // Difficulty rebalance: these were authored in HARD but play as MEDIUM — too famous to be
@@ -1259,6 +1279,8 @@ const META = {
   'Clarinet Concerto in A major, K. 622 — II. Adagio': { year: 1791, genre: 'clarinet concerto', genreWords: ['concerto', 'clarinet'], keys: ['clarinetconcerto', 'clarinetconcertoinamajor', 'k622', 'kv622'] },
   'The Four Seasons — “Autumn”, RV 293, I. Allegro': { year: 1723, genre: 'violin concerto', genreWords: ['concerto', 'seasons'], keys: ['autumn', 'autunno', 'fourseasons', 'rv293'] },
   'Arrival of the Queen of Sheba (Solomon)': { year: 1748, genre: 'Baroque oratorio sinfonia (orchestral interlude)', genreWords: ['baroque', 'oratorio', 'sinfonia', 'overture', 'orchestral'], keys: ['arrivalofthequeenofsheba', 'queenofsheba', 'hwv67'] },
+  'Vocalise, Op. 34 No. 14': { year: 1915, genre: 'song', genreWords: ['song', 'romance', 'lied'], keys: ['vocalise', 'op34'] },
+  'Serenade for Strings in E major, Op. 22 — I. Moderato': { year: 1875, genre: 'serenade', genreWords: ['serenade', 'strings', 'string', 'orchestra'], keys: ['serenadeforstrings', 'serenadeinemajor', 'stringserenade', 'op22', 'b52'] },
 };
 for (const pool of [EASY, MEDIUM, HARD]) for (const p of pool) Object.assign(p, META[p.title]);
 

@@ -1584,5 +1584,36 @@
       "s/p113/10.webp"
     ],
     "audioLocal": "tools/audio-cache/p113.mp3"
+  },
+  "Vocalise, Op. 34 No. 14": {
+    "id": "p114",
+    "tier": "medium",
+    "pages": [
+      "s/p114/1.webp",
+      "s/p114/2.webp",
+      "s/p114/3.webp",
+      "s/p114/4.webp",
+      "s/p114/5.webp",
+      "s/p114/6.webp",
+      "s/p114/7.webp",
+      "s/p114/8.webp",
+      "s/p114/9.webp",
+      "s/p114/10.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p114.mp3"
+  },
+  "Serenade for Strings in E major, Op. 22 — I. Moderato": {
+    "id": "p115",
+    "tier": "hard",
+    "pages": [
+      "s/p115/1.webp",
+      "s/p115/2.webp",
+      "s/p115/3.webp",
+      "s/p115/4.webp",
+      "s/p115/5.webp",
+      "s/p115/6.webp",
+      "s/p115/7.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p115.mp3"
   }
 }
