@@ -1,0 +1,927 @@
+{
+  "note": "Composer-name leak sweep of By Ear score images. Re-scan an id only if its pages count changes (score re-rendered) or it is new.",
+  "generatedAt": "2026-07-19",
+  "model": "haiku",
+  "scanned": 111,
+  "flagged": 15,
+  "pieces": {
+    "p01": {
+      "pages": 6,
+      "crop": 0.05,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p02": {
+      "pages": 10,
+      "crop": 0.17,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p03": {
+      "pages": 8,
+      "crop": 0.2,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p04": {
+      "pages": 3,
+      "crop": 0,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p05": {
+      "pages": 10,
+      "crop": 0,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p06": {
+      "pages": 10,
+      "crop": 0.13,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p07": {
+      "pages": 10,
+      "crop": 0.19,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p08": {
+      "pages": 3,
+      "crop": 0,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p09": {
+      "pages": 10,
+      "crop": 0.12,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p10": {
+      "pages": 3,
+      "crop": 0.26,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p28": {
+      "pages": 5,
+      "crop": 0.22,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p36": {
+      "pages": 3,
+      "crop": 0,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p37": {
+      "pages": 10,
+      "crop": 0,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p38": {
+      "pages": 10,
+      "crop": 0.09,
+      "cropBottom": 0.09,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "fixed",
+      "leaks": 3,
+      "fix": "cropBottom 0->0.09"
+    },
+    "p40": {
+      "pages": 10,
+      "crop": 0,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p41": {
+      "pages": 10,
+      "crop": 0.08,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p42": {
+      "pages": 10,
+      "crop": 0.2,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p50": {
+      "pages": 10,
+      "crop": 0,
+      "cropBottom": 0.05,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p51": {
+      "pages": 9,
+      "crop": 0.18,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "fixed",
+      "leaks": 1,
+      "fix": "pg2 redacted (by Strauss)"
+    },
+    "p52": {
+      "pages": 9,
+      "crop": 0.09,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p56": {
+      "pages": 4,
+      "crop": 0,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p57": {
+      "pages": 10,
+      "crop": 0,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p58": {
+      "pages": 1,
+      "crop": 0.06,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p59": {
+      "pages": 4,
+      "crop": 0,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p11": {
+      "pages": 10,
+      "crop": 0.24,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p12": {
+      "pages": 3,
+      "crop": 0.27,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p13": {
+      "pages": 2,
+      "crop": 0,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p14": {
+      "pages": 5,
+      "crop": 0.12,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "fixed",
+      "leaks": 1,
+      "fix": "crop 0.10->0.12"
+    },
+    "p15": {
+      "pages": 8,
+      "crop": 0.3,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p16": {
+      "pages": 1,
+      "crop": 0.175,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p17": {
+      "pages": 10,
+      "crop": 0.12,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p18": {
+      "pages": 1,
+      "crop": 0.29,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p19": {
+      "pages": 1,
+      "crop": 0.16,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p29": {
+      "pages": 2,
+      "crop": 0.16,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p30": {
+      "pages": 1,
+      "crop": 0.18,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p31": {
+      "pages": 6,
+      "crop": 0.12,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p32": {
+      "pages": 10,
+      "crop": 0.12,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p33": {
+      "pages": 10,
+      "crop": 0.16,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p39": {
+      "pages": 2,
+      "crop": 0.15,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p43": {
+      "pages": 10,
+      "crop": 0.33,
+      "cropBottom": 0.07,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "fixed",
+      "leaks": 10,
+      "fix": "cropBottom 0->0.07"
+    },
+    "p44": {
+      "pages": 6,
+      "crop": 0.3,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "fixed",
+      "leaks": 2,
+      "fix": "crop 0.24->0.30 + pg2 redacted (FRANZ SCHUBERT)"
+    },
+    "p45": {
+      "pages": 2,
+      "crop": 0,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p46": {
+      "pages": 10,
+      "crop": 0.09,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p47": {
+      "pages": 10,
+      "crop": 0.11,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p53": {
+      "pages": 10,
+      "crop": 0.17,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p54": {
+      "pages": 10,
+      "crop": 0.14,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p55": {
+      "pages": 5,
+      "crop": 0.25,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p60": {
+      "pages": 10,
+      "crop": 0.11,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p61": {
+      "pages": 10,
+      "crop": 0.2,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p62": {
+      "pages": 10,
+      "crop": 0.15,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p63": {
+      "pages": 10,
+      "crop": 0,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p64": {
+      "pages": 9,
+      "crop": 0.28,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p65": {
+      "pages": 6,
+      "crop": 0.1,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p85": {
+      "pages": 10,
+      "crop": 0.21,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p86": {
+      "pages": 8,
+      "crop": 0.12,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p70": {
+      "pages": 2,
+      "crop": 0,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p71": {
+      "pages": 8,
+      "crop": 0.09,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p72": {
+      "pages": 2,
+      "crop": 0.18,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p89": {
+      "pages": 4,
+      "crop": 0,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p90": {
+      "pages": 10,
+      "crop": 0.11,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p91": {
+      "pages": 6,
+      "crop": 0.07,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p92": {
+      "pages": 2,
+      "crop": 0.2,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p93": {
+      "pages": 6,
+      "crop": 0.18,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p114": {
+      "pages": 10,
+      "crop": 0.2,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p20": {
+      "pages": 3,
+      "crop": 0.24,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p21": {
+      "pages": 6,
+      "crop": 0.08,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p22": {
+      "pages": 5,
+      "crop": 0.13,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p26": {
+      "pages": 10,
+      "crop": 0,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p27": {
+      "pages": 10,
+      "crop": 0.17,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p34": {
+      "pages": 5,
+      "crop": 0.13,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p35": {
+      "pages": 10,
+      "crop": 0.3,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p48": {
+      "pages": 4,
+      "crop": 0.18,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p49": {
+      "pages": 9,
+      "crop": 0.21,
+      "cropBottom": 0.1,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "fixed",
+      "leaks": 8,
+      "fix": "cropBottom 0.08->0.10"
+    },
+    "p67": {
+      "pages": 10,
+      "crop": 0.13,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p23": {
+      "pages": 5,
+      "crop": 0.12,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "fixed",
+      "leaks": 1,
+      "fix": "see leaks"
+    },
+    "p24": {
+      "pages": 10,
+      "crop": 0.1,
+      "cropBottom": 0.08,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "fixed",
+      "leaks": 6,
+      "fix": "cropBottom 0.035->0.08"
+    },
+    "p25": {
+      "pages": 8,
+      "crop": 0.15,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p66": {
+      "pages": 10,
+      "crop": 0.11,
+      "cropBottom": 0.06,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p73": {
+      "pages": 5,
+      "crop": 0.27,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p74": {
+      "pages": 10,
+      "crop": 0.07,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p87": {
+      "pages": 10,
+      "crop": 0.05,
+      "cropBottom": 0.06,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "fixed",
+      "leaks": 1,
+      "fix": "cropBottom 0->0.06"
+    },
+    "p76": {
+      "pages": 5,
+      "crop": 0.08,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p88": {
+      "pages": 10,
+      "crop": 0.2,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "fixed",
+      "leaks": 1,
+      "fix": "crop 0.15->0.20"
+    },
+    "p78": {
+      "pages": 10,
+      "crop": 0.24,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "fixed",
+      "leaks": 1,
+      "fix": "crop 0.17->0.24"
+    },
+    "p79": {
+      "pages": 10,
+      "crop": 0.15,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p80": {
+      "pages": 10,
+      "crop": 0.15,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p81": {
+      "pages": 10,
+      "crop": 0.36,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p82": {
+      "pages": 10,
+      "crop": 0.12,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p83": {
+      "pages": 10,
+      "crop": 0.12,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p84": {
+      "pages": 10,
+      "crop": 0.17,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p94": {
+      "pages": 5,
+      "crop": 0.13,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p95": {
+      "pages": 10,
+      "crop": 0.085,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p96": {
+      "pages": 6,
+      "crop": 0.18,
+      "cropBottom": 0.09,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p97": {
+      "pages": 10,
+      "crop": 0.19,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p98": {
+      "pages": 10,
+      "crop": 0.26,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "fixed",
+      "leaks": 1,
+      "fix": "crop 0.21->0.26"
+    },
+    "p99": {
+      "pages": 10,
+      "crop": 0.11,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p100": {
+      "pages": 6,
+      "crop": 0.1,
+      "cropBottom": 0.07,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "fixed",
+      "leaks": 5,
+      "fix": "cropBottom 0.055->0.07"
+    },
+    "p101": {
+      "pages": 10,
+      "crop": 0.24,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "fixed",
+      "leaks": 1,
+      "fix": "crop 0.17->0.24"
+    },
+    "p102": {
+      "pages": 10,
+      "crop": 0.13,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p103": {
+      "pages": 10,
+      "crop": 0,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p104": {
+      "pages": 10,
+      "crop": 0.12,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p105": {
+      "pages": 10,
+      "crop": 0.17,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p106": {
+      "pages": 10,
+      "crop": 0.15,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p107": {
+      "pages": 10,
+      "crop": 0.11,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p108": {
+      "pages": 10,
+      "crop": 0.1,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p109": {
+      "pages": 6,
+      "crop": 0.24,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p110": {
+      "pages": 9,
+      "crop": 0.14,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p111": {
+      "pages": 10,
+      "crop": 0.17,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p112": {
+      "pages": 10,
+      "crop": 0.24,
+      "cropBottom": 0.075,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "fixed",
+      "leaks": 1,
+      "fix": "crop 0.185->0.24"
+    },
+    "p113": {
+      "pages": 10,
+      "crop": 0.06,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    },
+    "p115": {
+      "pages": 7,
+      "crop": 0.14,
+      "cropBottom": 0,
+      "scanned": "2026-07-19",
+      "model": "haiku",
+      "status": "clean"
+    }
+  }
+}

@@ -158,6 +158,7 @@ const EASY = [
     license: 'public domain',
     scoreNote: 'G. Schirmer 1912 vocal score',
     crop: 0.09,
+    cropBottom: 0.09,
     pages: local('hallelujah', 10),
   },
   {
@@ -301,7 +302,7 @@ const MEDIUM = [
     performer: 'Elisabeth Schumann (soprano), orchestra cond. Leo Rosenek (HMV, 1934)',
     license: 'public domain',
     scoreNote: '19th-century “Gems of German Song” edition',
-    crop: 0.1,
+    crop: 0.12,
     pages: pdfPages('c/ca', 'Ave_Maria_%28IA_b10257597%29.pdf', 1280, range(3, 7)),
   },
   {
@@ -422,6 +423,7 @@ const MEDIUM = [
     license: 'public domain (US federal)',
     scoreNote: 'Breitkopf 1879 orchestral full score',
     crop: 0.33,
+    cropBottom: 0.07,
     pages: local('figaro', 10),
   },
   {
@@ -431,7 +433,7 @@ const MEDIUM = [
     performer: 'San Francisco Symphony, cond. Alfred Hertz (HMV disc, 1920s)',
     license: 'public domain',
     scoreNote: 'Breitkopf 1888 piano four-hands original',
-    crop: 0.24,
+    crop: 0.3,
     pages: local('militaire', 6),
   },
   {
@@ -715,7 +717,7 @@ const HARD = [
     license: 'CC BY-SA 4.0',
     scoreNote: 'Bach-Gesellschaft 1867 edition, organ score',
     crop: 0.1,
-    cropBottom: 0.035, // edition footer "B.W. XV." would leak the composer
+    cropBottom: 0.08, // edition footer "B.W. XV." would leak the composer
     pages: local('passacaglia', 10),
   },
   {
@@ -786,7 +788,7 @@ const HARD = [
     license: 'public domain (US federal)',
     scoreNote: 'Novello/Ditson 1870 vocal score',
     crop: 0.21,
-    cropBottom: 0.08, // page footer names the opera and composer
+    cropBottom: 0.1, // page footer names the opera and composer
     pages: local('anvil', 9),
   },
   {
@@ -838,6 +840,7 @@ const HARD = [
     license: 'CC BY-NC-ND 2.5',
     scoreNote: 'Muzyka full score of the Op. 33 bis Suite (1922 Gutheil engraving)',
     crop: 0.05,
+    cropBottom: 0.06,
     pages: local('threeoranges', 10),
   },
   {
@@ -857,7 +860,7 @@ const HARD = [
     performer: 'Cleveland Orchestra, Nikolai Sokoloff (Brunswick 78, 1924)',
     license: 'public domain',
     scoreNote: 'Breitkopf & Härtel full orchestral score, Leipzig 1904',
-    crop: 0.15,
+    crop: 0.2,
     pages: local('valsetriste', 10),
   },
   {
@@ -867,7 +870,7 @@ const HARD = [
     performer: 'Giorgi Latso (piano)',
     license: 'CC BY-SA 4.0',
     scoreNote: "Bote & Bock 1917 edition (ed. d'Albert)",
-    crop: 0.17,
+    crop: 0.24,
     pages: local('mephisto', 10),
   },
   {
@@ -978,7 +981,7 @@ const HARD = [
     performer: 'Straram Symphony Orchestra (Orchestre Straram), cond. Walther Straram — Columbia 78rpm, rec. 24 Feb 1930, side 1 (matrix WLX 1289)',
     license: 'Public domain (Wikimedia Commons; 1930 recording, restoration by Public Domain Projekt / Carl Flisch)',
     scoreNote: 'Full orchestral score, A. Fromont (Paris), 1895 — engraved, plate no. E. 1091 F. (IMSLP)',
-    crop: 0.21,
+    crop: 0.26,
     pages: local('faune', 10),
   },
   {
@@ -999,7 +1002,7 @@ const HARD = [
     license: 'Audio: CC BY-SA 3.0 (Ben Goldstein; Al Goldstein collection / Pandora Music, EFF Open Audio License). Score: Public Domain.',
     scoreNote: 'Bach-Gesellschaft Ausgabe, Band 27 (ed. Alfred Dorffel), Breitkopf & Hartel, 1879 — original engraving; IMSLP #01307 (BWV1004.pdf)',
     crop: 0.1,
-    cropBottom: 0.055,
+    cropBottom: 0.07,
     pages: local('chaconne', 6),
   },
   {
@@ -1009,7 +1012,7 @@ const HARD = [
     performer: 'Neal O\'Doan (piano) with orchestra',
     license: 'CC BY-SA 2.0',
     scoreNote: 'Breitkopf & Härtel full orchestral score (Franz Liszts Musikalische Werke, Serie I, Band 13), ed. Bernhard Stavenhagen, Leipzig 1915',
-    crop: 0.17,
+    crop: 0.24,
     pages: local('totentanz', 10),
   },
   {
@@ -1119,7 +1122,7 @@ const HARD = [
     performer: 'Edvard Grieg (composer, 1903 recording)',
     license: 'Public domain',
     scoreNote: 'C. F. Peters, Leipzig 1897 engraved piano score (plate 8356, ed. Adolf Ruthardt)',
-    crop: 0.185,
+    crop: 0.24,
     cropBottom: 0.075,
     pages: local('troldhaugen', 10),
   },
