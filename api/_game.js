@@ -540,6 +540,116 @@ const COMPOSERS = [
       'Polish-German piano virtuoso of the dazzling encore "Étincelles" and the fifteen study-études of Op. 72; first name Moritz, surname Moszkowski.',
     ],
   },
+  {
+    name: "Clara Schumann", years: "1819–1896", alt: ["clarawieck", "claraschumannwieck"],
+    facts: [
+      "For over a decade her face looked out from Germany's 100-mark banknote, a grand piano printed beside her, until the euro finally retired it.",
+      "She was such a late talker that her father feared for her hearing; she was nearly five before she really spoke, yet by nine she was already dazzling audiences from the keyboard.",
+      "She helped turn playing an entire concert from memory, with no score on the music stand, from a shocking presumption into the expected norm.",
+      "To marry the composer she loved, she had to drag her own father through the courts, since he fought the match with everything he had.",
+      "She once confided to her diary that 'a woman must not desire to compose, there has never yet been one able to do it,' and after her thirties she all but laid down her pen.",
+      "Clara Schumann, piano prodigy, wife of Robert and lifelong confidante of Brahms, left a Piano Concerto (Op. 7), a Piano Trio (Op. 17) and the Three Romances, and reigned as one of the 19th century's most revered pianists.",
+    ],
+  },
+  {
+    name: "Fanny Hensel", years: "1805–1847", alt: ["fannymendelssohn", "fannymendelssohnhensel"],
+    facts: [
+      "As a teenager she could sit down and play all twenty-four preludes of Bach's \"Well-Tempered Clavier\" entirely from memory.",
+      "Her own father warned her in a letter that music could only ever be \"an ornament\" in her life — never a profession, as it would be for her brother.",
+      "For years she ran celebrated Sunday-morning musicales at her family's Berlin home, directing singers and players from the keyboard.",
+      "When Queen Victoria picked out a favorite among her brother's published songs and sang it for him, he had to confess that his sister was its real composer.",
+      "She wrote \"Das Jahr\" (\"The Year\"), a cycle of twelve piano pieces — one for each month — that her painter husband adorned with an illustration apiece.",
+      "German composer Fanny Hensel — Felix Mendelssohn's elder sister — wrote \"Das Jahr\" and the \"Easter Sonata\" that was mistaken for her brother's work for over 150 years.",
+    ],
+  },
+  {
+    name: "Hildegard von Bingen", years: "1098–1179", alt: ["hildegardofbingen", "hildegardevonbingen", "hildegardeofbingen"],
+    facts: [
+      "The youngest of ten children, she was pledged to the Church as a living 'tithe' and walled up beside a monastery as a young girl, enclosed alongside an older holy woman.",
+      "She invented an entire secret language of over a thousand words, complete with its own 23-letter alphabet, one of the earliest constructed languages on record.",
+      "Popes and emperors sought her counsel by letter, and she defied convention by preaching in public on tours through the Rhineland, almost unheard of for a woman of the 1100s.",
+      "She is celebrated for her concept of 'viriditas', a divine 'greening' life-force, and wrote two pioneering treatises on natural medicine cataloguing the healing powers of plants, stones, and animals.",
+      "In 2012, more than 800 years after her death, she was proclaimed a Doctor of the Church, one of only four women ever to receive that honor.",
+      "The visionary German abbess Hildegard, whose morality play 'Ordo Virtutum' and song-cycle 'Symphonia' made her the towering composer of medieval chant: better known as Hildegard von Bingen.",
+    ],
+  },
+  {
+    name: "Amy Beach", years: "1867–1944", alt: [],
+    facts: [
+      "As a small child she matched musical keys to specific colors in her mind, and would burst into tears if a familiar tune was played back to her in the 'wrong' key.",
+      "She could reportedly sing forty songs accurately before her first birthday, and at age four composed her earliest waltzes entirely in her head, playing them back note-for-note days later.",
+      "Denied formal training in composition, she taught herself the craft by translating French treatises on orchestration — including one by Berlioz — into English for her own study.",
+      "At eighteen she married a Boston surgeon twenty-four years her senior, who preferred she compose rather than tour; she published under his initials as 'Mrs. H. H. A.' and gave the proceeds of her rare recitals to charity.",
+      "At a New England artists' colony she transcribed wild hermit-thrush songs by ear and wove them into two piano pieces, 'A Hermit Thrush at Eve' and 'A Hermit Thrush at Morn.'",
+      "Her name is Amy Beach: her 1896 'Gaelic' Symphony was the first symphony composed and published by an American woman, and she also wrote a Piano Concerto and a Mass in E-flat.",
+    ],
+  },
+  {
+    name: "Cécile Chaminade", years: "1857–1944", alt: [],
+    facts: [
+      "Her insurance-executive father forbade her from formally enrolling at the Paris Conservatoire — decreeing that bourgeois girls were destined to be wives and mothers — so she trained privately with its professors instead.",
+      "Hearing her play in 1878, the veteran opera composer Ambroise Thomas declared: 'This is not a woman who composes, but a composer who is a woman.'",
+      "A neighbor in the village of Le Vésinet — none other than the composer of 'Carmen' — heard her improvise as a girl and took to calling her 'my little Mozart.'",
+      "A devoted favorite of Queen Victoria, she was invited to chat with the monarch at Windsor Castle; when Victoria was buried in 1901, one of her organ preludes was played at the funeral.",
+      "The Paris Conservatoire commissioned her 1902 Concertino for flute as an examination piece — it is now a cornerstone of the flute repertoire — and in 1913 she became the first female composer ever awarded France's Légion d'honneur.",
+      "Her charming salon miniatures — the piano study 'Automne', the ballet's 'Scarf Dance', and that flute Concertino — made Cécile Chaminade a household name whose sheet music sold in the hundreds of thousands.",
+    ],
+  },
+  {
+    name: "Lili Boulanger", years: "1893–1918", alt: [],
+    facts: [
+      "She reportedly had perfect pitch before she was even two, calling out the names of notes by ear while she was still a toddler in the nursery.",
+      "A bout of bronchial pneumonia in early childhood wrecked her health for good; she fought chronic illness her whole life and was gone by the age of 24.",
+      "As a small girl she trailed her older sister into classes at the Paris Conservatoire, soaking up harmony and counterpoint years before she was old enough to formally enroll.",
+      "Her father, Ernest, was himself a composer and a singing professor at the Paris Conservatoire — and, born back in 1815, he was pushing eighty by the time she came along.",
+      "In 1913 she made history as the first woman ever to win the Prix de Rome for musical composition.",
+      "Lili Boulanger — France's fragile young prodigy — is remembered for her cantata Faust et Hélène, the shimmering D'un matin de printemps, and her monumental Psalm settings such as Psalm 130, 'Du fond de l'abîme.'",
+    ],
+  },
+  {
+    name: "Ethel Smyth", years: "1858–1944", alt: ["ethelsmith"],
+    facts: [
+      "The daughter of a Royal Artillery major-general, she was so set on studying music abroad that she staged a domestic rebellion at home — refusing to go to church or join family outings — until her horrified father finally caved and let her go.",
+      "As a student in Leipzig she rubbed shoulders with the giants of Romantic music: she befriended Clara Schumann and Grieg, met Brahms, and won the admiration of Tchaikovsky, who nudged her toward richer orchestration.",
+      "Her towering Mass in D filled the Royal Albert Hall at its premiere — and was then bafflingly shelved for more than thirty years before anyone gave it a second hearing.",
+      "When advancing deafness made composing an agony, she reinvented herself as an author, spinning out a whole shelf of tart, gossipy memoirs that found more readers than much of her music ever did.",
+      "In her seventies she fell wildly, one-sidedly in love with novelist Virginia Woolf, who groaned that being adored by her was 'like being caught by a giant crab.'",
+      "Ethel Smyth wrote the storm-tossed opera The Wreckers and composed 'The March of the Women,' the song that became the rallying anthem of Britain's suffragettes.",
+    ],
+  },
+  {
+    name: "Florence Price", years: "1887–1953", alt: [],
+    facts: [
+      "To be admitted to a prestigious Boston conservatory around 1903, she listed her hometown as 'Pueblo, Mexico' — a ruse her mother devised so admissions officers wouldn't turn away a young Black student.",
+      "To pay the bills she improvised organ accompaniment for silent movies and churned out jingles for radio advertisements, all while composing symphonies on the side.",
+      "In 1932 she entered the national Wanamaker composition competition and walked off with first prize for a symphony, outscoring a field of established (and mostly male) composers.",
+      "Begging the Boston Symphony's conductor for a hearing, she wrote: 'I have two handicaps — those of sex and race. I am a woman; and I have some Negro blood in my veins.'",
+      "When contralto Marian Anderson sang to a crowd of some 75,000 at the Lincoln Memorial on Easter Sunday 1939, her program included this composer's arrangement of the spiritual 'My Soul's Been Anchored in the Lord.'",
+      "Florence Price's Symphony No. 1 in E minor, premiered by the Chicago Symphony Orchestra in 1933, made her the first Black American woman to have a symphony performed by a major orchestra.",
+    ],
+  },
+  {
+    name: "Louise Farrenc", years: "1804–1875", alt: [],
+    facts: [
+      "In a country where the opera house was the surest road to fame, this composer pointedly never wrote one, betting an entire career instead on symphonies and chamber music cut in a rigorous, Germanic classical mold.",
+      "The family trade was marble, not music: her father and grandfather carved statues for kings, and her brother sculpted the gilded winged 'Spirit of Liberty' that still crowns the column in the Place de la Bastille.",
+      "Shut out of the Conservatoire's official composition class because she was a woman, she took private lessons from Anton Reicha, the same counterpoint guru who trained Berlioz, Liszt, and Franck.",
+      "With her husband she assembled 'Le Tresor des pianistes,' a 23-volume treasury reviving three centuries of keyboard music, pioneering 'early-music' scholarship long before it was fashionable and finishing it alone after he died.",
+      "Handed a piano professorship at the Paris Conservatoire in 1842, a chair she would keep for three decades, she discovered she was paid less than her male colleagues and fought until the institution granted her equal salary.",
+      "Her Nonet, premiered in 1850 with a teenage Joseph Joachim leading on violin, became her calling card: meet Louise Farrenc, the French composer behind three symphonies and a celebrated body of chamber music.",
+    ],
+  },
+  {
+    name: "Barbara Strozzi", years: "1619–1677", alt: [],
+    facts: [
+      "She sent more secular vocal music to the printing press than any other composer of her generation — and did it largely on her own initiative, without a court or church post to support her.",
+      "The lone woman at a Venetian intellectual academy full of men, she was handed the job of announcing the topics for their formal debates and awarding the prize to the winner.",
+      "A celebrated Baroque portrait known as 'The Viola da Gamba Player,' now hanging in Dresden, is widely believed to depict her, instrument in hand and sheets of music before her.",
+      "Her very first published book, a set of madrigals, put to music the poems of her own adoptive father, a Venetian poet and opera librettist.",
+      "She trained as a composer under Francesco Cavalli, Monteverdi's protégé and the leading opera composer of 17th-century Venice.",
+      "Her name was Barbara, and her searing lament 'Lagrime mie' is the best known of the many cantatas and arias published by Barbara Strozzi.",
+    ],
+  },
 ];
 
 // Three extra facts per composer, slotted hard / medium / easy, so each game can
@@ -789,6 +899,56 @@ const EXTRA = {
     'A prodigy, he trained in Dresden and Berlin before touring Europe as a celebrated concert pianist.',
     'Beyond salon miniatures he wrote a full-length opera, "Boabdil," and a Piano Concerto in E major.',
     'As the strain of touring wore on him, he settled in Berlin — and later Paris — to teach and compose.',
+  ],
+  "Clara Schumann": [
+    "Widowed young, she spent four decades touring Europe as the tireless champion of her late husband's music, and of her devoted friend Brahms.",
+    "She raised a household of eight children while sustaining one of the most punishing concert careers of the age, often the family's chief breadwinner.",
+    "She composed her piano concerto as a teenager and premiered it at sixteen, with Felix Mendelssohn himself conducting the orchestra.",
+  ],
+  "Fanny Hensel": [
+    "She collapsed at 41 while rehearsing one of her brother's choral works and died the same day; the grief-stricken brother followed her to the grave just months later.",
+    "A long-dreamed-of year traveling in Italy finally set her composing freely, feted by the young French artists studying in Rome.",
+    "Though she wrote well over four hundred works, she dared to publish a set of songs under her own name only the year before she died.",
+  ],
+  "Hildegard von Bingen": [
+    "Her first great book of visions, 'Scivias', took about ten years to complete and was filled with vivid painted illuminations of what she claimed to see.",
+    "She said she had beheld a dazzling 'Living Light' since early childhood, visions that some modern scholars suspect were shaped by migraine auras.",
+    "Against her abbot's fierce objections, she broke away to found her own independent convent at Rupertsberg, taking her nuns with her.",
+  ],
+  "Amy Beach": [
+    "She was the only woman in Boston's 'Second New England School,' the circle of composers that included George Chadwick and Edward MacDowell.",
+    "In 1925 she became the founding first president of the Society of American Women Composers.",
+    "Her setting of Browning's poem 'The Year's at the Spring' became a runaway favorite, demanded as an encore in recital halls across America.",
+  ],
+  "Cécile Chaminade": [
+    "At 44 she married an older Marseille music publisher, a longtime friend of her mother's — reportedly on the condition that the union stay strictly platonic, the couple keeping separate homes in separate cities.",
+    "Across the United States, scores of amateur music societies sprang up bearing her name in her honor; a number of these clubs still meet today.",
+    "In 1908 she made a celebrated concert tour of the United States, where her adoring fans turned out in droves to hear her play her own pieces.",
+  ],
+  "Lili Boulanger": [
+    "Her devoted older sister, Nadia, went on to become the twentieth century's most influential composition teacher, mentoring the likes of Aaron Copland, Astor Piazzolla, and Quincy Jones.",
+    "During the First World War she and her sister ran a committee that mailed letters, money, and parcels to French musicians stuck in the trenches at the front.",
+    "Too weak to hold a pen at the very end, she dictated her final piece — a hushed 'Pie Jesu' — note by note to her older sister.",
+  ],
+  "Ethel Smyth": [
+    "Jailed for two months in Holloway after a suffragette window-smashing campaign, she was famously caught conducting her singing fellow inmates in the prison yard — beating time out of her cell window with a toothbrush.",
+    "She set composing aside for two entire years to throw herself into the fight for women's votes, forming a fierce, devoted attachment to movement leader Emmeline Pankhurst.",
+    "In 1922 she became the first woman composer ever to be made a Dame of the British Empire.",
+  ],
+  "Florence Price": [
+    "In 2009 a couple renovating a derelict house in St. Anne, Illinois — once her summer home — stumbled onto boxes of her lost manuscripts, including two violin concertos and a symphony long thought gone.",
+    "In place of the courtly scherzo of a European symphony, she dropped in a movement built on the 'Juba,' a syncopated African-American plantation dance.",
+    "Born in Little Rock, Arkansas in 1887, she and her family left for Chicago in 1927 as racial violence in the South worsened.",
+  ],
+  "Louise Farrenc": [
+    "Robert Schumann thought so highly of her that he devoted a glowing notice to her piano variations in his own influential music journal.",
+    "The Academie des Beaux-Arts awarded her its Prix Chartier for chamber music not once but twice, in 1861 and again in 1869.",
+    "Her thirty etudes spanning every major and minor key were adopted as required study for the Conservatoire's piano students.",
+  ],
+  "Barbara Strozzi": [
+    "She dedicated her first book of madrigals to Vittoria della Rovere, the Grand Duchess of Tuscany — just one of the powerful patrons she courted across Europe.",
+    "The poet who raised her as his adopted daughter was, scholars now agree, almost certainly her biological father as well.",
+    "The composer Niccolo Fontei dedicated two whole books of songs, his 'Bizzarrie poetiche' (1635 and 1636), to her voice, hailing her in print as 'la virtuosissima cantatrice' - the most virtuoso of all singers.",
   ],
 };
 // Interleave: [f0, x0, f1, f2, x1, f3, f4, x2, f5] keeps the cryptic-to-giveaway slope.
