@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 // "By Ear" screen (design sc-if isEar): an engraved score card whose pages turn
 // with the recording, over a guess form for composer + optional piece.
@@ -171,7 +172,7 @@ private struct ScoreCard: View {
         let bottom: CGFloat = !done ? CGFloat(game.puzzle.cropBottom ?? 0) : 0
         let url = pages.indices.contains(store.earPage) ? pages[store.earPage] : nil
         return ScorePage(url: url, top: top, bottom: bottom)
-            .padding(.horizontal, 16).padding(.top, 12).padding(.bottom, 8)
+            .padding(.horizontal, 8).padding(.top, 8).padding(.bottom, 8)
             .background(Color.white)
             .overlay(Rectangle().stroke(CD.rule, lineWidth: 1))
     }
@@ -241,60 +242,47 @@ private struct ScoreCard: View {
 
 // MARK: - Cropped score page
 
-// Renders the page at box width, then hides `top`/`bottom` fractions by offset +
-// clip. Natural rendered height is measured once the async image loads.
+// Loads the page image directly (so we know its real pixel size), then shows the
+// VISIBLE window — full page minus the hidden top/bottom fractions — at full box
+// width. Sizing itself from the image aspect is reliable, unlike measuring an
+// AsyncImage via preferences (which collapsed the score to a tiny fallback height).
 private struct ScorePage: View {
     let url: String?
     let top: CGFloat
     let bottom: CGFloat
-    @State private var natH: CGFloat = 0
-
-    private var visibleH: CGFloat { natH > 0 ? max(natH * (1 - top - bottom), 1) : 148 }
+    @State private var img: UIImage?
 
     var body: some View {
-        GeometryReader { geo in
-            let w = geo.size.width
-            AsyncImage(url: url.flatMap(URL.init(string:))) { phase in
-                if let image = phase.image {
-                    image.resizable().aspectRatio(contentMode: .fit)
-                        .frame(width: w)
-                        .background(GeometryReader { g in
-                            Color.clear.preference(key: PageHeightKey.self, value: g.size.height)
-                        })
-                        .offset(y: -top * natH)
-                        .frame(width: w, height: visibleH, alignment: .top)
-                        .clipped()
-                } else if phase.error != nil {
-                    placeholder(w, "score unavailable")
-                } else {
-                    placeholder(w, nil)
-                }
+        Group {
+            if let img, img.size.width > 0 {
+                let visH = max(img.size.height * (1 - top - bottom), 1)
+                Color.clear
+                    .aspectRatio(img.size.width / visH, contentMode: .fit)
+                    .overlay(
+                        GeometryReader { g in
+                            let w = g.size.width
+                            let fullH = w * img.size.height / img.size.width
+                            Image(uiImage: img).resizable()
+                                .frame(width: w, height: fullH)
+                                .offset(y: -top * fullH)
+                        }
+                    )
+                    .clipped()
+            } else {
+                Rectangle().fill(Color.white)
+                    .aspectRatio(0.75, contentMode: .fit)
+                    .overlay(ProgressView().tint(CD.faint))
             }
-            .onPreferenceChange(PageHeightKey.self) { natH = $0 }
         }
-        .frame(height: visibleH)
+        .task(id: url) { await load() }
     }
 
-    private func placeholder(_ w: CGFloat, _ note: String?) -> some View {
-        Rectangle().fill(Color.white)
-            .frame(width: w, height: 148)
-            .overlay(
-                Group {
-                    if let note {
-                        Text(note).font(CD.body(11, .regular, italic: true))
-                            .foregroundStyle(CD.faint)
-                    } else {
-                        ProgressView().tint(CD.faint)
-                    }
-                }
-            )
-    }
-}
-
-private struct PageHeightKey: PreferenceKey {
-    static let defaultValue: CGFloat = 0
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-        let n = nextValue(); if n > value { value = n }
+    private func load() async {
+        img = nil
+        guard let u = url.flatMap(URL.init(string:)) else { return }
+        if let (data, _) = try? await URLSession.shared.data(from: u), let ui = UIImage(data: data) {
+            img = ui
+        }
     }
 }
 

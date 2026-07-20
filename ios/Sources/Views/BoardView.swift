@@ -24,8 +24,8 @@ struct BoardView: View {
                         .padding(.top, 44)
                 } else {
                     VStack(spacing: 0) {
-                        ForEach(Array(top.enumerated()), id: \.offset) { _, r in
-                            row(r, me: !store.name.isEmpty && r.name == store.name)
+                        ForEach(Array(top.enumerated()), id: \.offset) { i, r in
+                            row(r, rank: i + 1, me: !store.name.isEmpty && r.name == store.name)
                         }
                         if let me {
                             Text("⋯")
@@ -33,7 +33,7 @@ struct BoardView: View {
                                 .foregroundStyle(CD.faint)
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 4)
-                            row(me, me: true)
+                            row(me, rank: me.rank ?? 0, me: true)
                         }
                     }
                     .padding(.top, 8)
@@ -56,7 +56,7 @@ struct BoardView: View {
     private var scopeToggle: some View {
         HStack(spacing: 0) {
             seg("Career", "career")
-            seg("Today", "today")
+            seg("Today", "daily")   // server scope key is "daily", not "today"
         }
         .frame(width: 200)
         .clipShape(RoundedRectangle(cornerRadius: 9))
@@ -76,9 +76,9 @@ struct BoardView: View {
     }
 
     // One leaderboard line: "rank. name  🔥streak" left, score right.
-    private func row(_ r: BoardRow, me: Bool) -> some View {
+    private func row(_ r: BoardRow, rank: Int, me: Bool) -> some View {
         let weight: Font.Weight = me ? .semibold : .regular
-        var left = Text(r.rank.map { "\($0)." } ?? "").foregroundStyle(CD.gold)
+        var left = Text("\(rank).").foregroundStyle(CD.gold)
             + Text("  \(r.name)").foregroundStyle(CD.ink)
         if r.streak > 1 {
             left = left + Text("  🔥\(r.streak)").font(CD.body(11, weight)).foregroundStyle(CD.ink)
