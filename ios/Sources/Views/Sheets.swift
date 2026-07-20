@@ -66,10 +66,14 @@ private struct WelcomeSheet: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .frame(maxWidth: .infinity)
             CDField(placeholder: "e.g. Maestro Fortissimo", text: $store.nameDraft) {
-                store.saveName(store.nameDraft); store.sheet = nil
+                store.saveName(store.nameDraft)
             }
             PrimaryButton(title: "Take the stage") {
-                store.saveName(store.nameDraft); store.sheet = nil
+                store.saveName(store.nameDraft)
+            }
+            if !store.nameError.isEmpty {
+                Text(store.nameError).font(CD.body(13)).foregroundStyle(CD.red)
+                    .multilineTextAlignment(.center).frame(maxWidth: .infinity)
             }
             Button { store.skipName() } label: {
                 Text("just browsing today")
@@ -93,10 +97,14 @@ private struct NameSheet: View {
                 .font(CD.body(14, .regular, italic: true)).foregroundStyle(CD.inkSoft)
                 .frame(maxWidth: .infinity).multilineTextAlignment(.center)
             CDField(placeholder: "e.g. Maestro Fortissimo", text: $store.nameDraft) {
-                store.saveName(store.nameDraft); store.sheet = nil
+                store.saveName(store.nameDraft)
             }
             PrimaryButton(title: "Enter the hall") {
-                store.saveName(store.nameDraft); store.sheet = nil
+                store.saveName(store.nameDraft)
+            }
+            if !store.nameError.isEmpty {
+                Text(store.nameError).font(CD.body(13)).foregroundStyle(CD.red)
+                    .multilineTextAlignment(.center).frame(maxWidth: .infinity)
             }
         }
         .sheetScroll()
@@ -193,7 +201,7 @@ private struct ResultSheet: View {
                 .padding(.top, 18)
             }
         }
-        .frame(maxWidth: .infinity)
-        .sheetScroll()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)   // center the verdict vertically
+        .padding(.horizontal, 22).padding(.vertical, 16)
     }
 }

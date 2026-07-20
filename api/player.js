@@ -12,6 +12,14 @@ module.exports = async (req, res) => {
     // from the result screen wiped the first score). Unplayed players aren't on the board
     // anyway, and the client's name rides every settle, so it persists on first play.
     const prof = await E.readJSON(E.profileKey(token));
+    // Reject a stage name already used by a different player (case-insensitive).
+    // Skip the check when the caller already holds that exact name (a no-op re-save).
+    if (!prof || String(prof.name || '').toLowerCase() !== name.toLowerCase()) {
+      const all = await E.loadAllProfiles(500);
+      if (all.some(p => p && p.name && p.name.toLowerCase() === name.toLowerCase())) {
+        return res.status(409).json({ error: 'That stage name is taken — try another.' });
+      }
+    }
     if (prof) { prof.name = name; await E.writeJSON(E.profileKey(token), prof); }
     return res.json({ ok: true, name });
   }

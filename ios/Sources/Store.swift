@@ -15,6 +15,7 @@ final class GameStore: ObservableObject {
     @Published var boardScope = "career"
     @Published var name = ""
     @Published var nameDraft = ""
+    @Published var nameError = ""
     @Published var sfxOn = true
     @Published var remindOn = false
 
@@ -243,8 +244,17 @@ final class GameStore: ObservableObject {
     func saveName(_ v: String) {
         let n = v.trimmingCharacters(in: .whitespaces)
         guard !n.isEmpty else { return }
-        name = n; lsSet("name", n)
-        Task { try? await API.setName(token: token, name: n) }
+        nameError = ""
+        Task {
+            do {
+                try await API.setName(token: token, name: n)   // 409 if taken
+                name = n; lsSet("name", n); sheet = nil
+            } catch APIError.http(409) {
+                nameError = "That stage name is taken — try another."
+            } catch {
+                name = n; lsSet("name", n); sheet = nil   // network error: keep it locally
+            }
+        }
     }
     func skipName() { lsSet("skip", "1"); sheet = nil }
 

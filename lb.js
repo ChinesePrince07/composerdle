@@ -102,8 +102,10 @@ async function lbNameBar(onSet) {
     const save = async () => {
       const v = bar.querySelector('#nbInput').value.trim();
       if (!v) return;
-      cdSetName(v);
-      try { await apiPost('/api/player', { name: v }); _profile.name = v; } catch (e) { _profile.name = v; }
+      // Honour the server's "name taken" 409; fall through to commit on a network error.
+      try { await apiPost('/api/player', { name: v }); }
+      catch (e) { if (e.data && e.data.error) { alert(e.data.error); return; } }
+      cdSetName(v); _profile.name = v;
       render(); onSet && onSet();
     };
     bar.querySelector('#nbSave').addEventListener('click', save);
@@ -124,8 +126,9 @@ async function lbNamePrompt(next) {
   dlg.querySelector('#dlgNameSave').onclick = async () => {
     const v = input.value.trim();
     if (!v) return;
-    cdSetName(v);
-    try { await apiPost('/api/player', { name: v }); _profile.name = v; } catch (e) { _profile.name = v; }
+    try { await apiPost('/api/player', { name: v }); }
+    catch (e) { if (e.data && e.data.error) { alert(e.data.error); return; } }
+    cdSetName(v); _profile.name = v;
     lbNameBar(); lbRender(); finish();
   };
   dlg.querySelector('#dlgNameSkip').onclick = e => {
