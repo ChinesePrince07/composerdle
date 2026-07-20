@@ -140,9 +140,12 @@ private struct ResultSheet: View {
                 let grid = store.currentMarks
                     .map { $0 == "win" ? "🟩" : $0 == "skip" ? "⬜️" : "🟥" }.joined()
 
-                Text(won ? "Bravo!" : "The curtain falls")
-                    .font(CD.display(22, .semibold, italic: true)).foregroundStyle(CD.red)
+                Text(won ? "Correct!" : "Not this time")
+                    .font(CD.display(28, .bold)).foregroundStyle(won ? CD.gold : CD.red)
                     .multilineTextAlignment(.center)
+                Text("+\(r.pts) pts")
+                    .font(CD.body(16, .semibold)).foregroundStyle(CD.ink)
+                    .padding(.top, 2)
 
                 Text(r.composer)
                     .font(CD.display(36, .semibold)).foregroundStyle(CD.ink)
@@ -162,11 +165,8 @@ private struct ResultSheet: View {
                         .padding(.top, 10)
                 }
 
-                Text("\(r.pts) points").font(CD.body(14.5)).foregroundStyle(CD.ink)
-                    .padding(.top, 12)
-
                 Text(grid).font(.system(size: 18)).tracking(4)
-                    .padding(.top, 6)
+                    .padding(.top, 14)
 
                 HStack(spacing: 8) {
                     ShareLink(item: store.shareText) {

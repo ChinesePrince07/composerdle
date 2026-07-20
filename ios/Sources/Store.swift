@@ -105,7 +105,7 @@ final class GameStore: ObservableObject {
         if let clues = r.clues { g.clues = clues }
         facts = g
         if r.state.done {
-            factsMsg = ""
+            factsMsg = ""; openResult()   // auto verdict → reveal
         } else if let strike = r.strike {
             factsMsg = "That is \(strike) — but not today's composer."
         } else if r.state.marks.last == "wrong" {
@@ -190,7 +190,7 @@ final class GameStore: ObservableObject {
         earMsgRight = false
         if let c = r.composer, !r.state.done { earGuessC = c }   // composer earned, keep it visible
         if r.state.done {
-            earMsg = ""
+            earMsg = ""; openResult()   // auto verdict → reveal
         } else if r.piece == "genre" {
             earMsg = "The right family\(r.genre.map { " (\($0))" } ?? "") — but not the piece."
         } else if let c = r.composer {
