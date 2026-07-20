@@ -1615,5 +1615,73 @@
       "s/p115/7.webp"
     ],
     "audioLocal": "tools/audio-cache/p115.mp3"
+  },
+  "Nocturne in D-flat major, Op. 27 No. 2": {
+    "id": "p116",
+    "tier": "medium",
+    "pages": [
+      "s/p116/1.webp",
+      "s/p116/2.webp",
+      "s/p116/3.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p116.mp3"
+  },
+  "Étude in E major, Op. 10 No. 3 (Tristesse)": {
+    "id": "p117",
+    "tier": "medium",
+    "pages": [
+      "s/p117/1.webp",
+      "s/p117/2.webp",
+      "s/p117/3.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p117.mp3"
+  },
+  "Étude in C minor, Op. 10 No. 12 (Revolutionary)": {
+    "id": "p118",
+    "tier": "medium",
+    "pages": [
+      "s/p118/1.webp",
+      "s/p118/2.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p118.mp3"
+  },
+  "Polonaise in A-flat major, Op. 53 (Héroïque)": {
+    "id": "p119",
+    "tier": "medium",
+    "pages": [
+      "s/p119/1.webp",
+      "s/p119/2.webp",
+      "s/p119/3.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p119.mp3"
+  },
+  "Piano Sonata No. 2 in B-flat minor, Op. 35 — III. Marche funèbre": {
+    "id": "p120",
+    "tier": "medium",
+    "pages": [
+      "s/p120/1.webp",
+      "s/p120/2.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p120.mp3"
+  },
+  "Barcarolle in F-sharp major, Op. 60": {
+    "id": "p121",
+    "tier": "hard",
+    "pages": [
+      "s/p121/1.webp",
+      "s/p121/2.webp",
+      "s/p121/3.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p121.mp3"
+  },
+  "Tarantella in A-flat major, Op. 43": {
+    "id": "p122",
+    "tier": "hard",
+    "pages": [
+      "s/p122/1.webp",
+      "s/p122/2.webp",
+      "s/p122/3.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p122.mp3"
   }
 }

@@ -665,7 +665,75 @@ const MEDIUM = [
     scoreNote: "Hawkes & Son 1919 full orchestral score (composer's own orchestration)",
     crop: 0.2,
     pages: local('paganinirhapsody', 10),
+  },  {
+    composer: 'Frédéric Chopin',
+    title: 'Nocturne in D-flat major, Op. 27 No. 2',
+    audio: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/4/42/Fryderyk_Chopin_-_Nocturne_op._27_n.2_Des-dur_-_Patrizia_Prati.ogg/Fryderyk_Chopin_-_Nocturne_op._27_n.2_Des-dur_-_Patrizia_Prati.ogg.mp3',
+    performer: 'Patrizia Prati',
+    license: 'CC BY-SA · Wikimedia',
+    scoreNote: 'Public-domain score (Wikimedia Commons)',
+    crop: 0.04,
+    pages: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Nocturne_-_op._27_n%C2%B0_2_-_r%C3%A9_b%C3%A9mol_majeur_-_piano_-_par_Fr._Chopin_-_btv1b9069004d_%2805_of_12%29.jpg/1280px-Nocturne_-_op._27_n%C2%B0_2_-_r%C3%A9_b%C3%A9mol_majeur_-_piano_-_par_Fr._Chopin_-_btv1b9069004d_%2805_of_12%29.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Nocturne_-_op._27_n%C2%B0_2_-_r%C3%A9_b%C3%A9mol_majeur_-_piano_-_par_Fr._Chopin_-_btv1b9069004d_%2806_of_12%29.jpg/1280px-Nocturne_-_op._27_n%C2%B0_2_-_r%C3%A9_b%C3%A9mol_majeur_-_piano_-_par_Fr._Chopin_-_btv1b9069004d_%2806_of_12%29.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Nocturne_-_op._27_n%C2%B0_2_-_r%C3%A9_b%C3%A9mol_majeur_-_piano_-_par_Fr._Chopin_-_btv1b9069004d_%2807_of_12%29.jpg/1280px-Nocturne_-_op._27_n%C2%B0_2_-_r%C3%A9_b%C3%A9mol_majeur_-_piano_-_par_Fr._Chopin_-_btv1b9069004d_%2807_of_12%29.jpg',
+    ],
   },
+  {
+    composer: 'Frédéric Chopin',
+    title: 'Étude in E major, Op. 10 No. 3 (Tristesse)',
+    audio: 'https://archive.org/download/jamendo-199730/15-1835079-OnClassical-federico_pulina_chopin_etudes_op._10_25_03_etude_in_e_major_op._10_no._3.mp3',
+    performer: 'Federico Pulina',
+    license: 'CC · OnClassical',
+    scoreNote: 'Public-domain score (Wikimedia Commons)',
+    crop: 0.07,
+    pages: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Etudes%2C_Op.10_%28IA_imslp-op10-chopin-frdric%29.pdf/page9-1280px-Etudes%2C_Op.10_%28IA_imslp-op10-chopin-frdric%29.pdf.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Etudes%2C_Op.10_%28IA_imslp-op10-chopin-frdric%29.pdf/page10-1280px-Etudes%2C_Op.10_%28IA_imslp-op10-chopin-frdric%29.pdf.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Etudes%2C_Op.10_%28IA_imslp-op10-chopin-frdric%29.pdf/page11-1280px-Etudes%2C_Op.10_%28IA_imslp-op10-chopin-frdric%29.pdf.jpg',
+    ],
+  },
+  {
+    composer: 'Frédéric Chopin',
+    title: 'Étude in C minor, Op. 10 No. 12 (Revolutionary)',
+    audio: 'https://archive.org/download/jamendo-199730/24-1835069-OnClassical-federico_pulina_chopin_etudes_op._10_25_12_etude_in_c_minor_op._10_no._12.mp3',
+    performer: 'Federico Pulina',
+    license: 'CC · OnClassical',
+    scoreNote: 'Public-domain score (Wikimedia Commons)',
+    crop: 0.03,
+    pages: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Etudes%2C_Op.10_%28IA_imslp-op10-chopin-frdric%29.pdf/page45-1280px-Etudes%2C_Op.10_%28IA_imslp-op10-chopin-frdric%29.pdf.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Etudes%2C_Op.10_%28IA_imslp-op10-chopin-frdric%29.pdf/page46-1280px-Etudes%2C_Op.10_%28IA_imslp-op10-chopin-frdric%29.pdf.jpg',
+    ],
+  },
+  {
+    composer: 'Frédéric Chopin',
+    title: 'Polonaise in A-flat major, Op. 53 (Héroïque)',
+    audio: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/2/24/Chopin_-_Polonaise_Op._53.oga/Chopin_-_Polonaise_Op._53.oga.mp3',
+    performer: 'community recording',
+    license: 'CC BY-SA · Wikimedia',
+    scoreNote: 'Public-domain score (Wikimedia Commons)',
+    crop: 0.04,
+    pages: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Polonaise_in_A-flat_major%2C_Op.53_%28IA_imslp-in-a-flat-major-op53-chopin-frdric%29.pdf/page2-1280px-Polonaise_in_A-flat_major%2C_Op.53_%28IA_imslp-in-a-flat-major-op53-chopin-frdric%29.pdf.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Polonaise_in_A-flat_major%2C_Op.53_%28IA_imslp-in-a-flat-major-op53-chopin-frdric%29.pdf/page3-1280px-Polonaise_in_A-flat_major%2C_Op.53_%28IA_imslp-in-a-flat-major-op53-chopin-frdric%29.pdf.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Polonaise_in_A-flat_major%2C_Op.53_%28IA_imslp-in-a-flat-major-op53-chopin-frdric%29.pdf/page4-1280px-Polonaise_in_A-flat_major%2C_Op.53_%28IA_imslp-in-a-flat-major-op53-chopin-frdric%29.pdf.jpg',
+    ],
+  },
+  {
+    composer: 'Frédéric Chopin',
+    title: 'Piano Sonata No. 2 in B-flat minor, Op. 35 — III. Marche funèbre',
+    audio: 'https://archive.org/download/jamendo-187289/10-1680386-OnClassical-natalia_sokolovskaya_chopin_piano_works_10_sonata_no._2_in_b_minor_op._35_iii._marche_funebre._lento.mp3',
+    performer: 'Natalia Sokolovskaya',
+    license: 'CC · OnClassical',
+    scoreNote: 'Public-domain score (Wikimedia Commons)',
+    crop: 0.03,
+    pages: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Piano_Sonata_No.2%2C_Op.35_%28IA_imslp-sonata-no2-op35-chopin-frdric%29.pdf/page12-1280px-Piano_Sonata_No.2%2C_Op.35_%28IA_imslp-sonata-no2-op35-chopin-frdric%29.pdf.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Piano_Sonata_No.2%2C_Op.35_%28IA_imslp-sonata-no2-op35-chopin-frdric%29.pdf/page13-1280px-Piano_Sonata_No.2%2C_Op.35_%28IA_imslp-sonata-no2-op35-chopin-frdric%29.pdf.jpg',
+    ],
+  },
+
 ];
 
 const HARD = [
@@ -1145,7 +1213,35 @@ const HARD = [
     scoreNote: 'Bote & Bock first-edition string-orchestra score, Berlin 1879',
     crop: 0.14,
     pages: local('dvorakserenade', 7),
+  },  {
+    composer: 'Frédéric Chopin',
+    title: 'Barcarolle in F-sharp major, Op. 60',
+    audio: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/1/12/Barcarolle-op-60.ogg/Barcarolle-op-60.ogg.mp3',
+    performer: 'community recording',
+    license: 'CC BY-SA · Wikimedia',
+    scoreNote: 'Public-domain score (Wikimedia Commons)',
+    crop: 0.04,
+    pages: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Barcarolle%2C_Op.60_%28IA_imslp-op60-chopin-frdric%29.pdf/page2-1280px-Barcarolle%2C_Op.60_%28IA_imslp-op60-chopin-frdric%29.pdf.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Barcarolle%2C_Op.60_%28IA_imslp-op60-chopin-frdric%29.pdf/page3-1280px-Barcarolle%2C_Op.60_%28IA_imslp-op60-chopin-frdric%29.pdf.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Barcarolle%2C_Op.60_%28IA_imslp-op60-chopin-frdric%29.pdf/page4-1280px-Barcarolle%2C_Op.60_%28IA_imslp-op60-chopin-frdric%29.pdf.jpg',
+    ],
   },
+  {
+    composer: 'Frédéric Chopin',
+    title: 'Tarantella in A-flat major, Op. 43',
+    audio: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b0/Chopin_-_Tarantelle_in_A-flat_major%2C_Op._43_%28Olga_Gurevich%29.flac/Chopin_-_Tarantelle_in_A-flat_major%2C_Op._43_%28Olga_Gurevich%29.flac.mp3',
+    performer: 'Olga Gurevich',
+    license: 'CC BY-SA · Wikimedia',
+    scoreNote: 'Public-domain score (Wikimedia Commons)',
+    crop: 0.04,
+    pages: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Tarentelle_pour_piano_-_Op._43_-_par_F._Chopin_-_btv1b525005007_%2805_of_12%29.jpg/1280px-Tarentelle_pour_piano_-_Op._43_-_par_F._Chopin_-_btv1b525005007_%2805_of_12%29.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Tarentelle_pour_piano_-_Op._43_-_par_F._Chopin_-_btv1b525005007_%2806_of_12%29.jpg/1280px-Tarentelle_pour_piano_-_Op._43_-_par_F._Chopin_-_btv1b525005007_%2806_of_12%29.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Tarentelle_pour_piano_-_Op._43_-_par_F._Chopin_-_btv1b525005007_%2807_of_12%29.jpg/1280px-Tarentelle_pour_piano_-_Op._43_-_par_F._Chopin_-_btv1b525005007_%2807_of_12%29.jpg',
+    ],
+  },
+
 ];
 
 // Difficulty rebalance: these were authored in HARD but play as MEDIUM — too famous to be
@@ -1283,7 +1379,14 @@ const META = {
   'The Four Seasons — “Autumn”, RV 293, I. Allegro': { year: 1723, genre: 'violin concerto', genreWords: ['concerto', 'seasons'], keys: ['autumn', 'autunno', 'fourseasons', 'rv293'] },
   'Arrival of the Queen of Sheba (Solomon)': { year: 1748, genre: 'Baroque oratorio sinfonia (orchestral interlude)', genreWords: ['baroque', 'oratorio', 'sinfonia', 'overture', 'orchestral'], keys: ['arrivalofthequeenofsheba', 'queenofsheba', 'hwv67'] },
   'Vocalise, Op. 34 No. 14': { year: 1915, genre: 'song', genreWords: ['song', 'romance', 'lied'], keys: ['vocalise', 'op34'] },
-  'Serenade for Strings in E major, Op. 22 — I. Moderato': { year: 1875, genre: 'serenade', genreWords: ['serenade', 'strings', 'string', 'orchestra'], keys: ['serenadeforstrings', 'serenadeinemajor', 'stringserenade', 'op22', 'b52'] },
+  'Serenade for Strings in E major, Op. 22 — I. Moderato': { year: 1875, genre: 'serenade', genreWords: ['serenade', 'strings', 'string', 'orchestra'], keys: ['serenadeforstrings', 'serenadeinemajor', 'stringserenade', 'op22', 'b52'] },  'Nocturne in D-flat major, Op. 27 No. 2': { year: 1835, genre: 'nocturne', genreWords: ['night music', 'piano', 'romantic', 'lyrical'], keys: ['op27no2', 'dflat', 'dbmajor'] },
+  'Étude in E major, Op. 10 No. 3 (Tristesse)': { year: 1833, genre: 'étude', genreWords: ['etude', 'study', 'sorrowful', 'tristesse'], keys: ['op10no3', 'emajor', 'tristesse'] },
+  'Étude in C minor, Op. 10 No. 12 (Revolutionary)': { year: 1833, genre: 'étude', genreWords: ['etude', 'study', 'revolutionary'], keys: ['op10no12', 'cminor', 'revolutionary'] },
+  'Polonaise in A-flat major, Op. 53 (Héroïque)': { year: 1842, genre: 'polonaise', genreWords: ['polonaise', 'polish dance', 'heroic'], keys: ['op53', 'aflat', 'abmajor', 'heroic'] },
+  'Piano Sonata No. 2 in B-flat minor, Op. 35 — III. Marche funèbre': { year: 1839, genre: 'sonata', genreWords: ['sonata', 'marche funebre', 'funeral march', 'romantic'], keys: ['op35', 'marchefunebre', 'funeralmarch', 'bflatminor'] },
+  'Barcarolle in F-sharp major, Op. 60': { year: 1846, genre: 'barcarolle', genreWords: ['barcarolle', 'character piece', 'romantic', 'boat song'], keys: ['op60', 'fsharp', 'fsharpmajor', 'barcarolle'] },
+  'Tarantella in A-flat major, Op. 43': { year: 1841, genre: 'tarantella', genreWords: ['tarantella', 'character piece', 'dance'], keys: ['op43', 'aflat', 'abmajor', 'tarantella', 'tarantelle'] },
+
 };
 for (const pool of [EASY, MEDIUM, HARD]) for (const p of pool) Object.assign(p, META[p.title]);
 

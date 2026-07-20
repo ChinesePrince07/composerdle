@@ -486,13 +486,27 @@
   lbNamePrompt();
 
   // ---------- load ----------
-  async function load(extra) {
+  // No-repeat By Ear (mirrors the iOS app): remember piece ids this browser has been
+  // served so practice rolls keep serving fresh music. Per-browser, best-effort.
+  let seenPieces = new Set();
+  try { seenPieces = new Set((localStorage.getItem('cdle-seen') || '').split(',').filter(Boolean)); } catch (e) {}
+  const pieceIdOf = s => { const m = String((s && s.puzzle && s.puzzle.pages && s.puzzle.pages[0]) || '').match(/\/s\/(p\d+)\//); return m ? m[1] : null; };
+  const markSeen = id => { if (!id || seenPieces.has(id)) return; seenPieces.add(id); try { localStorage.setItem('cdle-seen', [...seenPieces].join(',')); } catch (e) {} };
+
+  async function load(extra, attempt = 0) {
     try {
       const p = new URLSearchParams({ mode: 'ear', tier: MODE });
       if (CHALLENGE && !extra) p.set('challenge', CHALLENGE);
       if (DAY !== null && !extra) p.set('day', DAY);
       if (extra && extra.nonce) p.set('nonce', extra.nonce);
       S = await apiGet('/api/daily?' + p);
+      // no-repeat: on a practice roll, skip a piece this browser has already seen
+      // (best effort — give up after a few tries so a small pool still resolves)
+      const pid = pieceIdOf(S);
+      if (extra && extra.nonce && attempt < 8 && pid && seenPieces.has(pid)) {
+        return load({ nonce: Math.random().toString(36).slice(2, 10) }, attempt + 1);
+      }
+      if (pid) markSeen(pid);
       // plain boot: land on today's scored daily; if it's already played, roll straight
       // into a random practice piece instead of re-showing the finished result
       if (!extra && !CHALLENGE && DAY === null && S.state.done) return load({ nonce: Math.random().toString(36).slice(2, 10) });
