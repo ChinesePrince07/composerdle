@@ -22,6 +22,10 @@ final class AudioPlayer: ObservableObject {
         guard let u = URL(string: url) else { return }
         try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
         player = AVPlayer(playerItem: AVPlayerItem(url: u))
+        // Auto-play the recording as soon as the piece loads.
+        try? AVAudioSession.sharedInstance().setActive(true)
+        player?.play()
+        playing = true
         ticker = Task { [weak self] in
             while !Task.isCancelled {
                 try? await Task.sleep(for: .milliseconds(300))

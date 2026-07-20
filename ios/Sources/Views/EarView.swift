@@ -22,13 +22,9 @@ struct EarView: View {
 
     private func content(_ g: EarGame) -> some View {
         let pages = g.puzzle.pages ?? []
-        // GeometryReader gives the tab's available height so the score can be capped
-        // (~42%) — leaving the composer field + Submit visible without scrolling.
-        return GeometryReader { geo in
-          ScrollView {
+        return ScrollView {
             VStack(spacing: 7) {
-                ScoreCard(store: store, audio: store.audio, game: g, pages: pages,
-                          maxScoreH: geo.size.height * 0.42)
+                ScoreCard(store: store, audio: store.audio, game: g, pages: pages)
 
                 if g.state.done {
                     HStack(spacing: 8) {
@@ -46,7 +42,6 @@ struct EarView: View {
                 }
             }
             .padding(.horizontal, 16).padding(.top, 10).padding(.bottom, 14)
-          }
         }
     }
 
@@ -120,7 +115,6 @@ private struct ScoreCard: View {
     @ObservedObject var audio: AudioPlayer   // observed here so ticks re-render the bar + turn pages
     let game: EarGame
     let pages: [String]
-    let maxScoreH: CGFloat
 
     private var done: Bool { game.state.done }
 
@@ -177,7 +171,7 @@ private struct ScoreCard: View {
         let top: CGFloat = (store.earPage == 0 && !done) ? CGFloat(game.puzzle.crop ?? 0) : 0
         let bottom: CGFloat = !done ? CGFloat(game.puzzle.cropBottom ?? 0) : 0
         let url = pages.indices.contains(store.earPage) ? pages[store.earPage] : nil
-        return ScorePage(url: url, top: top, bottom: bottom, maxH: maxScoreH)
+        return ScorePage(url: url, top: top, bottom: bottom)
             .padding(.horizontal, 8).padding(.top, 8).padding(.bottom, 8)
             .background(Color.white)
             .overlay(Rectangle().stroke(CD.rule, lineWidth: 1))
@@ -256,7 +250,6 @@ private struct ScorePage: View {
     let url: String?
     let top: CGFloat
     let bottom: CGFloat
-    let maxH: CGFloat
     @State private var img: UIImage?
 
     var body: some View {
@@ -281,7 +274,6 @@ private struct ScorePage: View {
                     .overlay(ProgressView().tint(CD.faint))
             }
         }
-        .frame(maxHeight: maxH)
         .task(id: url) { await load() }
     }
 
