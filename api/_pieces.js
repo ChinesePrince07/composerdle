@@ -302,7 +302,7 @@ const MEDIUM = [
     performer: 'Elisabeth Schumann (soprano), orchestra cond. Leo Rosenek (HMV, 1934)',
     license: 'public domain',
     scoreNote: '19th-century “Gems of German Song” edition',
-    crop: 0.12,
+    crop: 0.22,
     pages: pdfPages('c/ca', 'Ave_Maria_%28IA_b10257597%29.pdf', 1280, range(3, 7)),
   },
   {
