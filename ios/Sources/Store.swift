@@ -39,6 +39,7 @@ final class GameStore: ObservableObject {
 
     let audio = AudioPlayer()
     let token: String
+    private var seenPieces: Set<String> = []   // By Ear piece ids already served, to avoid repeats
 
     private let d = UserDefaults.standard
     private func ls(_ k: String) -> String? { d.string(forKey: "cdle-\(k)") }
@@ -49,6 +50,7 @@ final class GameStore: ObservableObject {
         // which the server rejects as "bad token", so always lowercase (incl. any stored value).
         if let t = d.string(forKey: "cdle-token") { token = t.lowercased() }
         else { let t = UUID().uuidString.lowercased(); d.set(t, forKey: "cdle-token"); token = t }
+        seenPieces = Set((ls("seen") ?? "").split(separator: ",").map(String.init))
         name = ls("name") ?? ""
         tier = ["easy", "medium", "hard"].contains(ls("tier") ?? "") ? ls("tier")! : "medium"
         sfxOn = ls("sfx") != "0"
@@ -122,17 +124,34 @@ final class GameStore: ObservableObject {
     func loadEarPractice() {
         loadEar(nonce: Self.nonce())
     }
-    private func loadEar(nonce: String?) {
-        earBusy = true; earMsg = ""; earGuessC = ""; earGuessP = ""; earPage = 0
+    private func loadEar(nonce: String?, attempt: Int = 0) {
+        if attempt == 0 { earBusy = true; earMsg = ""; earGuessC = ""; earGuessP = ""; earPage = 0 }
         Task {
-            defer { earBusy = false }
             do {
                 let r = try await API.daily(token: token, mode: "ear", tier: tier, nonce: nonce)
+                let id = Self.pieceId(r.puzzle.pages?.first)
+                // Practice (nonce): if this piece was already served, reroll a fresh nonce
+                // (best effort) so the player keeps meeting new music.
+                if nonce != nil, let id, seenPieces.contains(id), attempt < 8 {
+                    loadEar(nonce: Self.nonce(), attempt: attempt + 1); return
+                }
+                if let id { markSeen(id) }
                 ear = EarGame(gs: r.gs, puzzle: r.puzzle, state: r.state)
                 if let a = r.puzzle.audio { audio.load(a) }
                 if r.state.comp, let c = r.state.composer { earGuessC = c }
-            } catch { earMsg = "The hall did not answer — pull to retry." }
+                earBusy = false
+            } catch { earMsg = "The hall did not answer — pull to retry."; earBusy = false }
         }
+    }
+
+    private func markSeen(_ id: String) {
+        seenPieces.insert(id)
+        lsSet("seen", seenPieces.joined(separator: ","))
+    }
+    // Extract the opaque piece id ("p14") from a score-page URL (.../s/p14/1.webp).
+    static func pieceId(_ url: String?) -> String? {
+        guard let url, let r = url.range(of: #"/s/p\d+/"#, options: .regularExpression) else { return nil }
+        return String(url[r].dropFirst(3).dropLast())
     }
 
     func guessEar() {
