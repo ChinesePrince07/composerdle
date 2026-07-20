@@ -153,11 +153,18 @@ async function lbRender() {
   if (tabs) [...tabs.querySelectorAll('button')].forEach(b =>
     b.classList.toggle('on', b.dataset.scope === _scope));
   try {
-    const { top } = await apiGet(`/api/leaderboard?scope=${_scope}`);
-    const me = (_profile && _profile.name) || '';
-    ol.innerHTML = top.length
-      ? top.map(e => `<li${e.name === me ? ' class="me"' : ''}><span>${lbEsc(e.name)}${e.streak > 1 ? ` <em class="stk">🔥${e.streak}</em>` : ''}</span><span>${e.score}</span></li>`).join('')
-      : '<li class="empty">An empty hall — be the first on stage.</li>';
+    const { top, me } = await apiGet(`/api/leaderboard?scope=${_scope}`);
+    const meName = (_profile && _profile.name) || '';
+    const row = (e, extra, rank) =>
+      `<li class="${extra}"${rank ? ` data-rank="${rank}"` : ''}><span>${lbEsc(e.name)}${e.streak > 1 ? ` <em class="stk">🔥${e.streak}</em>` : ''}</span><span>${e.score}</span></li>`;
+    if (!top.length) {
+      ol.innerHTML = '<li class="empty">An empty hall — be the first on stage.</li>';
+    } else {
+      let html = top.map(e => row(e, e.name === meName ? 'me' : '')).join('');
+      // caller ranked outside the top 25 → pin their own row below a gap
+      if (me) html += '<li class="gap" aria-hidden="true">⋯</li>' + row(me, 'me mine', me.rank);
+      ol.innerHTML = html;
+    }
   } catch (e) {
     ol.innerHTML = '<li class="empty">Leaderboard unreachable.</li>';
   }

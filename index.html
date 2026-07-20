@@ -119,6 +119,9 @@
   #board li { display: flex; justify-content: space-between; padding: 10px 14px; border-bottom: 1px dotted var(--faint); font-size: 18px; counter-increment: rank; }
   #board li span:first-child::before { content: counter(rank) '.  '; color: var(--gold); }
   #board li.me { background: rgba(168,132,44,.12); font-weight: 500; }
+  #board li.gap { justify-content: center; color: var(--ink-soft); counter-increment: none; letter-spacing: .3em; }
+  #board li.mine { counter-increment: none; }
+  #board li.mine span:first-child::before { content: attr(data-rank) '.  '; }
   #board li.empty { justify-content: center; font-style: italic; color: var(--ink-soft); }
   #board li.empty::before { content: none; }
   .stk { font-style: normal; font-size: 12px; }
