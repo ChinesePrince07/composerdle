@@ -45,8 +45,10 @@ final class GameStore: ObservableObject {
     private func lsSet(_ k: String, _ v: String) { d.set(v, forKey: "cdle-\(k)") }
 
     init() {
-        if let t = d.string(forKey: "cdle-token") { token = t }
-        else { let t = UUID().uuidString; d.set(t, forKey: "cdle-token"); token = t }
+        // Server cleanToken requires ^[a-z0-9-]{8,40}$ — Swift's UUID().uuidString is UPPERCASE,
+        // which the server rejects as "bad token", so always lowercase (incl. any stored value).
+        if let t = d.string(forKey: "cdle-token") { token = t.lowercased() }
+        else { let t = UUID().uuidString.lowercased(); d.set(t, forKey: "cdle-token"); token = t }
         name = ls("name") ?? ""
         tier = ["easy", "medium", "hard"].contains(ls("tier") ?? "") ? ls("tier")! : "medium"
         sfxOn = ls("sfx") != "0"
