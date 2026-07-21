@@ -127,7 +127,7 @@ private struct HowtoSheet: View {
                 Bullet(md: "Pick a level: **Easy** serves common-knowledge clues, **Hard** only the niche, obscure ones. Fewer tries = more points; Medium ×2, Hard ×3.")
             }
             .padding(.top, 2)
-            Text("An idea by TwoSet Violin, brought to iOS.")
+            Text("A daily classical-music guessing game.")
                 .font(CD.body(12, .regular, italic: true)).foregroundStyle(CD.inkSoft)
                 .frame(maxWidth: .infinity).multilineTextAlignment(.center)
             PrimaryButton(title: "To the stage") { store.sheet = nil }
@@ -171,6 +171,15 @@ private struct ResultSheet: View {
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: false, vertical: true)
                         .padding(.top, 10)
+                }
+
+                // Recording credit — required to honour the CC-BY-SA licences on By Ear audio.
+                if store.resultMode == .ear, let perf = r.performer, !perf.isEmpty {
+                    Text(perf + (r.license.map { " · \($0)" } ?? ""))
+                        .font(CD.body(11)).foregroundStyle(CD.inkSoft)
+                        .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.top, 6)
                 }
 
                 Text(grid).font(.system(size: 18)).tracking(4)

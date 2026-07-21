@@ -1,7 +1,7 @@
 // Server-authoritative game engine. Answers, facts, and scoring never leave this side.
 // Storage: Cloudflare R2 (S3-compatible) — one object per player profile. R2 has zero
 // egress fees, so heavy read traffic (leaderboard, audio) can't trip a bandwidth suspension.
-const { S3Client, GetObjectCommand, PutObjectCommand, ListObjectsV2Command } = require('@aws-sdk/client-s3');
+const { S3Client, GetObjectCommand, PutObjectCommand, ListObjectsV2Command, DeleteObjectCommand } = require('@aws-sdk/client-s3');
 const { COMPOSERS, matchGuess, norm, dayNumber } = require('./_game.js');
 const { PIECES } = require('./_pieces.js');
 const ASSETS = require('./_assets.json');
@@ -69,6 +69,31 @@ async function loadAllProfiles(limit = 500) {
 }
 const gameKey = (token, key) => `g/${token}/${key}.json`;
 const profileKey = token => `u/${token}.json`;
+
+// Objectionable stage-name screen for the public leaderboard (App Store Guideline 1.2).
+// Conservative starter — leet digits are folded to letters first so "N1GGA" / "f u c k"
+// still catch. Hardcore terms match as a SUBSTRING of the letters-only form (so spacing /
+// concatenation can't hide them; the rare cost is a "Scunthorpe"-style false positive).
+// Ambiguous words that appear inside real names match only as WHOLE tokens (so Dickson,
+// grape, bassoon, class are fine). EXPAND / swap in a maintained wordlist before launch.
+const NAME_SLURS = ['nigg', 'faggot', 'kike', 'chink', 'spic', 'tranny', 'retard', 'cunt', 'fuck', 'shit', 'pussy', 'whore', 'nazi', 'pedo', 'molest'];
+const NAME_WORDS = new Set(['fag', 'ass', 'sex', 'coon', 'dick', 'cock', 'slut', 'bitch', 'rape', 'rapist', 'porn', 'cum', 'tit', 'tits']);
+function nameRejected(name) {
+  const leet = String(name || '').toLowerCase()
+    .replace(/[1|!]/g, 'i').replace(/0/g, 'o').replace(/3/g, 'e').replace(/[4@]/g, 'a').replace(/[5$]/g, 's').replace(/7/g, 't');
+  const norm = leet.replace(/[^a-z]/g, '');
+  if (norm && NAME_SLURS.some(w => norm.includes(w))) return true;
+  return leet.split(/[^a-z]+/).some(t => NAME_WORDS.has(t));
+}
+
+// Erase a player's entire server-side footprint (App Store Guideline 5.1.1(v)).
+// The profile object is the only PII written — in-progress game state rides the
+// signed `gs` token, so one delete fully removes the player.
+async function deleteProfile(token) {
+  if (!R2) return false;
+  try { await R2.send(new DeleteObjectCommand({ Bucket: R2_BUCKET, Key: R2_PREFIX + profileKey(token) })); return true; }
+  catch (e) { return false; }
+}
 
 const cleanToken = t => /^[a-z0-9-]{8,40}$/.test(String(t || '')) ? t : null;
 
@@ -323,7 +348,7 @@ async function settleGame(token, key, g, day, isToday, name) {
   // one browser = one identity: the client's current stage name rides every settle, so a
   // rename is applied in place and can't be undone by a stale profile read (Blob ~60s cache)
   const nm = String(name || '').trim().slice(0, 24);
-  if (nm) prof.name = nm;
+  if (nm && !nameRejected(nm)) prof.name = nm;   // silently ignore an objectionable name on the settle path
   if (prof.results[key] !== undefined) return prof; // already settled (also the replay guard for practice)
   const daily = /^\d+-/.test(key);
   prof.games++;
@@ -347,6 +372,7 @@ async function settleGame(token, key, g, day, isToday, name) {
 module.exports = {
   MAX, TIERS, utcDay, pieceForDay, composerForDay, pieceById, assets,
   readJSON, writeJSON, loadAllProfiles, gameKey, profileKey, cleanToken,
+  deleteProfile, nameRejected,
   newGame, earView, factsView, publicState, earResult, factsResult,
   applyEarAction, applyFactsAction, settleGame, factIndices, factsFor,
   signGame, readGame, puzzleFor, gameFromResult,

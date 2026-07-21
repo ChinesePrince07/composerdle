@@ -73,6 +73,15 @@ enum API {
         _ = try await post("/api/player", ["token": token, "name": name])
     }
 
+    // DELETE /api/player — erase the player's profile, stats, and leaderboard entry.
+    static func deleteProfile(token: String) async throws {
+        guard let url = URL(string: base + "/api/player?token=\(esc(token))") else { throw APIError.badURL }
+        var req = URLRequest(url: url); req.httpMethod = "DELETE"
+        let (_, resp) = try await URLSession.shared.data(for: req)
+        guard let http = resp as? HTTPURLResponse else { throw APIError.transport }
+        guard (200..<300).contains(http.statusCode) else { throw APIError.http(http.statusCode) }
+    }
+
     static func leaderboard(token: String, scope: String) async throws -> Leaderboard {
         try decode(await get("/api/leaderboard?token=\(esc(token))&scope=\(scope)"))
     }

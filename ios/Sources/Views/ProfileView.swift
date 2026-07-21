@@ -3,6 +3,7 @@ import SwiftUI
 // "Programme" / Profile screen (design sc-if isProfile).
 struct ProfileView: View {
     @ObservedObject var store: GameStore
+    @State private var confirmDelete = false
 
     private let distKeys = ["1", "2", "3", "4", "5", "6", "x"]
 
@@ -106,8 +107,6 @@ struct ProfileView: View {
             VStack(spacing: 0) {
                 settingRow("Sound effects", on: store.sfxOn) { store.toggleSfx() }
                 DottedRule()
-                settingRow("Daily puzzle reminder", on: store.remindOn) { store.toggleRemind() }
-                DottedRule()
                 Button { store.sheet = .howto } label: {
                     HStack {
                         Text("How to play").font(CD.body(15)).foregroundStyle(CD.ink)
@@ -118,7 +117,23 @@ struct ProfileView: View {
                     .contentShape(Rectangle())
                 }
                 .buttonStyle(.plain)
+                DottedRule()
+                Button { confirmDelete = true } label: {
+                    HStack {
+                        Text("Delete my data").font(CD.body(15)).foregroundStyle(CD.red)
+                        Spacer()
+                        Text("›").font(CD.body(15)).foregroundStyle(CD.faint)
+                    }
+                    .padding(.horizontal, 16).padding(.vertical, 13)
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
             }
+        }
+        .confirmationDialog("Delete your stage name, stats, and leaderboard entry? This can't be undone.",
+                            isPresented: $confirmDelete, titleVisibility: .visible) {
+            Button("Delete my data", role: .destructive) { store.deleteData() }
+            Button("Cancel", role: .cancel) {}
         }
     }
 
@@ -132,7 +147,7 @@ struct ProfileView: View {
     }
 
     private var credits: some View {
-        (Text("an idea by TwoSet Violin, brought to iOS\nin the key of Wordle ")
+        (Text("a daily classical-music guessing game ")
             .font(CD.body(12, .regular, italic: true)).foregroundStyle(CD.inkSoft)
             + Text("·").font(CD.body(12)).foregroundStyle(CD.gold)
             + Text(" recordings & scores from the public domain")

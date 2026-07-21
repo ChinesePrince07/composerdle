@@ -17,7 +17,6 @@ final class GameStore: ObservableObject {
     @Published var nameDraft = ""
     @Published var nameError = ""
     @Published var sfxOn = true
-    @Published var remindOn = false
 
     // By Facts
     @Published var facts: FactsGame?
@@ -55,7 +54,6 @@ final class GameStore: ObservableObject {
         name = ls("name") ?? ""
         tier = ["easy", "medium", "hard"].contains(ls("tier") ?? "") ? ls("tier")! : "medium"
         sfxOn = ls("sfx") != "0"
-        remindOn = ls("remind") == "1"
         if name.isEmpty && ls("skip") != "1" { sheet = .welcome }
     }
 
@@ -258,8 +256,17 @@ final class GameStore: ObservableObject {
     }
     func skipName() { lsSet("skip", "1"); sheet = nil }
 
+    // Erase the player's server profile + local identity (App Store Guideline 5.1.1(v)).
+    func deleteData() {
+        Task {
+            try? await API.deleteProfile(token: token)
+            name = ""; nameDraft = ""; profile = nil; board = nil
+            seenPieces = []
+            for k in ["name", "seen", "skip"] { d.removeObject(forKey: "cdle-\(k)") }
+        }
+    }
+
     func toggleSfx() { sfxOn.toggle(); lsSet("sfx", sfxOn ? "1" : "0") }
-    func toggleRemind() { remindOn.toggle(); lsSet("remind", remindOn ? "1" : "0") }
 
     // MARK: result helpers
     var currentResult: GameResult? {

@@ -11,10 +11,18 @@ struct EarView: View {
             if let g = store.ear {
                 content(g)
             } else {
-                Text("Cueing the recording…")
-                    .font(CD.body(15, .regular, italic: true))
-                    .foregroundStyle(CD.inkSoft)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                VStack(spacing: 14) {
+                    Text(store.earMsg.isEmpty ? "Cueing the recording…" : store.earMsg)
+                        .font(CD.body(15, .regular, italic: true))
+                        .foregroundStyle(store.earMsg.isEmpty ? CD.inkSoft : CD.red)
+                        .multilineTextAlignment(.center)
+                    if !store.earMsg.isEmpty {
+                        OutlineButton(title: "Try again") { store.loadEarDaily() }
+                            .frame(maxWidth: 200)
+                    }
+                }
+                .padding(.horizontal, 24)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
         .task { if store.ear == nil { store.loadEarDaily() } }

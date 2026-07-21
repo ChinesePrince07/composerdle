@@ -13,10 +13,18 @@ struct FactsView: View {
                     bottomBar(g)
                 }
             } else {
-                Text("Setting the programme…")
-                    .font(CD.body(15, .regular, italic: true))
-                    .foregroundStyle(CD.inkSoft)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                VStack(spacing: 14) {
+                    Text(store.factsMsg.isEmpty ? "Setting the programme…" : store.factsMsg)
+                        .font(CD.body(15, .regular, italic: true))
+                        .foregroundStyle(store.factsMsg.isEmpty ? CD.inkSoft : CD.red)
+                        .multilineTextAlignment(.center)
+                    if !store.factsMsg.isEmpty {
+                        OutlineButton(title: "Try again") { store.loadFacts() }
+                            .frame(maxWidth: 200)
+                    }
+                }
+                .padding(.horizontal, 24)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
         .task { if store.facts == nil { store.loadFacts() } }

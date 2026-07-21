@@ -85,14 +85,31 @@ async function cdProfile(force) {
   return _profile;
 }
 
+// Erase this browser's server profile + local identity (App Store Guideline 5.1.1(v)).
+async function cdDeleteData() {
+  try { await apiFetch('/api/player?token=' + cdToken(), { method: 'DELETE' }); } catch (e) {}
+  try {
+    localStorage.removeItem('cdle-token');
+    localStorage.removeItem('cdle-name');
+    localStorage.removeItem('cdle-seen');
+    sessionStorage.removeItem('cdle-name-skip');
+  } catch (e) {}
+  _tok = null; _profile = null;
+  location.reload();
+}
+
 // name bar (#namebar): asks for a stage name until one exists
 async function lbNameBar(onSet) {
   const bar = document.getElementById('namebar');
   const prof = await cdProfile();
   function render() {
     if (_profile.name) {
-      bar.innerHTML = `on the programme as <strong>${lbEsc(_profile.name)}</strong> · <a href="#" id="nbChange">change</a>`;
+      bar.innerHTML = `on the programme as <strong>${lbEsc(_profile.name)}</strong> · <a href="#" id="nbChange">change</a> · <a href="#" id="nbDelete">delete my data</a>`;
       bar.querySelector('#nbChange').addEventListener('click', e => { e.preventDefault(); form(); });
+      bar.querySelector('#nbDelete').addEventListener('click', e => {
+        e.preventDefault();
+        if (confirm('Delete your stage name, stats, and leaderboard entry? This cannot be undone.')) cdDeleteData();
+      });
     } else form();
   }
   function form() {

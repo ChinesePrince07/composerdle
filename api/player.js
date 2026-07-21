@@ -7,6 +7,7 @@ module.exports = async (req, res) => {
     const token = E.cleanToken((req.body || {}).token);
     const name = String((req.body || {}).name || '').trim().slice(0, 24);
     if (!token || !name) return res.status(400).json({ error: 'token and name required' });
+    if (E.nameRejected(name)) return res.status(400).json({ error: "That stage name isn't allowed — pick another." });
     // Rename in place only. Never create a profile here: a fresh write could clobber a
     // just-settled profile hiding behind the ~60s Blob cache (skip-prompt → play → rename
     // from the result screen wiped the first score). Unplayed players aren't on the board
@@ -22,6 +23,13 @@ module.exports = async (req, res) => {
     }
     if (prof) { prof.name = name; await E.writeJSON(E.profileKey(token), prof); }
     return res.json({ ok: true, name });
+  }
+  if (req.method === 'DELETE') {
+    // Erase this player's profile + stats + leaderboard entry (App Store Guideline 5.1.1(v)).
+    const token = E.cleanToken((req.query || {}).token);
+    if (!token) return res.status(400).json({ error: 'bad token' });
+    await E.deleteProfile(token);
+    return res.json({ ok: true });
   }
   const token = E.cleanToken((req.query || {}).token);
   if (!token) return res.status(400).json({ error: 'bad token' });
