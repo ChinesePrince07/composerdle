@@ -31,16 +31,6 @@ const EASY = [
     ],
   },
   {
-    composer: 'Ludwig van Beethoven',
-    title: 'Symphony No. 5 in C minor, Op. 67 — I. Allegro con brio',
-    audio: `${UP}/transcoded/e/e6/Ludwig_van_Beethoven_-_symphony_no._5_in_c_minor%2C_op._67_-_i._allegro_con_brio.ogg/Ludwig_van_Beethoven_-_symphony_no._5_in_c_minor%2C_op._67_-_i._allegro_con_brio.ogg.mp3`,
-    performer: 'Skidmore College Orchestra',
-    license: 'public domain · Musopen',
-    scoreNote: 'Eulenburg miniature full score',
-    crop: 0.17,
-    pages: local('beethoven5', 10),
-  },
-  {
     composer: 'Wolfgang Amadeus Mozart',
     title: 'Eine kleine Nachtmusik, K. 525 — I. Allegro',
     audio: `${UP}/transcoded/2/24/Mozart_-_Eine_kleine_Nachtmusik_-_1._Allegro.ogg/Mozart_-_Eine_kleine_Nachtmusik_-_1._Allegro.ogg.mp3`,
@@ -162,16 +152,6 @@ const EASY = [
     pages: local('hallelujah', 10),
   },
   {
-    composer: 'Ludwig van Beethoven',
-    title: 'Symphony No. 9 — Finale (Ode to Joy)',
-    audio: 'https://archive.org/download/d-842-9-beethoven-9th-i/D842-9%20Beethoven%209th%20%28iv%29.mp3',
-    performer: 'Symphony Orchestra & Chorus, cond. Albert Coates (HMV, 1923)',
-    license: 'public domain',
-    scoreNote: 'Schott first-edition full score, Mainz 1826',
-    crop: 0,
-    pages: local('odetojoy', 10),
-  },
-  {
     composer: 'Pyotr Ilyich Tchaikovsky',
     title: 'The Nutcracker — March',
     audio: `${UP}/transcoded/5/53/PDP-CH_-_National_Symphony_Orchestra_of_London_-_Stanford_Robinson%2C_conductor_-_The_Nutcracker_Suite%2C_Op._71_-_Miniature_Overture%2C_March_-_Tchaikovsky_-_Decca-k1142-ar9056.flac/PDP-CH_-_National_Symphony_Orchestra_of_London_-_Stanford_Robinson%2C_conductor_-_The_Nutcracker_Suite%2C_Op._71_-_Miniature_Overture%2C_March_-_Tchaikovsky_-_Decca-k1142-ar9056.flac.mp3`,
@@ -265,6 +245,26 @@ const EASY = [
 ];
 
 const MEDIUM = [
+  {
+    composer: 'Ludwig van Beethoven',
+    title: 'Symphony No. 5 in C minor, Op. 67 — I. Allegro con brio',
+    audio: `${UP}/transcoded/e/e6/Ludwig_van_Beethoven_-_symphony_no._5_in_c_minor%2C_op._67_-_i._allegro_con_brio.ogg/Ludwig_van_Beethoven_-_symphony_no._5_in_c_minor%2C_op._67_-_i._allegro_con_brio.ogg.mp3`,
+    performer: 'Skidmore College Orchestra',
+    license: 'public domain · Musopen',
+    scoreNote: 'Eulenburg miniature full score',
+    crop: 0.17,
+    pages: local('beethoven5', 10),
+  },
+  {
+    composer: 'Ludwig van Beethoven',
+    title: 'Symphony No. 9 — Finale (Ode to Joy)',
+    audio: 'https://archive.org/download/d-842-9-beethoven-9th-i/D842-9%20Beethoven%209th%20%28iv%29.mp3',
+    performer: 'Symphony Orchestra & Chorus, cond. Albert Coates (HMV, 1923)',
+    license: 'public domain',
+    scoreNote: 'Schott first-edition full score, Mainz 1826',
+    crop: 0,
+    pages: local('odetojoy', 10),
+  },
   {
     composer: 'Johannes Brahms',
     title: 'Hungarian Dance No. 5',
@@ -737,6 +737,66 @@ const MEDIUM = [
 ];
 
 const HARD = [
+  {
+    composer: 'Ludwig van Beethoven',
+    title: 'Symphony No. 1 in C major, Op. 21 — II. Andante cantabile con moto',
+    audio: 'https://commons.wikimedia.org/wiki/Special:FilePath/Symphony%20No.%201%20in%20C%20-%20II.%20Andante%20cantabile%20con%20moto%20-%20Chamber%20Orchestra%20-%20United%20States%20Marine%20Band.opus',
+    performer: 'United States Marine Band chamber orchestra',
+    license: 'public domain (US federal)',
+    scoreNote: 'Breitkopf & Härtel orchestral score, 1809',
+    crop: 0,
+    pages: pdfPages('b/b4', 'Symphony_No.1%2C_Op.21_%28IA_imslp-no1-op21-beethoven-ludwig-van%29.pdf', 1280, range(2, 5)),
+  },
+  {
+    composer: 'Ludwig van Beethoven',
+    title: 'Symphony No. 2 in D major, Op. 36 — II. Larghetto',
+    audio: 'https://commons.wikimedia.org/wiki/Special:FilePath/Beethoven%20Symphony%202%20D%20major%20Op%2036%20-%202%20Larghetto%20%28A%20major%29.oga',
+    performer: 'Musopen Symphony Orchestra',
+    license: 'public domain · Musopen',
+    scoreNote: 'Breitkopf & Härtel orchestral score, 1809',
+    crop: 0,
+    pages: pdfPages('3/39', 'Symphony_No.2%2C_Op.36_%28IA_imslp-no2-op36-beethoven-ludwig-van%29.pdf', 1280, range(2, 5)),
+  },
+  {
+    composer: 'Ludwig van Beethoven',
+    title: 'Symphony No. 3 “Eroica” — III. Scherzo',
+    audio: 'https://commons.wikimedia.org/wiki/Special:FilePath/Beethoven%20-%20Symphony%20No.%203%20in%20E%20flat%20major%2C%20Op.%2055%20%27Eroica%27%20-%20III.%20Scherzo.%20Allegro%20vivace%20%28Musopen%20Symphony%29.flac',
+    performer: 'Musopen Symphony Orchestra',
+    license: 'public domain · Musopen',
+    scoreNote: 'Breitkopf & Härtel orchestral score, 1809',
+    crop: 0,
+    pages: pdfPages('3/38', 'Symphony_No.3%2C_Op.55_%28IA_imslp-no3-op55-beethoven-ludwig-van%29.pdf', 1280, range(2, 5)),
+  },
+  {
+    composer: 'Ludwig van Beethoven',
+    title: 'Symphony No. 4 in B-flat major, Op. 60 — II. Adagio',
+    audio: 'https://commons.wikimedia.org/wiki/Special:FilePath/Ludwig%20van%20Beethoven%20-%20symphony%20no.%204%20in%20b%20flat%20major%2C%20op.%2060%20-%20ii.%20adagio.ogg',
+    performer: 'Musopen Symphony Orchestra',
+    license: 'public domain · Musopen',
+    scoreNote: 'Breitkopf & Härtel orchestral score, 1809',
+    crop: 0,
+    pages: pdfPages('a/a4', 'Symphony_No.4%2C_Op.60_%28IA_imslp-no4-op60-beethoven-ludwig-van%29.pdf', 1280, range(2, 5)),
+  },
+  {
+    composer: 'Ludwig van Beethoven',
+    title: 'Symphony No. 6 “Pastoral” — V. Allegretto',
+    audio: 'https://commons.wikimedia.org/wiki/Special:FilePath/Ludwig%20van%20Beethoven%20-%20symphony%20no.%206%20in%20f%20major%20%27pastoral%27%2C%20op.%2068%20-%20v.%20allegretto.ogg',
+    performer: 'Musopen Symphony Orchestra',
+    license: 'public domain · Musopen',
+    scoreNote: 'Breitkopf & Härtel orchestral score, 1810',
+    crop: 0,
+    pages: pdfPages('0/02', 'Symphony_No.6%2C_Op.68_%28IA_imslp-no6-op68-beethoven-ludwig-van%29.pdf', 1280, range(2, 5)),
+  },
+  {
+    composer: 'Ludwig van Beethoven',
+    title: 'Symphony No. 8 in F major, Op. 93 — II. Allegretto scherzando',
+    audio: 'https://commons.wikimedia.org/wiki/Special:FilePath/Ludwig%20van%20Beethoven%20-%20symphony%20no.%208%20in%20f%20major%2C%20op.%2093%20-%20ii.%20allegretto%20scherzando.ogg',
+    performer: 'Musopen Symphony Orchestra',
+    license: 'public domain · Musopen',
+    scoreNote: 'Breitkopf & Härtel orchestral score, 1817',
+    crop: 0,
+    pages: pdfPages('0/00', 'Symphony_No.8%2C_Op.93_%28IA_imslp-no8-op93-beethoven-ludwig-van%29.pdf', 1280, range(2, 5)),
+  },
   {
     composer: 'Niccolò Paganini',
     title: 'Caprice No. 24 in A minor',
@@ -1258,6 +1318,12 @@ const HARD_TO_MEDIUM = new Set([
   'The Four Seasons — “Winter”, RV 297, I.',
   'Anvil Chorus (Il trovatore)',
   'Pavane, Op. 50',
+  'Symphony No. 1 in C major, Op. 21 — II. Andante cantabile con moto',
+  'Symphony No. 2 in D major, Op. 36 — II. Larghetto',
+  'Symphony No. 3 “Eroica” — III. Scherzo',
+  'Symphony No. 4 in B-flat major, Op. 60 — II. Adagio',
+  'Symphony No. 6 “Pastoral” — V. Allegretto',
+  'Symphony No. 8 in F major, Op. 93 — II. Allegretto scherzando',
 ]);
 const PIECES = {
   easy: EASY,
@@ -1269,6 +1335,12 @@ const PIECES = {
 // genreWords (detect "right genre" in a wrong guess), keys (accepted piece-name answers,
 // matched against a normalized guess with substring containment).
 const META = {
+  'Symphony No. 1 in C major, Op. 21 — II. Andante cantabile con moto': { year: 1800, genre: 'symphony', genreWords: ['symphony', 'symphonie'], keys: ['symphony1', 'firstsymphony', 'op21'] },
+  'Symphony No. 2 in D major, Op. 36 — II. Larghetto': { year: 1802, genre: 'symphony', genreWords: ['symphony', 'symphonie'], keys: ['symphony2', 'secondsymphony', 'op36'] },
+  'Symphony No. 3 “Eroica” — III. Scherzo': { year: 1804, genre: 'symphony', genreWords: ['symphony', 'symphonie'], keys: ['symphony3', 'eroica', 'heroic', 'op55'] },
+  'Symphony No. 4 in B-flat major, Op. 60 — II. Adagio': { year: 1806, genre: 'symphony', genreWords: ['symphony', 'symphonie'], keys: ['symphony4', 'fourthsymphony', 'op60'] },
+  'Symphony No. 6 “Pastoral” — V. Allegretto': { year: 1808, genre: 'symphony', genreWords: ['symphony', 'symphonie', 'pastoral'], keys: ['symphony6', 'pastoral', 'sixthsymphony', 'op68'] },
+  'Symphony No. 8 in F major, Op. 93 — II. Allegretto scherzando': { year: 1812, genre: 'symphony', genreWords: ['symphony', 'symphonie'], keys: ['symphony8', 'eighthsymphony', 'op93'] },
   'Toccata and Fugue in D minor, BWV 565': { year: 1704, genre: 'organ work', genreWords: ['organ', 'toccata', 'fugue'], keys: ['toccata', 'bwv565'] },
   'Symphony No. 5 in C minor, Op. 67 — I. Allegro con brio': { year: 1808, genre: 'symphony', genreWords: ['symphony', 'symphonie'], keys: ['symphony5', 'fifthsymphony', 'fatesymphony'] },
   'Eine kleine Nachtmusik, K. 525 — I. Allegro': { year: 1787, genre: 'serenade', genreWords: ['serenade', 'nachtmusik'], keys: ['kleinenachtmusik', 'einekleine', 'nightmusic', 'k525'] },

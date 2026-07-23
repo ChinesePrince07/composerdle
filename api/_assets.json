@@ -14,7 +14,7 @@
   },
   "Symphony No. 5 in C minor, Op. 67 — I. Allegro con brio": {
     "id": "p02",
-    "tier": "easy",
+    "tier": "medium",
     "pages": [
       "s/p02/1.webp",
       "s/p02/2.webp",
@@ -519,7 +519,7 @@
   },
   "Symphony No. 9 — Finale (Ode to Joy)": {
     "id": "p40",
-    "tier": "easy",
+    "tier": "medium",
     "pages": [
       "s/p40/1.webp",
       "s/p40/2.webp",
@@ -1683,5 +1683,71 @@
       "s/p122/3.webp"
     ],
     "audioLocal": "tools/audio-cache/p122.mp3"
+  },
+  "Symphony No. 1 in C major, Op. 21 — II. Andante cantabile con moto": {
+    "id": "p123",
+    "tier": "medium",
+    "pages": [
+      "s/p123/1.webp",
+      "s/p123/2.webp",
+      "s/p123/3.webp",
+      "s/p123/4.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p123.mp3"
+  },
+  "Symphony No. 2 in D major, Op. 36 — II. Larghetto": {
+    "id": "p124",
+    "tier": "medium",
+    "pages": [
+      "s/p124/1.webp",
+      "s/p124/2.webp",
+      "s/p124/3.webp",
+      "s/p124/4.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p124.mp3"
+  },
+  "Symphony No. 3 “Eroica” — III. Scherzo": {
+    "id": "p125",
+    "tier": "medium",
+    "pages": [
+      "s/p125/1.webp",
+      "s/p125/2.webp",
+      "s/p125/3.webp",
+      "s/p125/4.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p125.mp3"
+  },
+  "Symphony No. 4 in B-flat major, Op. 60 — II. Adagio": {
+    "id": "p126",
+    "tier": "medium",
+    "pages": [
+      "s/p126/1.webp",
+      "s/p126/2.webp",
+      "s/p126/3.webp",
+      "s/p126/4.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p126.mp3"
+  },
+  "Symphony No. 6 “Pastoral” — V. Allegretto": {
+    "id": "p127",
+    "tier": "medium",
+    "pages": [
+      "s/p127/1.webp",
+      "s/p127/2.webp",
+      "s/p127/3.webp",
+      "s/p127/4.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p127.mp3"
+  },
+  "Symphony No. 8 in F major, Op. 93 — II. Allegretto scherzando": {
+    "id": "p128",
+    "tier": "medium",
+    "pages": [
+      "s/p128/1.webp",
+      "s/p128/2.webp",
+      "s/p128/3.webp",
+      "s/p128/4.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p128.mp3"
   }
 }
