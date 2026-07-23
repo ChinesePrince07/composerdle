@@ -71,8 +71,6 @@ npm install
 node test.js
 ```
 
-To build the native app, install [XcodeGen](https://github.com/yonaskolb/XcodeGen), then generate the Xcode project from `ios/project.yml`. The client targets iOS 17+ and talks to the live API.
-
 ## Credits
 
 The original “Wordle for composers” idea is [TwoSet Violin](https://www.youtube.com/@twosetviolin)’s. Recordings and editions come from sources including Wikimedia Commons, Musopen, the Internet Archive, BnF Gallica, and IMSLP; see the in-game [Credits page](https://composerdle.andypandy.org/credits.html) for the exact attribution attached to every work.
