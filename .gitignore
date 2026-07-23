@@ -15,3 +15,7 @@ prev/
 *.pdf
 
 .DS_Store
+
+# Codex delegation / instruction briefs — internal only, must never be pushed
+codex-*.md
+composerdle-add-pieces.md
