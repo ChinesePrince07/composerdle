@@ -733,6 +733,74 @@ const MEDIUM = [
       'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Piano_Sonata_No.2%2C_Op.35_%28IA_imslp-sonata-no2-op35-chopin-frdric%29.pdf/page13-1280px-Piano_Sonata_No.2%2C_Op.35_%28IA_imslp-sonata-no2-op35-chopin-frdric%29.pdf.jpg',
     ],
   },
+  {
+    composer: 'Gustav Mahler',
+    title: 'Symphony No. 1 in D major "Titan" — III. Feierlich (Funeral March)',
+    audio: 'https://upload.wikimedia.org/wikipedia/commons/9/9d/Mahler_Symphony1_Movement3_VPO.oga',
+    performer: 'Virtual Philharmonic Orchestra (Reinhold Behringer)',
+    license: 'CC BY-SA 4.0 · Wikimedia',
+    scoreNote: 'Public-domain orchestral score',
+    crop: 0,
+    pages: [
+      'https://iiif.archive.org/image/iiif/2/imslp-no1-mahler-gustav%2fMahler-Symph1fs_jp2.zip%2fMahler-Symph1fs_jp2%2fMahler-Symph1fs_0075.jp2/full/pct:50/0/default.jpg',
+      'https://iiif.archive.org/image/iiif/2/imslp-no1-mahler-gustav%2fMahler-Symph1fs_jp2.zip%2fMahler-Symph1fs_jp2%2fMahler-Symph1fs_0076.jp2/full/pct:50/0/default.jpg',
+      'https://iiif.archive.org/image/iiif/2/imslp-no1-mahler-gustav%2fMahler-Symph1fs_jp2.zip%2fMahler-Symph1fs_jp2%2fMahler-Symph1fs_0077.jp2/full/pct:50/0/default.jpg',
+    ],
+  },
+  {
+    composer: 'Gustav Mahler',
+    title: 'Symphony No. 2 in C minor "Resurrection" — I. Allegro maestoso',
+    audio: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/2/2f/Mahler_Symphony_no._2%2C_I._Allegro_maestoso.ogg/Mahler_Symphony_no._2%2C_I._Allegro_maestoso.ogg.mp3',
+    performer: 'DuPage Symphony Orchestra, cond. Barbara Schubert',
+    license: 'CC0 · Musopen/archive.org',
+    scoreNote: 'Public-domain orchestral score',
+    crop: 0,
+    pages: [
+      'https://upload.wikimedia.org/wikipedia/commons/9/93/Mahler_Symphony_No._2_manuscript.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/5/5b/Mahler_Symphony_No._2_manuscript_2.jpg',
+    ],
+  },
+  {
+    composer: 'Pyotr Ilyich Tchaikovsky',
+    title: 'Symphony No. 4 in F minor, Op. 36 — IV. Finale',
+    audio: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/5/51/Finale_Tchaikovsky_Symphony_No_4.ogg/Finale_Tchaikovsky_Symphony_No_4.ogg.mp3',
+    performer: 'U.S. Navy Band (wind-band arr.)',
+    license: 'public domain (US federal)',
+    scoreNote: 'Public-domain orchestral score',
+    crop: 0.08,
+    pages: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Tchaikovsky_4th_Symphony.pdf/page96-960px-Tchaikovsky_4th_Symphony.pdf.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Tchaikovsky_4th_Symphony.pdf/page97-960px-Tchaikovsky_4th_Symphony.pdf.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Tchaikovsky_4th_Symphony.pdf/page98-960px-Tchaikovsky_4th_Symphony.pdf.jpg',
+    ],
+  },
+  {
+    composer: 'Pyotr Ilyich Tchaikovsky',
+    title: 'Symphony No. 5 in E minor, Op. 64 — II. Andante cantabile',
+    audio: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/9/9f/Tchaikovsky_-_Symphony_No.5,_E_minor,_Op.64_-_van_Kempen_-_I_Andante_II_Andante.ogg/Tchaikovsky_-_Symphony_No.5,_E_minor,_Op.64_-_van_Kempen_-_I_Andante_II_Andante.ogg.mp3',
+    performer: 'orchestra cond. Paul van Kempen (historic)',
+    license: 'public domain · Musopen',
+    scoreNote: 'Public-domain orchestral score',
+    crop: 0.08,
+    pages: [
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Tchaikovsky_5th_Symphony.pdf/page56-960px-Tchaikovsky_5th_Symphony.pdf.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Tchaikovsky_5th_Symphony.pdf/page57-960px-Tchaikovsky_5th_Symphony.pdf.jpg',
+    ],
+  },
+  {
+    composer: 'Pyotr Ilyich Tchaikovsky',
+    title: 'Symphony No. 6 in B minor, Op. 74 "Pathétique" — I. Adagio',
+    audio: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b7/Tchaikovsky%2C_Symphony_No._6_In_B_Minor%2C_Op._74%2C_%27Pathetique%27_-_I._Adagio%2C_Allegro_Non_Troppo.ogg/Tchaikovsky%2C_Symphony_No._6_In_B_Minor%2C_Op._74%2C_%27Pathetique%27_-_I._Adagio%2C_Allegro_Non_Troppo.ogg.mp3',
+    performer: 'Musopen',
+    license: 'public domain · Musopen',
+    scoreNote: 'Public-domain orchestral score',
+    crop: 0,
+    pages: [
+      'scores/tchaikovsky6mvt1/pg1.png',
+      'scores/tchaikovsky6mvt1/pg2.png',
+      'scores/tchaikovsky6mvt1/pg3.png',
+    ],
+  },
 
 ];
 
@@ -1458,6 +1526,11 @@ const META = {
   'Piano Sonata No. 2 in B-flat minor, Op. 35 — III. Marche funèbre': { year: 1839, genre: 'sonata', genreWords: ['sonata', 'marche funebre', 'funeral march', 'romantic'], keys: ['op35', 'marchefunebre', 'funeralmarch', 'bflatminor'] },
   'Barcarolle in F-sharp major, Op. 60': { year: 1846, genre: 'barcarolle', genreWords: ['barcarolle', 'character piece', 'romantic', 'boat song'], keys: ['op60', 'fsharp', 'fsharpmajor', 'barcarolle'] },
   'Tarantella in A-flat major, Op. 43': { year: 1841, genre: 'tarantella', genreWords: ['tarantella', 'character piece', 'dance'], keys: ['op43', 'aflat', 'abmajor', 'tarantella', 'tarantelle'] },
+  'Symphony No. 1 in D major "Titan" — III. Feierlich (Funeral March)': { year: 1888, genre: 'symphony', genreWords: ['symphony', 'funeral march', 'romantic', 'minor'], keys: ['symphony1', 'titan', 'funeralmarch', 'frerejacques'] },
+  'Symphony No. 2 in C minor "Resurrection" — I. Allegro maestoso': { year: 1894, genre: 'symphony', genreWords: ['symphony', 'resurrection', 'romantic'], keys: ['symphony2', 'resurrection', 'allegromaestoso'] },
+  'Symphony No. 4 in F minor, Op. 36 — IV. Finale': { year: 1878, genre: 'symphony', genreWords: ['symphony', 'finale', 'folk song', 'romantic'], keys: ['symphony4', 'op36', 'finale'] },
+  'Symphony No. 5 in E minor, Op. 64 — II. Andante cantabile': { year: 1888, genre: 'symphony', genreWords: ['symphony', 'andante', 'horn solo', 'romantic'], keys: ['symphony5', 'op64', 'andantecantabile'] },
+  'Symphony No. 6 in B minor, Op. 74 "Pathétique" — I. Adagio': { year: 1893, genre: 'symphony', genreWords: ['symphony', 'pathetique', 'adagio', 'romantic'], keys: ['symphony6', 'op74', 'pathetique', 'adagio'] },
 
 };
 for (const pool of [EASY, MEDIUM, HARD]) for (const p of pool) Object.assign(p, META[p.title]);
