@@ -38,6 +38,20 @@ private struct Bullet: View {
     }
 }
 
+// Left-aligned bulleted row for the How-to list (matches the design's <ul>).
+private struct BulletRow: View {
+    let md: String
+    var body: some View {
+        HStack(alignment: .top, spacing: 9) {
+            Text("•").font(CD.body(14)).foregroundStyle(CD.gold)
+            Text(.init(md)).font(CD.body(14)).foregroundStyle(CD.ink)
+                .lineSpacing(3)
+                .fixedSize(horizontal: false, vertical: true)
+                .frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
+}
+
 private extension View {
     func sheetScroll() -> some View {
         ScrollView { self.padding(.horizontal, 22).padding(.top, 14).padding(.bottom, 34) }
@@ -118,15 +132,16 @@ private struct HowtoSheet: View {
     var body: some View {
         VStack(alignment: .center, spacing: 12) {
             SheetTitle(text: "How to play")
-            VStack(alignment: .center, spacing: 7) {
-                Bullet(md: "One composer hides behind six fun-fact clues, cryptic first, obvious last.")
-                Bullet(md: "You have **six tries**: guess (surname is enough) or ask for the next clue — either spends a try.")
-                Bullet(md: "Wrong guesses are struck off the list.")
-                Bullet(md: "**By Ear** brings a real recording and its engraved score, name inked out. A **hint** (year, era, genre) costs a try.")
-                Bullet(md: "Cracked the composer but not the piece? Keep hunting with your remaining tries — or **take the points** and move on.")
-                Bullet(md: "Pick a level: **Easy** serves common-knowledge clues, **Hard** only the niche, obscure ones. Fewer tries = more points; Medium ×2, Hard ×3.")
+            VStack(alignment: .leading, spacing: 9) {
+                BulletRow(md: "One composer hides behind six fun-fact clues, cryptic first, obvious last.")
+                BulletRow(md: "You have **six tries**: guess (surname is enough) or ask for the next clue — either spends a try.")
+                BulletRow(md: "Wrong guesses are struck off the list.")
+                BulletRow(md: "**By Ear** brings a real recording and its engraved score, name inked out. A **hint** (year, era, genre) costs a try.")
+                BulletRow(md: "Cracked the composer but not the piece? Keep hunting with your remaining tries — or **take the points** and move on.")
+                BulletRow(md: "Pick a level: **Easy** serves common-knowledge clues, **Hard** only the niche, obscure ones. Fewer tries = more points; Medium ×2, Hard ×3.")
             }
-            .padding(.top, 2)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.top, 6)
             Text("A daily classical-music guessing game.")
                 .font(CD.body(12, .regular, italic: true)).foregroundStyle(CD.inkSoft)
                 .frame(maxWidth: .infinity).multilineTextAlignment(.center)

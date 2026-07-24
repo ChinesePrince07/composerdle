@@ -29,7 +29,7 @@ struct RootView: View {
         .preferredColorScheme(.light)
         .sheet(item: $store.sheet) { sheet in
             SheetHost(store: store, sheet: sheet)
-                .presentationDetents([.fraction(0.4), .large])
+                .presentationDetents(sheet == .howto ? [.large] : [.fraction(0.4), .large])
                 .presentationDragIndicator(.visible)
                 .presentationCornerRadius(22)
                 .presentationBackground(CD.paperHi)
