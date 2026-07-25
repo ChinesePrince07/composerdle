@@ -1492,32 +1492,32 @@ const HARD = [
   },
 ];
 
-// Difficulty rebalance: these were authored in HARD but play as MEDIUM — too famous to be
-// "niche". Kept as one editable list rather than relocating ten blocks; move a title in or
-// out of this Set to retier it. (META still applies via the EASY/MEDIUM/HARD loop below.)
-const HARD_TO_MEDIUM = new Set([
-  'Caprice No. 24 in A minor',
-  'Sì, mi chiamano Mimì (La bohème)',
-  'Symphony No. 5 — IV. Adagietto',
-  'Slavonic Dance in E minor, Op. 72 No. 2',
-  'Danse macabre, Op. 40',
-  'Prelude in C-sharp minor, Op. 3 No. 2',
-  'Symphony No. 8 “Unfinished” — I. Allegro moderato',
-  'The Four Seasons — “Winter”, RV 297, I.',
-  'Anvil Chorus (Il trovatore)',
-  'Pavane, Op. 50',
-  'Symphony No. 1 in C major, Op. 21 — II. Andante cantabile con moto',
-  'Symphony No. 2 in D major, Op. 36 — II. Larghetto',
-  'Symphony No. 3 “Eroica” — III. Scherzo',
-  'Symphony No. 4 in B-flat major, Op. 60 — II. Adagio',
-  'Symphony No. 6 “Pastoral” — V. Allegretto',
-  'Symphony No. 8 in F major, Op. 93 — II. Allegretto scherzando',
-]);
-const PIECES = {
-  easy: EASY,
-  medium: MEDIUM.concat(HARD.filter(p => HARD_TO_MEDIUM.has(p.title))),
-  hard: HARD.filter(p => !HARD_TO_MEDIUM.has(p.title)),
+// Difficulty rebalance: a piece plays in the tier named here rather than the array it was
+// authored in — retiering is one line, not a relocated block. `tools/admin.js` rewrites this
+// map. (META still applies via the EASY/MEDIUM/HARD loop below.)
+// TIER_OVERRIDES_START — machine-edited by tools/admin.js, keep the markers
+const TIER_OVERRIDES = {
+  'Anvil Chorus (Il trovatore)': 'medium',
+  'Caprice No. 24 in A minor': 'medium',
+  'Danse macabre, Op. 40': 'medium',
+  'Pavane, Op. 50': 'medium',
+  'Prelude in C-sharp minor, Op. 3 No. 2': 'medium',
+  'Slavonic Dance in E minor, Op. 72 No. 2': 'medium',
+  'Symphony No. 1 in C major, Op. 21 — II. Andante cantabile con moto': 'medium',
+  'Symphony No. 2 in D major, Op. 36 — II. Larghetto': 'medium',
+  'Symphony No. 3 “Eroica” — III. Scherzo': 'medium',
+  'Symphony No. 4 in B-flat major, Op. 60 — II. Adagio': 'medium',
+  'Symphony No. 5 — IV. Adagietto': 'medium',
+  'Symphony No. 6 “Pastoral” — V. Allegretto': 'medium',
+  'Symphony No. 8 in F major, Op. 93 — II. Allegretto scherzando': 'medium',
+  'Symphony No. 8 “Unfinished” — I. Allegro moderato': 'medium',
+  'Sì, mi chiamano Mimì (La bohème)': 'medium',
+  'The Four Seasons — “Winter”, RV 297, I.': 'medium',
 };
+// TIER_OVERRIDES_END
+const PIECES = { easy: [], medium: [], hard: [] };
+for (const [home, pool] of [['easy', EASY], ['medium', MEDIUM], ['hard', HARD]])
+  for (const p of pool) (PIECES[TIER_OVERRIDES[p.title]] || PIECES[home]).push(p);
 
 // Per-piece guessing metadata: composition year (hint), genre (hint + feedback),
 // genreWords (detect "right genre" in a wrong guess), keys (accepted piece-name answers,
