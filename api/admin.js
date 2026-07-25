@@ -48,7 +48,7 @@ module.exports = async (req, res) => {
   // First unlock via ?key= — park it in an HttpOnly cookie so the key leaves the URL bar.
   if (req.query && req.query.key) {
     res.setHeader('set-cookie',
-      `${COOKIE}=${encodeURIComponent(req.query.key)}; HttpOnly; Secure; SameSite=Lax; Path=/api/admin; Max-Age=2592000`);
+      `${COOKIE}=${encodeURIComponent(req.query.key)}; HttpOnly; Secure; SameSite=Lax; Path=/api/admin; Max-Age=31536000`);
   }
 
   await E.refreshTiers(true);

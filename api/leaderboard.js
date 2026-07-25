@@ -16,9 +16,22 @@ module.exports = async (req, res) => {
         .reduce((s, [, v]) => s + (typeof v === 'number' ? v : (v && v.pts) || 0), 0);
   const row = p => ({ name: p.name, score: scoreOf(p), streak: p.streak ? p.streak.cur : 0 });
 
-  // Store down → serve an empty board instead of 500ing the whole page.
-  const profiles = (await E.loadAllProfiles(500)).filter(p => p && p.name);
-  const ranked = profiles.map(row).filter(r => r.score > 0).sort((a, b) => b.score - a.score);
+  // One aggregated object covers every player in a single read. Fall back to the old profile
+  // scan only if it is missing (first deploy, or a day rolled over before any settle refreshed
+  // it) — that path is capped at 500 and therefore incomplete, so it is a stopgap, not a mode
+  // to sit in. /api/lb-rebuild repairs the aggregate.
+  const lb = await E.readJSON(E.LB_KEY);
+  let ranked;
+  if (lb && lb.users && (scope === 'career' || lb.day === day)) {
+    ranked = Object.values(lb.users)
+      .map(u => ({ name: u.n, score: scope === 'career' ? (u.c || 0) : (u.d === day ? u.ds || 0 : 0), streak: u.s || 0 }))
+      .filter(r => r.name && r.score > 0)
+      .sort((a, b) => b.score - a.score);
+  } else {
+    // Store down → serve an empty board instead of 500ing the whole page.
+    const profiles = (await E.loadAllProfiles(500)).filter(p => p && p.name);
+    ranked = profiles.map(row).filter(r => r.score > 0).sort((a, b) => b.score - a.score);
+  }
   const top = ranked.slice(0, 25);
 
   // The caller's own standing — returned only when they have a score and fell outside the top 25,

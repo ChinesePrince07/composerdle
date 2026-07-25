@@ -122,6 +122,53 @@ function readGame(gs) {
   catch (e) { return null; }
 }
 
+// ---------- leaderboard aggregate ----------
+// One object holding a row per player, so the board costs a single R2 read. The old path read
+// every profile object and capped at 500 of them — once the hall passed 500 players the cap
+// silently hid whoever fell outside an arbitrary key-order window, including the top scorers.
+// Reading all of them instead is not an option: ~1800 profiles took ~20s and grows linearly.
+const LB_KEY = 'leaderboard.json';
+const lbRow = (prof, day) => ({
+  n: prof.name,
+  c: prof.career || 0,
+  s: prof.streak ? prof.streak.cur : 0,
+  d: day,
+  ds: Object.entries(prof.results || {}).filter(([k]) => k.startsWith(`${day}-`))
+    .reduce((sum, [, v]) => sum + (typeof v === 'number' ? v : (v && v.pts) || 0), 0),
+});
+// Incremental update on settle. Two settles landing together can lose one row (R2 has no
+// atomic read-modify-write); that player's row corrects itself on their next settle, and
+// lbRebuild repairs everything. It is a scoreboard, not a ledger.
+async function lbUpsert(token, prof) {
+  const lb = await readJSON(LB_KEY);
+  if (!lb || !lb.users) return false;   // no aggregate yet — /api/lb-rebuild creates it
+  lb.users[profileKey(token)] = lbRow(prof, utcDay());
+  lb.at = Date.now();
+  return writeJSON(LB_KEY, lb);
+}
+// Full scan → aggregate. Slow (seconds); only for backfill and repair, never on a user request.
+async function lbRebuild() {
+  if (!R2) return null;
+  const day = utcDay();
+  const keys = [];
+  let ContinuationToken;
+  do {
+    const r = await R2.send(new ListObjectsV2Command({
+      Bucket: R2_BUCKET, Prefix: R2_PREFIX + 'u/', ContinuationToken, MaxKeys: 1000,
+    }));
+    for (const o of r.Contents || []) keys.push(o.Key.slice(R2_PREFIX.length));
+    ContinuationToken = r.IsTruncated ? r.NextContinuationToken : undefined;
+  } while (ContinuationToken);
+  const users = {};
+  for (let i = 0; i < keys.length; i += 100) {
+    const batch = await Promise.all(keys.slice(i, i + 100).map(k => readJSON(k)));
+    batch.forEach((p, j) => { if (p && p.name) users[keys[i + j]] = lbRow(p, day); });
+  }
+  const lb = { at: Date.now(), day, users };
+  await writeJSON(LB_KEY, lb);
+  return lb;
+}
+
 // ---------- runtime difficulty overrides ----------
 // The deployed admin panel writes cdle/tier-overrides.json; requests re-tier from it (60s
 // cache) so a difficulty change takes effect without a redeploy. No object → the tiers
@@ -386,12 +433,14 @@ async function settleGame(token, key, g, day, isToday, name) {
     prof.streak.max = Math.max(prof.streak.max, prof.streak.cur);
   }
   await writeJSON(profileKey(token), prof);
+  await lbUpsert(token, prof);   // keep the aggregated board current without a full profile scan
   return prof;
 }
 
 module.exports = {
   MAX, TIERS, utcDay, pieceForDay, composerForDay, pieceById, assets,
   refreshTiers, applyTiers, PIECES, POOLS,
+  lbRebuild, LB_KEY,
   readJSON, writeJSON, loadAllProfiles, gameKey, profileKey, cleanToken,
   deleteProfile, nameRejected,
   newGame, earView, factsView, publicState, earResult, factsResult,
