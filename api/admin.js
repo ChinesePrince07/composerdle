@@ -24,15 +24,20 @@ function authorized(req) {
   return a.length === b.length && crypto.timingSafeEqual(a, b);
 }
 
+// Same audio URL the game serves, so the panel plays the exact clip players hear.
+const AUDIO_HOST = process.env.AUDIO_HOST || '';
+const audioFor = (p, a) => (a && a.id && AUDIO_HOST) ? `${AUDIO_HOST}/a/${a.id}.mp3` : (p.audio || null);
+
 // Current tier of every piece, plus the tier it was authored in.
 function board() {
   const home = {};
   for (const t of E.TIERS) for (const p of E.POOLS[t]) home[p.title] = t;
   const rows = [];
   for (const t of E.TIERS) for (const p of E.PIECES[t]) {
+    const a = ASSETS[p.title];
     rows.push({
       title: p.title, composer: p.composer, tier: t, home: home[p.title],
-      id: (ASSETS[p.title] || {}).id || null,
+      id: (a || {}).id || null, audio: audioFor(p, a),
     });
   }
   return rows;
@@ -109,6 +114,9 @@ main{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:12px 14px
 .chip .c{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--soft)}
 .chip button{font:inherit;border:1px solid var(--rule);background:#fbf5e7;border-radius:6px;cursor:pointer;padding:2px 7px;color:var(--ink)}
 .chip button[disabled]{opacity:.25;cursor:default}
+.chip .pl{min-width:30px}
+.chip.playing{border-color:var(--gold);background:#fffdf4}
+.chip.playing .pl{background:var(--gold);color:var(--hi);border-color:var(--gold)}
 #toast{position:fixed;right:14px;bottom:14px;background:var(--ink);color:var(--hi);padding:9px 14px;border-radius:8px;opacity:0;transition:opacity .2s}
 #toast.on{opacity:1}
 </style></head><body>
@@ -139,11 +147,16 @@ function render() {
   }).join('');
   const moved = ROWS.filter(r => r.tier !== r.home).length;
   document.getElementById('state').textContent = ROWS.length + ' pieces · ' + moved + ' retiered';
+  syncPlaying();   // a drag re-renders the board; keep the sounding chip marked
 }
 
 function chip(r) {
   const i = TIERS.indexOf(r.tier);
+  const play = r.audio
+    ? '<button class="pl" draggable="false" data-audio="' + esc(r.audio) + '">&#9654;</button>'
+    : '<button class="pl" disabled>&#9654;</button>';
   return '<div class="chip' + (r.tier !== r.home ? ' moved' : '') + '" draggable="true" data-title="' + esc(r.title) + '">' +
+    play +
     '<button class="mv" data-dir="-1"' + (i === 0 ? ' disabled' : '') + '>&lsaquo;</button>' +
     '<span class="t"><span class="n">' + esc(r.title) + '</span><br><span class="c">' + esc(r.composer) + '</span></span>' +
     '<button class="mv" data-dir="1"' + (i === 2 ? ' disabled' : '') + '>&rsaquo;</button></div>';
@@ -213,6 +226,35 @@ document.addEventListener('drop', e => {
   const title = dragged || e.dataTransfer.getData('text/plain');
   dragged = null;
   if (title) move(title, col.dataset.tier);
+});
+
+// One shared player: starting a piece stops whatever was sounding, so the columns never
+// overlap. The Audio object lives outside the DOM, so a re-render mid-playback is harmless —
+// syncPlaying() just re-marks the chip afterwards.
+let player = null, playingTitle = null;
+function syncPlaying() {
+  document.querySelectorAll('.chip').forEach(c => {
+    const on = c.dataset.title === playingTitle;
+    c.classList.toggle('playing', on);
+    const b = c.querySelector('.pl');
+    if (b && !b.disabled) b.innerHTML = on ? '&#10073;&#10073;' : '&#9654;';
+  });
+}
+function stop() { if (player) { player.pause(); } playingTitle = null; syncPlaying(); }
+document.addEventListener('click', e => {
+  const b = e.target.closest('.pl');
+  if (!b || b.disabled) return;
+  const title = b.closest('.chip').dataset.title;
+  if (playingTitle === title) return stop();
+  if (!player) {
+    player = new Audio();
+    player.addEventListener('ended', stop);
+    player.addEventListener('error', () => { toast('audio failed to load', true); stop(); });
+  }
+  player.src = b.dataset.audio;
+  playingTitle = title;
+  syncPlaying();
+  player.play().catch(err => { toast('playback blocked: ' + err.message, true); stop(); });
 });
 
 // Touch-friendly fallback — dragging is awkward on a phone.
