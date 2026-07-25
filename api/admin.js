@@ -60,6 +60,17 @@ module.exports = async (req, res) => {
 
   if (req.method === 'POST') {
     const body = req.body || {};
+
+    // Moderation actions on reported stage names (guideline 1.2 "timely response").
+    if (body.action === 'clearName') {
+      const n = await E.clearName(body.name);
+      return res.status(200).json({ ok: true, cleared: n });
+    }
+    if (body.action === 'dismiss') {
+      await E.dismissReports(String(body.name || ''));
+      return res.status(200).json({ ok: true });
+    }
+
     const map = body.overrides;
     if (!map || typeof map !== 'object' || Array.isArray(map)) {
       return res.status(400).json({ error: 'expected {overrides:{title:tier}}' });
@@ -74,6 +85,7 @@ module.exports = async (req, res) => {
     return res.status(200).json({ ok: true, count: Object.keys(clean).length });
   }
 
+  if (req.query && req.query.reports) return res.status(200).json(await E.listReports());
   if (req.query && req.query.data) return res.status(200).json(board());
 
   res.setHeader('content-type', 'text/html; charset=utf-8');
@@ -119,12 +131,23 @@ main{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:12px 14px
 .chip.playing .pl{background:var(--gold);color:var(--hi);border-color:var(--gold)}
 #toast{position:fixed;right:14px;bottom:14px;background:var(--ink);color:var(--hi);padding:9px 14px;border-radius:8px;opacity:0;transition:opacity .2s}
 #toast.on{opacity:1}
+button.ghost{background:#fff;color:var(--ink);border:1px solid var(--rule);border-radius:7px;padding:5px 10px;cursor:pointer}
+.hide{display:none}
+#reports{margin:12px 14px 0;background:var(--hi);border:1px solid var(--rule);border-radius:10px;padding:10px 12px}
+#reports h2{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin:0 0 8px}
+.rep{display:flex;gap:10px;align-items:center;padding:6px 0;border-top:1px dotted var(--rule)}
+.rep:first-of-type{border-top:0}
+.rep .who{flex:1;font-size:15px}
+.rep .when{font-size:12px;color:var(--soft)}
+.rep.done{opacity:.45}
 </style></head><body>
 <header>
   <h1>Difficulty</h1>
   <input id="q" placeholder="filter composer / title" size="24">
+  <button id="repToggle" class="ghost">Reports</button>
   <span id="state">loading…</span>
 </header>
+<section id="reports" class="hide"></section>
 <main id="board"></main>
 <div id="toast"></div>
 <script>
@@ -267,5 +290,43 @@ document.addEventListener('click', e => {
 });
 document.getElementById('q').addEventListener('input', render);
 
+// ---- moderation queue ----
+async function loadReports() {
+  const items = await (await fetch('/api/admin?reports=1', { credentials: 'same-origin' })).json();
+  const open = items.filter(r => !r.done);
+  document.getElementById('repToggle').textContent = 'Reports' + (open.length ? ' (' + open.length + ')' : '');
+  const el = document.getElementById('reports');
+  el.innerHTML = '<h2>Reported stage names</h2>' + (items.length
+    ? items.map(r =>
+        '<div class="rep' + (r.done ? ' done' : '') + '" data-name="' + esc(r.name) + '">' +
+        '<span class="who">' + esc(r.name) + '</span>' +
+        '<span class="when">' + new Date(r.at).toISOString().slice(0, 16).replace('T', ' ') + '</span>' +
+        (r.done ? '<span class="when">handled</span>'
+                : '<button class="ghost act" data-act="clearName">withdraw name</button>' +
+                  '<button class="ghost act" data-act="dismiss">dismiss</button>') +
+        '</div>').join('')
+    : '<div class="when">nothing reported</div>');
+}
+document.getElementById('repToggle').addEventListener('click', () => {
+  document.getElementById('reports').classList.toggle('hide');
+  loadReports();
+});
+document.addEventListener('click', async e => {
+  const b = e.target.closest('.act');
+  if (!b) return;
+  const name = b.closest('.rep').dataset.name;
+  const act = b.dataset.act;
+  if (act === 'clearName' && !confirm('Withdraw the name "' + name + '" from every profile using it?')) return;
+  b.disabled = true;
+  const r = await (await fetch('/api/admin', {
+    method: 'POST', credentials: 'same-origin',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ action: act, name }),
+  })).json();
+  toast(r.ok ? (act === 'clearName' ? 'withdrawn from ' + r.cleared + ' profile(s)' : 'dismissed') : 'failed', !r.ok);
+  loadReports();
+});
+
 load();
+loadReports();
 </script></body></html>`;

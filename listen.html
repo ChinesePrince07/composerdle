@@ -161,6 +161,11 @@
   footer { margin-top: 48px; text-align: center; font-size: 13px; font-style: italic; color: var(--ink-soft); }
   footer .orn { color: var(--gold); font-style: normal; }
   footer a { color: var(--ink-soft); }
+  /* report / hide controls on leaderboard rows — quiet until the row is hovered */
+  .lbmod { border: 0; background: none; cursor: pointer; font-size: 12px; opacity: 0; padding: 0 2px; color: var(--ink-soft); transition: opacity .15s; }
+  li:hover .lbmod, .lbmod:focus { opacity: .75; }
+  .lbmod:hover { opacity: 1; }
+  @media (hover: none) { .lbmod { opacity: .5; } }
   [hidden] { display: none !important; }
 </style>
 </head>

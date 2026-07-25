@@ -74,6 +74,11 @@ enum API {
     }
 
     // DELETE /api/player — erase the player's profile, stats, and leaderboard entry.
+    // Flag an objectionable stage name for review (App Store guideline 1.2).
+    static func report(token: String, name: String) async throws {
+        _ = try await post("/api/report", ["token": token, "name": name])
+    }
+
     static func deleteProfile(token: String) async throws {
         guard let url = URL(string: base + "/api/player?token=\(esc(token))") else { throw APIError.badURL }
         var req = URLRequest(url: url); req.httpMethod = "DELETE"

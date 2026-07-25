@@ -35,6 +35,7 @@ final class GameStore: ObservableObject {
 
     @Published var profile: Profile?
     @Published var board: Leaderboard?
+    @Published var blocked: Set<String> = Set(UserDefaults.standard.stringArray(forKey: "cdle-blocked") ?? [])
     @Published var resultMode: Tab = .facts
 
     let audio = AudioPlayer()
@@ -238,6 +239,25 @@ final class GameStore: ObservableObject {
         Task { board = try? await API.leaderboard(token: token, scope: boardScope) }
     }
     func setScope(_ s: String) { boardScope = s; loadBoard() }
+
+    // Moderation (App Store guideline 1.2). Reporting queues a name for review; blocking is
+    // local to this device — the leaderboard is the only place players see each other, so
+    // hiding a name is the whole of "block" here.
+    func block(_ name: String) {
+        guard !name.isEmpty else { return }
+        blocked.insert(name)
+        d.set(Array(blocked), forKey: "cdle-blocked")
+    }
+
+    func unblockAll() {
+        blocked.removeAll()
+        d.removeObject(forKey: "cdle-blocked")
+    }
+
+    func report(_ name: String) {
+        let t = token
+        Task { try? await API.report(token: t, name: name) }
+    }
 
     func saveName(_ v: String) {
         let n = v.trimmingCharacters(in: .whitespaces)

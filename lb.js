@@ -158,6 +158,23 @@ async function lbNamePrompt(next) {
   input.focus();
 }
 
+// Moderation controls on the board (App Store guideline 1.2). Reporting sends the name to the
+// review queue; blocking is local to this browser — the leaderboard is the only place players
+// see each other, so hiding a name is the whole of "block" here.
+function cdBlocked() {
+  try { return JSON.parse(localStorage.getItem('cdle-blocked') || '[]'); } catch (e) { return []; }
+}
+function cdBlock(name) {
+  try {
+    const list = cdBlocked();
+    if (!list.includes(name)) list.push(name);
+    localStorage.setItem('cdle-blocked', JSON.stringify(list));
+  } catch (e) {}
+}
+function cdUnblockAll() {
+  try { localStorage.removeItem('cdle-blocked'); } catch (e) {}
+}
+
 // leaderboard (#boardList + #boardTabs): career and today's-puzzle views
 let _scope = 'career';
 async function lbRender() {
@@ -172,11 +189,33 @@ async function lbRender() {
   }
   if (tabs) [...tabs.querySelectorAll('button')].forEach(b =>
     b.classList.toggle('on', b.dataset.scope === _scope));
+  if (ol && !ol.dataset.modWired) {
+    ol.dataset.modWired = 1;
+    ol.addEventListener('click', async e => {
+      const b = e.target.closest('.lbmod');
+      if (!b) return;
+      const name = b.dataset.name;
+      if (b.dataset.act === 'block') {
+        cdBlock(name);
+        lbRender();
+        return;
+      }
+      b.disabled = true;
+      try { await apiPost('/api/report', { name }); } catch (err) {}
+      b.textContent = '✓';
+      b.title = 'Reported — thank you';
+    });
+  }
   try {
-    const { top, me } = await apiGet(`/api/leaderboard?scope=${_scope}`);
+    const { top: rawTop, me } = await apiGet(`/api/leaderboard?scope=${_scope}`);
     const meName = (_profile && _profile.name) || '';
+    const hidden = cdBlocked();
+    const top = rawTop.filter(e => !hidden.includes(e.name));
+    const mod = e => (e.name && e.name !== meName)
+      ? ` <button class="lbmod" data-act="report" data-name="${lbEsc(e.name)}" title="Report this name">⚑</button><button class="lbmod" data-act="block" data-name="${lbEsc(e.name)}" title="Hide this player">🚫</button>`
+      : '';
     const row = (e, extra, rank) =>
-      `<li class="${extra}"${rank ? ` data-rank="${rank}"` : ''}><span>${lbEsc(e.name)}${e.streak > 1 ? ` <em class="stk">🔥${e.streak}</em>` : ''}</span><span>${e.score}</span></li>`;
+      `<li class="${extra}"${rank ? ` data-rank="${rank}"` : ''}><span>${lbEsc(e.name)}${e.streak > 1 ? ` <em class="stk">🔥${e.streak}</em>` : ''}${mod(e)}</span><span>${e.score}</span></li>`;
     if (!top.length) {
       ol.innerHTML = '<li class="empty">An empty hall — be the first on stage.</li>';
     } else {

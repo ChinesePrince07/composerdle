@@ -169,6 +169,52 @@ async function lbRebuild() {
   return lb;
 }
 
+// ---------- moderation (App Store guideline 1.2) ----------
+// Stage names are user-generated content shown to every player, so the game needs more than
+// the posting filter in nameRejected(): a way to report a name, and a way for us to act on it.
+// Reports live in one small object; volume is low enough that a lost concurrent write is a
+// non-event, and capping the list keeps the object bounded.
+const REPORTS_KEY = 'reports.json';
+const REPORTS_MAX = 500;
+async function addReport(reportedName, byToken) {
+  const name = String(reportedName || '').trim().slice(0, 24);
+  if (!name) return false;
+  const rs = (await readJSON(REPORTS_KEY)) || { items: [] };
+  rs.items = rs.items || [];
+  // one open report per name per reporter — stops a single player flooding the queue
+  const by = String(byToken || '').slice(0, 12);
+  if (rs.items.some(r => r.name === name && r.by === by && !r.done)) return true;
+  rs.items.unshift({ name, by, at: Date.now(), done: false });
+  if (rs.items.length > REPORTS_MAX) rs.items.length = REPORTS_MAX;
+  return writeJSON(REPORTS_KEY, rs);
+}
+const listReports = async () => ((await readJSON(REPORTS_KEY)) || { items: [] }).items || [];
+// Acting on a report: withdraw the offending name everywhere. The player keeps their scores
+// and can choose a new name; only the objectionable string goes.
+async function clearName(name) {
+  const target = String(name || '').trim();
+  if (!target) return 0;
+  const lb = (await readJSON(LB_KEY)) || { users: {} };
+  const keys = Object.entries(lb.users || {}).filter(([, u]) => u.n === target).map(([k]) => k);
+  let n = 0;
+  for (const k of keys) {
+    const prof = await readJSON(k);
+    if (!prof) continue;
+    prof.name = '';
+    await writeJSON(k, prof);
+    delete lb.users[k];
+    n++;
+  }
+  if (n) await writeJSON(LB_KEY, lb);
+  await dismissReports(target);
+  return n;
+}
+async function dismissReports(name) {
+  const rs = (await readJSON(REPORTS_KEY)) || { items: [] };
+  for (const r of rs.items || []) if (r.name === name) r.done = true;
+  return writeJSON(REPORTS_KEY, rs);
+}
+
 // ---------- runtime difficulty overrides ----------
 // The deployed admin panel writes cdle/tier-overrides.json; requests re-tier from it (60s
 // cache) so a difficulty change takes effect without a redeploy. No object → the tiers
@@ -441,6 +487,7 @@ module.exports = {
   MAX, TIERS, utcDay, pieceForDay, composerForDay, pieceById, assets,
   refreshTiers, applyTiers, PIECES, POOLS,
   lbRebuild, LB_KEY,
+  addReport, listReports, clearName, dismissReports,
   readJSON, writeJSON, loadAllProfiles, gameKey, profileKey, cleanToken,
   deleteProfile, nameRejected,
   newGame, earView, factsView, publicState, earResult, factsResult,
