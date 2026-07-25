@@ -147,6 +147,7 @@ struct ProfileView: View {
     }
 
     private var credits: some View {
+        VStack(spacing: 0) {
         (Text("a daily classical-music guessing game ")
             .font(CD.body(12, .regular, italic: true)).foregroundStyle(CD.inkSoft)
             + Text("·").font(CD.body(12)).foregroundStyle(CD.gold)
@@ -156,6 +157,17 @@ struct ProfileView: View {
             .lineSpacing(4)
             .frame(maxWidth: .infinity)
             .padding(.top, 6)
+
+            // Reachable contact + policies, as guideline 1.2 expects of an app that shows
+            // player-chosen names.
+            HStack(spacing: 6) {
+                Link("Support", destination: URL(string: "https://composerdle.andypandy.org/support.html")!)
+                Text("·").foregroundStyle(CD.gold)
+                Link("Privacy", destination: URL(string: "https://composerdle.andypandy.org/privacy.html")!)
+            }
+            .font(CD.body(12)).foregroundStyle(CD.red)
+            .padding(.top, 8)
+        }
     }
 }
 
