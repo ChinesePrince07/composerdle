@@ -1675,4 +1675,6 @@ function pieceIndex(date, pool) {
   return ((dn * stride + 3) % n + n) % n;
 }
 
-if (typeof module !== 'undefined') module.exports = { PIECES, pieceIndex };
+// POOLS/TIER_OVERRIDES are exported so the runtime can re-tier from the R2 override map that
+// the deployed admin panel writes (see _engine.refreshTiers) without a redeploy.
+if (typeof module !== 'undefined') module.exports = { PIECES, pieceIndex, POOLS: { easy: EASY, medium: MEDIUM, hard: HARD }, TIER_OVERRIDES };

@@ -8,6 +8,7 @@ module.exports = async (req, res) => {
   const token = E.cleanToken(b.token);
   const parsed = E.readGame(b.gs);
   if (!token || !parsed) return res.status(400).json({ error: 'bad request' });
+  await E.refreshTiers();   // pick up admin-panel retiering before re-deriving the answer
   const { key, g } = parsed;
 
   const ctx = E.puzzleFor(key, g);

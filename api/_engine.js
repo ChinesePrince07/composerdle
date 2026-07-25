@@ -3,7 +3,7 @@
 // egress fees, so heavy read traffic (leaderboard, audio) can't trip a bandwidth suspension.
 const { S3Client, GetObjectCommand, PutObjectCommand, ListObjectsV2Command, DeleteObjectCommand } = require('@aws-sdk/client-s3');
 const { COMPOSERS, matchGuess, norm, dayNumber } = require('./_game.js');
-const { PIECES } = require('./_pieces.js');
+const { PIECES, POOLS, TIER_OVERRIDES } = require('./_pieces.js');
 const ASSETS = require('./_assets.json');
 
 // Opaque audio host (decoupled from the profile-read base below). Unset → hotlink the
@@ -120,6 +120,26 @@ function readGame(gs) {
   if (a.length !== b.length || !crypto.timingSafeEqual(a, b)) return null;
   try { const o = JSON.parse(Buffer.from(body, 'base64url').toString()); return { key: o.k, g: o.g }; }
   catch (e) { return null; }
+}
+
+// ---------- runtime difficulty overrides ----------
+// The deployed admin panel writes cdle/tier-overrides.json; requests re-tier from it (60s
+// cache) so a difficulty change takes effect without a redeploy. No object → the tiers
+// authored in _pieces.js stand. A present object is authoritative: a title absent from it
+// plays in the array it was authored in, which is how the panel clears an override.
+let tierCheckedAt = 0;
+function applyTiers(map) {
+  for (const t of TIERS) PIECES[t].length = 0;
+  for (const home of TIERS) for (const p of POOLS[home]) {
+    const tier = (map ? map[p.title] : TIER_OVERRIDES[p.title]) || home;
+    (PIECES[tier] || PIECES[home]).push(p);
+  }
+}
+async function refreshTiers(force) {
+  if (!force && Date.now() - tierCheckedAt < 60000) return;
+  tierCheckedAt = Date.now();
+  const map = await readJSON('tier-overrides.json');
+  if (map) applyTiers(map);
 }
 
 // ---------- puzzles ----------
@@ -371,6 +391,7 @@ async function settleGame(token, key, g, day, isToday, name) {
 
 module.exports = {
   MAX, TIERS, utcDay, pieceForDay, composerForDay, pieceById, assets,
+  refreshTiers, applyTiers, PIECES, POOLS,
   readJSON, writeJSON, loadAllProfiles, gameKey, profileKey, cleanToken,
   deleteProfile, nameRejected,
   newGame, earView, factsView, publicState, earResult, factsResult,

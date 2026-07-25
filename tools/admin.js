@@ -14,6 +14,9 @@ const http = require('http');
 const ROOT = path.join(__dirname, '..');
 const SRC = path.join(ROOT, 'api', '_pieces.js');
 const PORT = Number(process.env.ADMIN_PORT) || 5174;
+// Loopback by default. Set ADMIN_HOST (e.g. this box's Tailscale IP) only when the browser runs
+// on a different machine — the panel lists every answer, so keep it off any public interface.
+const HOST = process.env.ADMIN_HOST || '127.0.0.1';
 
 // R2 public base, for pieces whose rendered assets aren't on this machine.
 function env(name) {
@@ -301,8 +304,8 @@ document.addEventListener('click', async e => {
 load();
 </script></body></html>`;
 
-server.listen(PORT, '127.0.0.1', () => {
-  console.log(`admin panel  →  http://localhost:${PORT}`);
-  console.log('local only (127.0.0.1). edits go straight into api/_pieces.js — review with `git diff` before committing.');
+server.listen(PORT, HOST, () => {
+  console.log(`admin panel  →  http://${HOST}:${PORT}`);
+  console.log(`bound to ${HOST}. edits go straight into api/_pieces.js — review with \`git diff\` before committing.`);
   if (!R2) console.log('note: no R2_PUBLIC_BASE_URL in .env.local — only locally rendered assets will display.');
 });

@@ -6,6 +6,7 @@ module.exports = async (req, res) => {
   const q = req.query || {};
   const token = E.cleanToken(q.token);
   if (!token) return res.status(400).json({ error: 'bad token' });
+  await E.refreshTiers();   // pick up admin-panel retiering without a redeploy
   const mode = q.mode === 'facts' ? 'facts' : 'ear';
   const tier = E.TIERS.includes(q.tier) ? q.tier : 'easy';
   const today = E.utcDay();
