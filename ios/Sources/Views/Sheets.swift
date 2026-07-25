@@ -42,10 +42,10 @@ private struct Bullet: View {
 private struct BulletRow: View {
     let md: String
     var body: some View {
-        HStack(alignment: .top, spacing: 9) {
-            Text("•").font(CD.body(14)).foregroundStyle(CD.gold)
+        HStack(alignment: .top, spacing: 8) {
+            Text("•").font(CD.body(14)).foregroundStyle(CD.ink)
             Text(.init(md)).font(CD.body(14)).foregroundStyle(CD.ink)
-                .lineSpacing(3)
+                .lineSpacing(4)   // design: 14px text, line-height 1.5
                 .fixedSize(horizontal: false, vertical: true)
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
@@ -132,7 +132,7 @@ private struct HowtoSheet: View {
     var body: some View {
         VStack(alignment: .center, spacing: 12) {
             SheetTitle(text: "How to play")
-            VStack(alignment: .leading, spacing: 9) {
+            VStack(alignment: .leading, spacing: 7) {   // design: <ul> gap 7px
                 BulletRow(md: "One composer hides behind six fun-fact clues, cryptic first, obvious last.")
                 BulletRow(md: "You have **six tries**: guess (surname is enough) or ask for the next clue — either spends a try.")
                 BulletRow(md: "Wrong guesses are struck off the list.")
@@ -146,7 +146,7 @@ private struct HowtoSheet: View {
                 .font(CD.body(12, .regular, italic: true)).foregroundStyle(CD.inkSoft)
                 .frame(maxWidth: .infinity).multilineTextAlignment(.center)
             PrimaryButton(title: "To the stage") { store.sheet = nil }
-                .frame(width: 200).frame(maxWidth: .infinity)
+                .frame(width: 180).frame(maxWidth: .infinity)   // design: 180px wide, centred
         }
         .sheetScroll()
     }
