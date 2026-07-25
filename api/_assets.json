@@ -1797,5 +1797,124 @@
       "s/p133/3.webp"
     ],
     "audioLocal": "tools/audio-cache/p133.mp3"
+  },
+  "Transcendental Étude No. 4 “Mazeppa”, S. 139": {
+    "id": "p134",
+    "tier": "medium",
+    "pages": [
+      "s/p134/1.webp",
+      "s/p134/2.webp",
+      "s/p134/3.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p134.mp3"
+  },
+  "Transcendental Étude No. 5 “Feux follets”, S. 139": {
+    "id": "p135",
+    "tier": "medium",
+    "pages": [
+      "s/p135/1.webp",
+      "s/p135/2.webp",
+      "s/p135/3.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p135.mp3"
+  },
+  "Transcendental Étude No. 9 “Ricordanza”, S. 139": {
+    "id": "p136",
+    "tier": "medium",
+    "pages": [
+      "s/p136/1.webp",
+      "s/p136/2.webp",
+      "s/p136/3.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p136.mp3"
+  },
+  "Transcendental Étude No. 12 “Chasse-neige”, S. 139": {
+    "id": "p137",
+    "tier": "medium",
+    "pages": [
+      "s/p137/1.webp",
+      "s/p137/2.webp",
+      "s/p137/3.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p137.mp3"
+  },
+  "Transcendental Étude No. 3 “Paysage”, S. 139": {
+    "id": "p138",
+    "tier": "hard",
+    "pages": [
+      "s/p138/1.webp",
+      "s/p138/2.webp",
+      "s/p138/3.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p138.mp3"
+  },
+  "Transcendental Étude No. 8 “Wilde Jagd”, S. 139": {
+    "id": "p139",
+    "tier": "hard",
+    "pages": [
+      "s/p139/1.webp",
+      "s/p139/2.webp",
+      "s/p139/3.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p139.mp3"
+  },
+  "Transcendental Étude No. 10 in F minor, S. 139": {
+    "id": "p140",
+    "tier": "hard",
+    "pages": [
+      "s/p140/1.webp",
+      "s/p140/2.webp",
+      "s/p140/3.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p140.mp3"
+  },
+  "Transcendental Étude No. 11 “Harmonies du soir”, S. 139": {
+    "id": "p141",
+    "tier": "medium",
+    "pages": [
+      "s/p141/1.webp",
+      "s/p141/2.webp",
+      "s/p141/3.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p141.mp3"
+  },
+  "Transcendental Étude No. 1 “Preludio”, S. 139": {
+    "id": "p142",
+    "tier": "hard",
+    "pages": [
+      "s/p142/1.webp",
+      "s/p142/2.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p142.mp3"
+  },
+  "Transcendental Étude No. 2 in A minor, S. 139": {
+    "id": "p143",
+    "tier": "hard",
+    "pages": [
+      "s/p143/1.webp",
+      "s/p143/2.webp",
+      "s/p143/3.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p143.mp3"
+  },
+  "Transcendental Étude No. 6 “Vision”, S. 139": {
+    "id": "p144",
+    "tier": "hard",
+    "pages": [
+      "s/p144/1.webp",
+      "s/p144/2.webp",
+      "s/p144/3.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p144.mp3"
+  },
+  "Transcendental Étude No. 7 “Eroica”, S. 139": {
+    "id": "p145",
+    "tier": "hard",
+    "pages": [
+      "s/p145/1.webp",
+      "s/p145/2.webp",
+      "s/p145/3.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p145.mp3"
   }
 }
