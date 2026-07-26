@@ -56,10 +56,10 @@ jobs:
           git config user.name  "ChinesePrince07"
           git config user.email "chineseprince07@users.noreply.github.com"
           git add api/_pieces.js
-          git commit -m "Sync difficulty tiers from the admin panel
-
-Retiering done in the deployed panel lives in R2, which overrides the
-source. This is that state written back so the repo matches what players
-actually get."
+          # Two -m flags rather than an embedded newline: a multi-line string here has to stay
+          # indented inside the YAML block scalar, and unindented body lines silently break it.
+          git commit \
+            -m "Sync difficulty tiers from the admin panel" \
+            -m "Retiering done in the deployed panel lives in R2, which overrides the source. This is that state written back so the repo matches what players actually get."
           git push
           echo "pushed updated tiers"
