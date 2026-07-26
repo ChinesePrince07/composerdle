@@ -42,9 +42,19 @@ jobs:
           [ -n "$ADMIN_KEY" ] || { echo "::error::ADMIN_KEY secret is not set"; exit 1; }
           node tools/sync-tiers.js
 
-      # test.js is the guard that the rewrite did not corrupt the pool.
+      # Guard against a corrupt rewrite. Deliberately not test.js: that pulls in _engine.js and
+      # the AWS SDK, which would mean installing the whole dependency tree to check one edited
+      # file. _pieces.js has no dependencies, and an empty tier is the failure that matters.
       - name: Verify the pool still loads
-        run: node test.js
+        run: |
+          node -e "
+            const { PIECES } = require('./api/_pieces.js');
+            const n = t => PIECES[t].length;
+            const total = n('easy') + n('medium') + n('hard');
+            console.log('easy ' + n('easy') + ' · medium ' + n('medium') + ' · hard ' + n('hard') + ' · total ' + total);
+            for (const t of ['easy','medium','hard']) if (!n(t)) { console.error('::error::tier ' + t + ' is empty'); process.exit(1); }
+            if (total < 100) { console.error('::error::only ' + total + ' pieces — refusing a suspicious rewrite'); process.exit(1); }
+          "
 
       - name: Commit if anything changed
         run: |
