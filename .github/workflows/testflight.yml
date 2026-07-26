@@ -157,8 +157,11 @@ jobs:
           # which on a headless runner just hangs until the job times out.
           security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$KCPW" "$KC" >/dev/null
           security list-keychains -d user -s "$KC" $(security list-keychains -d user | tr -d '"')
-          echo "identities available to codesign:"
-          security find-identity -v -p codesigning "$KC" | sed -n 's/.*"\(.*\)"/  \1/p'
+          # Only the certificate TYPE. A signing identity embeds the account holder's legal
+          # name, and Actions logs on a public repo are world-readable.
+          echo "codesigning identities imported: $(security find-identity -v -p codesigning "$KC" | grep -c 'valid identities\|Apple ')"
+          security find-identity -v -p codesigning "$KC" \
+            | grep -oE 'Apple (Development|Distribution)' | sort -u | sed 's/^/  /'
 
       - name: Generate Xcode project
         working-directory: ios
