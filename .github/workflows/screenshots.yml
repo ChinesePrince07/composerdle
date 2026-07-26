@@ -84,7 +84,37 @@ jobs:
               xcrun xcresulttool get --legacy --format json \
                 --path "$RUNNER_TEMP/screens.xcresult" > "$RUNNER_TEMP/root.json" || true
             }
-          find "$OUT" -type f | head -40
+          # The export names files by UUID. A manifest maps each one to the attachment name the
+          # test set ("01-by-facts"), so rename them — otherwise picking the right image for
+          # the store listing means opening all of them.
+          if [ -f "$OUT/manifest.json" ]; then
+            python3 - "$OUT" <<'PY'
+          import json, os, sys
+          out = sys.argv[1]
+          try:
+              manifest = json.load(open(os.path.join(out, "manifest.json")))
+          except Exception as e:
+              print("manifest unreadable:", e); raise SystemExit(0)
+          entries = manifest if isinstance(manifest, list) else [manifest]
+          for test in entries:
+              for att in (test.get("attachments") or []):
+                  src = att.get("exportedFileName")
+                  nice = att.get("suggestedHumanReadableName") or att.get("name")
+                  if not src or not nice:
+                      continue
+                  s = os.path.join(out, src)
+                  if not os.path.exists(s):
+                      continue
+                  base = os.path.splitext(nice)[0]
+                  ext = os.path.splitext(src)[1] or ".png"
+                  d = os.path.join(out, base + ext)
+                  if s != d:
+                      os.replace(s, d)
+                      print(f"{src} -> {base}{ext}")
+          PY
+          fi
+          rm -f "$OUT/manifest.json"
+          find "$OUT" -type f | sort | head -40
           COUNT="$(find "$OUT" -type f \( -name '*.png' -o -name '*.jpeg' -o -name '*.jpg' \) | wc -l | tr -d ' ')"
           echo "captured $COUNT image(s)"
           [ "$COUNT" -gt 0 ] || { echo "::error::no screenshots captured"; exit 1; }

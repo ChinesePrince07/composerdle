@@ -30,6 +30,7 @@ on:
     branches: [main]
     paths:
       - 'ios/**'
+      - '!ios/UITests/**'          # screenshot tooling ships nothing — no need to upload a build
       - '.github/workflows/testflight.yml'
 
 concurrency:
