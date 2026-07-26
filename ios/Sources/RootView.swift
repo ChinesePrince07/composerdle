@@ -36,13 +36,14 @@ struct RootView: View {
         }
     }
 
-    // Height per sheet, by how much each one actually has to say. Welcome carries the most —
-    // title, four rules, a paragraph, the name field and two actions — so a fractional detent
-    // clipped it on first launch, which is the worst possible first impression. The result
-    // sheet is not scrollable, so it also needs room for the composer, piece and credit lines.
+    // Height per sheet. Welcome and how-to both open at half height and drag up from there;
+    // the earlier 0.4 was too short and clipped welcome's rules on first launch. Both scroll,
+    // so half height shows the opening without swallowing the screen. The result sheet gets
+    // more because it is the one sheet with no scroll view and must fit the composer, piece
+    // and credit lines outright.
     private func detents(for sheet: GameStore.Sheet) -> Set<PresentationDetent> {
         switch sheet {
-        case .welcome: return [.large]
+        case .welcome: return [.fraction(0.5), .large]
         case .howto:   return [.fraction(0.5), .large]
         case .result:  return [.fraction(0.6), .large]
         case .name:    return [.fraction(0.4), .large]
