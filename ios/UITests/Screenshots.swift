@@ -36,6 +36,20 @@ final class Screenshots: XCTestCase {
         return true
     }
 
+    /// By Ear puts its controls below the score, so the useful buttons start off-screen and
+    /// isHittable is false until scrolled to. Swipe until the element comes into reach.
+    @discardableResult
+    private func scrollTo(_ el: XCUIElement, maxSwipes: Int = 6) -> Bool {
+        if el.exists && el.isHittable { return true }
+        let scroll = app.scrollViews.firstMatch
+        for _ in 0..<maxSwipes {
+            if el.exists && el.isHittable { return true }
+            if scroll.exists { scroll.swipeUp() } else { app.swipeUp() }
+            sleep(1)
+        }
+        return el.exists && el.isHittable
+    }
+
     // First launch shows the stage-name sheet. Skip it — screenshots should show the game, and
     // an empty name field reads like an onboarding bug on a store page.
     private func dismissWelcomeIfPresent() {
@@ -83,31 +97,34 @@ final class Screenshots: XCTestCase {
         _ = tapIfPossible(clue, settle: 2)
         snap("01-by-facts")
 
-        // 2 — spend the remaining tries to reach the reveal. Each clue costs a try, so the round
-        // ends on its own; this also leaves Profile with a played game to display.
-        for _ in 0..<6 {
-            if revealVisible { break }
-            if !tapIfPossible(clue, settle: 2) { break }
-        }
-        if revealVisible {
-            sleep(1)
-            snap("02-reveal")
-            // Dismiss so the tab bar is reachable again.
-            if !tapIfPossible(button(containing: "Next"), settle: 2) {
-                app.swipeDown()
-                sleep(1)
-            }
-        }
-
-        // 3 — By Ear: a recording plus the engraved score with the composer inked out. The score
+        // 2 — By Ear: a recording plus the engraved score with the composer inked out. The score
         // is a remote image, so this needs the longest settle.
         openTab("By Ear", index: 1)
         sleep(6)
-        snap("03-by-ear")
+        snap("02-by-ear")
 
-        // 4 — a hint revealed, showing the clue mechanic
-        if tapIfPossible(button(containing: "Hint"), settle: 3) {
-            snap("04-by-ear-hint")
+        // 3 — a hint revealed, showing the clue mechanic. The hint button sits below the score,
+        // so it has to be scrolled to before it is tappable.
+        let hint = button(containing: "Hint")
+        scrollTo(hint)
+        if tapIfPossible(hint, settle: 3) {
+            snap("03-by-ear-hint")
+        }
+
+        // 4 — the reveal. "Give up" ends the round deterministically, which exhausting clues did
+        // not: the clue button stops responding once the tries are spent, so the earlier loop
+        // never reached the end of a round. Giving up on By Ear also produces the richer reveal —
+        // composer, piece, performer and licence — and leaves Profile with a played game.
+        let giveUp = button(containing: "Give up")
+        scrollTo(giveUp)
+        if tapIfPossible(giveUp, settle: 4) {
+            if revealVisible {
+                snap("04-reveal")
+                if !tapIfPossible(button(containing: "Next"), settle: 2) {
+                    app.swipeDown()
+                    sleep(1)
+                }
+            }
         }
 
         // 5 — leaderboard

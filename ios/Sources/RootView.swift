@@ -29,10 +29,23 @@ struct RootView: View {
         .preferredColorScheme(.light)
         .sheet(item: $store.sheet) { sheet in
             SheetHost(store: store, sheet: sheet)
-                .presentationDetents(sheet == .howto ? [.fraction(0.5), .large] : [.fraction(0.4), .large])
+                .presentationDetents(detents(for: sheet))
                 .presentationDragIndicator(.visible)
                 .presentationCornerRadius(22)
                 .presentationBackground(CD.paperHi)
+        }
+    }
+
+    // Height per sheet, by how much each one actually has to say. Welcome carries the most —
+    // title, four rules, a paragraph, the name field and two actions — so a fractional detent
+    // clipped it on first launch, which is the worst possible first impression. The result
+    // sheet is not scrollable, so it also needs room for the composer, piece and credit lines.
+    private func detents(for sheet: GameStore.Sheet) -> Set<PresentationDetent> {
+        switch sheet {
+        case .welcome: return [.large]
+        case .howto:   return [.fraction(0.5), .large]
+        case .result:  return [.fraction(0.6), .large]
+        case .name:    return [.fraction(0.4), .large]
         }
     }
 
