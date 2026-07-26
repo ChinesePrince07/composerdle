@@ -9,7 +9,11 @@ final class GameStore: ObservableObject {
     enum Sheet: Int, Identifiable { case welcome, name, howto, result; var id: Int { rawValue } }
 
     // navigation / prefs
-    @Published var tab: Tab = .facts
+    // Leaving By Ear pauses the recording. Nothing elsewhere in the app explains where music
+    // would be coming from, so a clip still playing over the leaderboard reads as a stuck app.
+    @Published var tab: Tab = .facts {
+        didSet { if tab != .ear { audio.pause() } }
+    }
     @Published var tier = "medium"
     @Published var sheet: Sheet?
     @Published var boardScope = "career"

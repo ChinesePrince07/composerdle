@@ -43,6 +43,14 @@ final class AudioPlayer: ObservableObject {
         else { try? AVAudioSession.sharedInstance().setActive(true); p.play(); playing = true }
     }
 
+    // Halt playback but keep the loaded clip and its position — used when the player leaves the
+    // By Ear tab, so coming back resumes instead of restarting the piece.
+    func pause() {
+        guard playing else { return }
+        player?.pause()
+        playing = false
+    }
+
     func stop() {
         ticker?.cancel(); ticker = nil
         player?.pause(); player = nil
