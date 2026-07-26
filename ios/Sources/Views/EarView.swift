@@ -220,6 +220,10 @@ private struct ScoreCard: View {
                     .background(CD.ink).clipShape(Circle())
             }
             .buttonStyle(.plain)
+            // An icon-only control announces nothing to VoiceOver, and a UI test cannot find it
+            // by label either — naming it fixes both.
+            .accessibilityIdentifier("transport")
+            .accessibilityLabel(audio.playing ? "Pause recording" : "Play recording")
 
             Text(fmt(audio.time))
                 .font(CD.body(11)).monospacedDigit().foregroundStyle(CD.inkSoft)
