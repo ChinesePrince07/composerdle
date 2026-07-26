@@ -883,16 +883,6 @@ const MEDIUM = [
     pages: local('chaminade2', 3),
   },
   {
-    composer: 'Fanny Hensel',
-    title: 'Piano Trio in D minor, Op. 11 — I. Allegro molto vivace',
-    audio: 'https://s9.imslp.org/files/imglnks/usimg/2/20/IMSLP256030-PMLP70387-FannyMendelssohn_PianoTrio_Op11.mp3',
-    performer: 'Claremont Trio — live recording, Isabella Stewart Gardner Museum, Boston (hosted on IMSLP)',
-    license: 'Creative Commons Attribution-NonCommercial-NoDerivatives 3.0 (CC BY-NC-ND 3.0)',
-    scoreNote: 'Berlin: Bote & Bock/Breitkopf & Härtel, 1850 first edition, photographically reprinted 198',
-    crop: 0.03,
-    pages: local('hensel1', 3),
-  },
-  {
     composer: 'Moritz Moszkowski',
     title: 'Spanish Dance No. 1 in C major, Op. 12 No. 1',
     audio: 'https://archive.org/download/78_spanish-dance_the-band-of-hm-royal-air-force-moszkowski-flight-lieut-j-amers_gbia7001973a/SPANISH%20DANCE%20-%20THE%20BAND%20OF%20H.M.%20ROYAL%20AIR%20FORCE.mp3',
@@ -1779,7 +1769,6 @@ const META = {
   'Trois Morceaux pour Piano — III. Cortège': { year: 1914, genre: 'solo piano (impressionist)', genreWords: ['piano','cortege'], keys: ['cortege','troismorceaux'] },
   'Callirhoë, Op. 37 — III. Pas des Écharpes (Scarf Dance)': { year: 1888, genre: 'romantic — character piece / scène de ballet (piano)', genreWords: ['ballet','dance'], keys: ['scarfdance','pasdesecharpes','callirhoe'] },
   'Scherzo No. 2 in C minor, Op. 14': { year: 1845, genre: 'piano solo', genreWords: ['scherzo','piano'], keys: ['scherzo2','op14'] },
-  'Piano Trio in D minor, Op. 11 — I. Allegro molto vivace': { year: 1847, genre: 'chamber (piano trio)', genreWords: ['trio','chamber'], keys: ['pianotrio','op11'] },
   'Spanish Dance No. 1 in C major, Op. 12 No. 1': { year: 1876, genre: 'piano dance / salon piece', genreWords: ['dance','spanish'], keys: ['spanishdance','op12'] },
 };
 for (const pool of [EASY, MEDIUM, HARD]) for (const p of pool) Object.assign(p, META[p.title]);
