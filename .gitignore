@@ -19,3 +19,10 @@ prev/
 # Codex delegation / instruction briefs — internal only, must never be pushed
 codex-*.md
 composerdle-add-pieces.md
+
+# App Store screenshots — regenerate with Actions → Screenshots
+screenshots/
+
+# Local tool output — not part of the app
+.claude/
+.playwright-mcp/
