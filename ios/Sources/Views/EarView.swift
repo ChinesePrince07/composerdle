@@ -51,6 +51,7 @@ struct EarView: View {
             }
             .padding(.horizontal, 16).padding(.top, 10).padding(.bottom, 14)
         }
+        .scrollDismissesKeyboard(.interactively)   // drag down to put the keyboard away
     }
 
     // MARK: guess form (not done)
@@ -69,7 +70,7 @@ struct EarView: View {
             CDField(placeholder: "Full name or surname — e.g. Dvořák",
                     text: $store.earGuessC,
                     disabled: g.state.comp,
-                    onSubmit: store.guessEar)
+                    onSubmit: { hideKeyboard(); store.guessEar() })
 
             // Uppercase baked into the label literal so the gold paren keeps its case.
             (Text("THE PIECE ").font(CD.body(12, .semibold)).tracking(2.5).foregroundStyle(CD.ink)
@@ -79,9 +80,9 @@ struct EarView: View {
             CDField(placeholder: "e.g. Symphony No. 5",
                     text: $store.earGuessP,
                     disabled: g.state.pieceFound,
-                    onSubmit: store.guessEar)
+                    onSubmit: { hideKeyboard(); store.guessEar() })
 
-            PrimaryButton(title: "Submit guess ♪", action: store.guessEar)
+            PrimaryButton(title: "Submit guess ♪") { hideKeyboard(); store.guessEar() }
 
             if !store.earMsg.isEmpty {
                 Text(store.earMsg)

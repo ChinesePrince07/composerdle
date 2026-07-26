@@ -50,6 +50,7 @@ struct FactsView: View {
             .padding(.top, 10)
             .padding(.bottom, 12)
         }
+        .scrollDismissesKeyboard(.interactively)   // drag down to put the keyboard away
     }
 
     private func clueCard(index: Int, text: String) -> some View {
@@ -87,8 +88,8 @@ struct FactsView: View {
                 HStack(spacing: 8) {
                     CDField(placeholder: "Full name or surname…",
                             text: $store.factsGuess,
-                            onSubmit: store.guessFacts)
-                    PrimaryButton(title: "Guess", action: store.guessFacts)
+                            onSubmit: { hideKeyboard(); store.guessFacts() })
+                    PrimaryButton(title: "Guess") { hideKeyboard(); store.guessFacts() }
                         .frame(width: 92)
                 }
                 if !store.factsMsg.isEmpty {

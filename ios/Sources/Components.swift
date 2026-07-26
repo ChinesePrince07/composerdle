@@ -97,6 +97,14 @@ struct OutlineButton: View {
 }
 
 // Parchment text field matching the design inputs.
+// Put the keyboard away. Nothing in the app resigned focus, so after typing a guess the
+// keyboard sat over the tab bar with no way to dismiss it — tapping outside a SwiftUI
+// TextField does not do it on its own.
+func hideKeyboard() {
+    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder),
+                                    to: nil, from: nil, for: nil)
+}
+
 struct CDField: View {
     let placeholder: String
     @Binding var text: String
