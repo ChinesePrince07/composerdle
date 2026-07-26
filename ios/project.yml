@@ -45,3 +45,35 @@ targets:
         CURRENT_PROJECT_VERSION: "1"
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+
+  # Drives the app in the simulator to capture App Store screenshots
+  # (see .github/workflows/screenshots.yml). Never linked into the shipping app.
+  ComposerdleUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: UITests
+    dependencies:
+      - target: Composerdle
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: org.andypandy.composerdle.uitests
+        TEST_TARGET_NAME: Composerdle
+        CODE_SIGNING_ALLOWED: NO
+
+# Declared explicitly so the UI tests attach to the same scheme the build workflows
+# already pass to -scheme. Archiving still builds only the app target.
+schemes:
+  Composerdle:
+    build:
+      targets:
+        Composerdle: all
+        ComposerdleUITests: [test]
+    test:
+      config: Debug
+      targets:
+        - ComposerdleUITests
+    run:
+      config: Debug
+    archive:
+      config: Release

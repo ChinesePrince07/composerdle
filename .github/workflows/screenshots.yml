@@ -1,0 +1,117 @@
+name: Screenshots
+
+# Capture App Store screenshots by driving the real app in a 6.9" simulator, then export the
+# PNGs as a downloadable artifact. Manual only — these are needed per release, not per push.
+#
+# 6.9" is the one iPhone size App Store Connect requires: supply 1320x2868 (or 1290x2796) and
+# Apple scales it down for every smaller device. Composerdle is iPhone-only
+# (TARGETED_DEVICE_FAMILY 1), so no iPad set is needed.
+#
+# No secrets and no signing: simulator builds are unsigned.
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: screenshots-composerdle
+  cancel-in-progress: true
+
+jobs:
+  capture:
+    runs-on: macos-26
+    timeout-minutes: 40
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select release Xcode 26
+        run: |
+          set -euo pipefail
+          XC="$(ls -d /Applications/Xcode_26*.app 2>/dev/null | grep -iv beta | sort -V | tail -1 || true)"
+          [ -n "$XC" ] || XC="$(ls -d /Applications/Xcode*.app | grep -iv beta | sort -V | tail -1)"
+          sudo xcode-select -s "$XC"
+          xcodebuild -version
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Generate Xcode project
+        working-directory: ios
+        run: xcodegen generate
+
+      # Prefer the largest 6.9" device present. Names shift between Xcode releases, so pick the
+      # first available rather than hardcoding one and failing when Apple renames it.
+      - name: Pick a 6.9-inch simulator
+        id: sim
+        run: |
+          set -euo pipefail
+          AVAILABLE="$(xcrun simctl list devices available)"
+          for NAME in "iPhone 17 Pro Max" "iPhone 16 Pro Max" "iPhone 15 Pro Max"; do
+            if echo "$AVAILABLE" | grep -q "$NAME ("; then
+              echo "device=$NAME" >> "$GITHUB_OUTPUT"
+              echo "chose $NAME"
+              exit 0
+            fi
+          done
+          echo "::error::no 6.9-inch simulator available on this runner"
+          exit 1
+
+      - name: Run screenshot UI test
+        working-directory: ios
+        run: |
+          set -euo pipefail
+          xcodebuild test \
+            -project Composerdle.xcodeproj \
+            -scheme Composerdle \
+            -destination "platform=iOS Simulator,name=${{ steps.sim.outputs.device }}" \
+            -resultBundlePath "$RUNNER_TEMP/screens.xcresult" \
+            -only-testing:ComposerdleUITests/Screenshots/testCaptureAppStoreScreenshots \
+            CODE_SIGNING_ALLOWED=NO \
+            | grep -aE "error:|Test Case|passed|failed|\*\* TEST" || true
+          test -d "$RUNNER_TEMP/screens.xcresult" || { echo "::error::no result bundle produced"; exit 1; }
+
+      # Attachments live inside the .xcresult. Xcode 26 exports them directly; the legacy dance
+      # is kept as a fallback so a tooling change degrades instead of breaking.
+      - name: Export screenshots from the result bundle
+        run: |
+          set -euo pipefail
+          OUT="$RUNNER_TEMP/screenshots"
+          mkdir -p "$OUT"
+          xcrun xcresulttool export attachments \
+            --path "$RUNNER_TEMP/screens.xcresult" \
+            --output-path "$OUT" 2>/dev/null || {
+              echo "export attachments unavailable — falling back to legacy extraction"
+              xcrun xcresulttool get --legacy --format json \
+                --path "$RUNNER_TEMP/screens.xcresult" > "$RUNNER_TEMP/root.json" || true
+            }
+          find "$OUT" -type f | head -40
+          COUNT="$(find "$OUT" -type f \( -name '*.png' -o -name '*.jpeg' -o -name '*.jpg' \) | wc -l | tr -d ' ')"
+          echo "captured $COUNT image(s)"
+          [ "$COUNT" -gt 0 ] || { echo "::error::no screenshots captured"; exit 1; }
+
+      # Report pixel sizes so a wrong simulator is obvious here rather than at upload time,
+      # where App Store Connect rejects the whole set.
+      - name: Verify dimensions
+        run: |
+          set -euo pipefail
+          cd "$RUNNER_TEMP/screenshots"
+          find . -type f \( -name '*.png' -o -name '*.jpeg' -o -name '*.jpg' \) | while read -r f; do
+            echo "$f -> $(sips -g pixelWidth -g pixelHeight "$f" | awk '/pixel/{printf "%s ", $2}')"
+          done
+          echo ""
+          echo "App Store 6.9-inch accepts 1320x2868, 1290x2796 or 1260x2736 (portrait)."
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: app-store-screenshots
+          path: ${{ runner.temp }}/screenshots
+          retention-days: 30
+
+      - name: Result bundle on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots-xcresult
+          path: ${{ runner.temp }}/screens.xcresult
+          if-no-files-found: ignore
+          retention-days: 5
