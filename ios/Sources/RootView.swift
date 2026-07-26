@@ -36,14 +36,14 @@ struct RootView: View {
         }
     }
 
-    // Height per sheet. Welcome and how-to both open at half height and drag up from there;
-    // the earlier 0.4 was too short and clipped welcome's rules on first launch. Both scroll,
-    // so half height shows the opening without swallowing the screen. The result sheet gets
-    // more because it is the one sheet with no scroll view and must fit the composer, piece
-    // and credit lines outright.
+    // Height per sheet, tuned on device. Welcome sits taller than how-to because it carries
+    // the rules AND the name field and its two actions — at half height the actionable part
+    // fell below the fold on first launch. Both still drag up to full and both scroll. The
+    // result sheet gets more again: it is the one sheet with no scroll view, so the composer,
+    // piece and credit lines have to fit outright.
     private func detents(for sheet: GameStore.Sheet) -> Set<PresentationDetent> {
         switch sheet {
-        case .welcome: return [.fraction(0.5), .large]
+        case .welcome: return [.fraction(0.65), .large]
         case .howto:   return [.fraction(0.5), .large]
         case .result:  return [.fraction(0.6), .large]
         case .name:    return [.fraction(0.4), .large]
