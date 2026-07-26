@@ -78,6 +78,37 @@ jobs:
           chmod 600 "$RUNNER_TEMP/keys/AuthKey_${ASC_KEY_ID}.p8"
           cp "$RUNNER_TEMP/keys/AuthKey_${ASC_KEY_ID}.p8" ~/.appstoreconnect/private_keys/
 
+      # Without a certificate of our own, -allowProvisioningUpdates mints a NEW distribution
+      # certificate every run: its private key is created in the runner's keychain, which is
+      # destroyed with the job, so the next run cannot find a key and asks Apple for another.
+      # Apple caps distribution certificates per account, and we hit that cap after five builds.
+      #
+      # Importing one long-lived certificate fixes it for good — cloud signing then only has to
+      # fetch the provisioning profile, which is unlimited. Skipped when the secrets are absent,
+      # so the previous path still works until they are added.
+      - name: Import distribution certificate
+        if: ${{ secrets.IOS_DIST_P12 != '' }}
+        env:
+          P12: ${{ secrets.IOS_DIST_P12 }}
+          P12_PW: ${{ secrets.IOS_DIST_P12_PASSWORD }}
+        run: |
+          set -euo pipefail
+          KC="$RUNNER_TEMP/signing.keychain-db"
+          KCPW="$(uuidgen)"
+          security create-keychain -p "$KCPW" "$KC"
+          security set-keychain-settings -lut 3600 "$KC"
+          security unlock-keychain -p "$KCPW" "$KC"
+          printf '%s' "$P12" | base64 --decode > "$RUNNER_TEMP/dist.p12"
+          security import "$RUNNER_TEMP/dist.p12" -k "$KC" -P "$P12_PW" \
+            -T /usr/bin/codesign -T /usr/bin/security
+          rm -f "$RUNNER_TEMP/dist.p12"
+          # Without the partition list, codesign cannot use the imported key and prompts —
+          # which on a headless runner just hangs until the job times out.
+          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$KCPW" "$KC" >/dev/null
+          security list-keychains -d user -s "$KC" $(security list-keychains -d user | tr -d '"')
+          echo "identities available to codesign:"
+          security find-identity -v -p codesigning "$KC" | sed -n 's/.*"\(.*\)"/  \1/p'
+
       - name: Generate Xcode project
         working-directory: ios
         run: xcodegen generate
