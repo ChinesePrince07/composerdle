@@ -11,6 +11,15 @@ name: Screenshots
 
 on:
   workflow_dispatch:
+    inputs:
+      suite:
+        description: "Which UI test class to run"
+        required: true
+        default: Screenshots
+        type: choice
+        options:
+          - Screenshots   # poses the app for App Store images
+          - Smoke         # drives every screen and photographs each step
 
 concurrency:
   group: screenshots-composerdle
@@ -65,7 +74,7 @@ jobs:
             -scheme Composerdle \
             -destination "platform=iOS Simulator,name=${{ steps.sim.outputs.device }}" \
             -resultBundlePath "$RUNNER_TEMP/screens.xcresult" \
-            -only-testing:ComposerdleUITests/Screenshots/testCaptureAppStoreScreenshots \
+            -only-testing:ComposerdleUITests/${{ inputs.suite }} \
             CODE_SIGNING_ALLOWED=NO \
             | grep -aE "error:|Test Case|passed|failed|\*\* TEST" || true
           test -d "$RUNNER_TEMP/screens.xcresult" || { echo "::error::no result bundle produced"; exit 1; }
