@@ -45,6 +45,9 @@ jobs:
       SCHEME: Composerdle
       BUNDLE_ID: org.andypandy.composerdle
       TEAM_ID: R696Q88HS7
+      # The secrets context is not usable in a step-level `if`, but it is in job env — so the
+      # presence check is resolved here and the step tests the resulting flag.
+      HAS_DIST_CERT: ${{ secrets.IOS_DIST_P12 != '' }}
 
     steps:
       - uses: actions/checkout@v4
@@ -87,7 +90,7 @@ jobs:
       # fetch the provisioning profile, which is unlimited. Skipped when the secrets are absent,
       # so the previous path still works until they are added.
       - name: Import distribution certificate
-        if: ${{ secrets.IOS_DIST_P12 != '' }}
+        if: env.HAS_DIST_CERT == 'true'
         env:
           P12: ${{ secrets.IOS_DIST_P12 }}
           P12_PW: ${{ secrets.IOS_DIST_P12_PASSWORD }}
