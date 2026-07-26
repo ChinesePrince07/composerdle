@@ -603,7 +603,7 @@ const MEDIUM = [
     performer: 'John Harrison (violin), Wichita State University Chamber Players',
     license: 'CC BY-SA 3.0',
     scoreNote: '1725 first-edition part book (BnF scan)',
-    crop: 0.18,
+    crop: 0.15,
     pages: local('summer', 2),
   },
   {
@@ -861,8 +861,8 @@ const HARD = [
     audio: 'https://commons.wikimedia.org/wiki/Special:FilePath/Symphony%20No.%201%20in%20C%20-%20II.%20Andante%20cantabile%20con%20moto%20-%20Chamber%20Orchestra%20-%20United%20States%20Marine%20Band.opus',
     performer: 'United States Marine Band chamber orchestra',
     license: 'public domain (US federal)',
-    scoreNote: 'Breitkopf & Härtel orchestral score, 1809',
-    crop: 0,
+    scoreNote: 'Breitkopf & Härtel piano four-hands arrangement, arr. Jul. Schäffer',
+    crop: 0.15,
     pages: pdfPages('b/b4', 'Symphony_No.1%2C_Op.21_%28IA_imslp-no1-op21-beethoven-ludwig-van%29.pdf', 1280, range(2, 5)),
   },
   {
@@ -871,8 +871,8 @@ const HARD = [
     audio: 'https://commons.wikimedia.org/wiki/Special:FilePath/Beethoven%20Symphony%202%20D%20major%20Op%2036%20-%202%20Larghetto%20%28A%20major%29.oga',
     performer: 'Musopen Symphony Orchestra',
     license: 'public domain · Musopen',
-    scoreNote: 'Breitkopf & Härtel orchestral score, 1809',
-    crop: 0,
+    scoreNote: 'Breitkopf & Härtel piano four-hands arrangement, arr. Fr. Mockwitz',
+    crop: 0.15,
     pages: pdfPages('3/39', 'Symphony_No.2%2C_Op.36_%28IA_imslp-no2-op36-beethoven-ludwig-van%29.pdf', 1280, range(2, 5)),
   },
   {
@@ -881,8 +881,8 @@ const HARD = [
     audio: 'https://commons.wikimedia.org/wiki/Special:FilePath/Beethoven%20-%20Symphony%20No.%203%20in%20E%20flat%20major%2C%20Op.%2055%20%27Eroica%27%20-%20III.%20Scherzo.%20Allegro%20vivace%20%28Musopen%20Symphony%29.flac',
     performer: 'Musopen Symphony Orchestra',
     license: 'public domain · Musopen',
-    scoreNote: 'Breitkopf & Härtel orchestral score, 1809',
-    crop: 0,
+    scoreNote: 'Breitkopf & Härtel piano four-hands arrangement, arr. F. L. Schubert',
+    crop: 0.15,
     pages: pdfPages('3/38', 'Symphony_No.3%2C_Op.55_%28IA_imslp-no3-op55-beethoven-ludwig-van%29.pdf', 1280, range(2, 5)),
   },
   {
@@ -891,8 +891,8 @@ const HARD = [
     audio: 'https://commons.wikimedia.org/wiki/Special:FilePath/Ludwig%20van%20Beethoven%20-%20symphony%20no.%204%20in%20b%20flat%20major%2C%20op.%2060%20-%20ii.%20adagio.ogg',
     performer: 'Musopen Symphony Orchestra',
     license: 'public domain · Musopen',
-    scoreNote: 'Breitkopf & Härtel orchestral score, 1809',
-    crop: 0,
+    scoreNote: 'Breitkopf & Härtel piano four-hands arrangement, arr. Fr. Mockwitz',
+    crop: 0.15,
     pages: pdfPages('a/a4', 'Symphony_No.4%2C_Op.60_%28IA_imslp-no4-op60-beethoven-ludwig-van%29.pdf', 1280, range(2, 5)),
   },
   {
@@ -901,8 +901,8 @@ const HARD = [
     audio: 'https://commons.wikimedia.org/wiki/Special:FilePath/Ludwig%20van%20Beethoven%20-%20symphony%20no.%206%20in%20f%20major%20%27pastoral%27%2C%20op.%2068%20-%20v.%20allegretto.ogg',
     performer: 'Musopen Symphony Orchestra',
     license: 'public domain · Musopen',
-    scoreNote: 'Breitkopf & Härtel orchestral score, 1810',
-    crop: 0,
+    scoreNote: 'Breitkopf & Härtel piano four-hands arrangement, arr. S. Bagge',
+    crop: 0.15,
     pages: pdfPages('0/02', 'Symphony_No.6%2C_Op.68_%28IA_imslp-no6-op68-beethoven-ludwig-van%29.pdf', 1280, range(2, 5)),
   },
   {
@@ -911,8 +911,8 @@ const HARD = [
     audio: 'https://commons.wikimedia.org/wiki/Special:FilePath/Ludwig%20van%20Beethoven%20-%20symphony%20no.%208%20in%20f%20major%2C%20op.%2093%20-%20ii.%20allegretto%20scherzando.ogg',
     performer: 'Musopen Symphony Orchestra',
     license: 'public domain · Musopen',
-    scoreNote: 'Breitkopf & Härtel orchestral score, 1817',
-    crop: 0,
+    scoreNote: 'Breitkopf & Härtel piano four-hands arrangement, arr. Aug. Horn',
+    crop: 0.15,
     pages: pdfPages('0/00', 'Symphony_No.8%2C_Op.93_%28IA_imslp-no8-op93-beethoven-ludwig-van%29.pdf', 1280, range(2, 5)),
   },
   {
@@ -1498,9 +1498,14 @@ const HARD = [
 // TIER_OVERRIDES_START — machine-edited by tools/admin.js, keep the markers
 const TIER_OVERRIDES = {
   'Anvil Chorus (Il trovatore)': 'medium',
+  'Barcarolle (The Tales of Hoffmann)': 'hard',
   'Caprice No. 24 in A minor': 'medium',
+  'Clarinet Concerto in A major, K. 622 — II. Adagio': 'hard',
   'Danse macabre, Op. 40': 'medium',
+  'Finlandia': 'hard',
+  'Lacrimosa (Requiem, K. 626)': 'easy',
   'Pavane, Op. 50': 'medium',
+  'Pomp and Circumstance March No. 1': 'hard',
   'Prelude in C-sharp minor, Op. 3 No. 2': 'medium',
   'Slavonic Dance in E minor, Op. 72 No. 2': 'medium',
   'Symphony No. 1 in C major, Op. 21 — II. Andante cantabile con moto': 'medium',
@@ -1509,10 +1514,13 @@ const TIER_OVERRIDES = {
   'Symphony No. 4 in B-flat major, Op. 60 — II. Adagio': 'medium',
   'Symphony No. 5 — IV. Adagietto': 'medium',
   'Symphony No. 6 “Pastoral” — V. Allegretto': 'medium',
+  'Symphony No. 7 — II. Allegretto': 'easy',
   'Symphony No. 8 in F major, Op. 93 — II. Allegretto scherzando': 'medium',
   'Symphony No. 8 “Unfinished” — I. Allegro moderato': 'medium',
   'Sì, mi chiamano Mimì (La bohème)': 'medium',
+  'The Four Seasons — “Summer”, RV 315, III. Presto': 'easy',
   'The Four Seasons — “Winter”, RV 297, I.': 'medium',
+  'The Moldau': 'hard',
 };
 // TIER_OVERRIDES_END
 const PIECES = { easy: [], medium: [], hard: [] };
