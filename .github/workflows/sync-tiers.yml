@@ -1,0 +1,65 @@
+name: Sync tiers
+
+# Difficulty changes made in the deployed admin panel are written to R2, and the game treats
+# that object as authoritative — so retiering never reaches git on its own. If the object were
+# ever lost, every tier would silently revert to whatever the source last said.
+#
+# This pulls the live tiers back into api/_pieces.js once a day and commits when they differ, so
+# the repo always reflects what players are actually getting.
+#
+# Needs one secret: ADMIN_KEY (the same key the admin panel uses). No storage credentials — the
+# script reads through the key-gated admin endpoint rather than R2 directly.
+
+on:
+  schedule:
+    - cron: '17 4 * * *'      # daily, 04:17 UTC — off the hour to dodge scheduler congestion
+  workflow_dispatch:
+
+concurrency:
+  group: sync-tiers
+  cancel-in-progress: false
+
+permissions:
+  contents: write             # needed to push the commit
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Pull live tiers into the source
+        env:
+          ADMIN_KEY: ${{ secrets.ADMIN_KEY }}
+        run: |
+          set -euo pipefail
+          [ -n "$ADMIN_KEY" ] || { echo "::error::ADMIN_KEY secret is not set"; exit 1; }
+          node tools/sync-tiers.js
+
+      # test.js is the guard that the rewrite did not corrupt the pool.
+      - name: Verify the pool still loads
+        run: node test.js
+
+      - name: Commit if anything changed
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- api/_pieces.js; then
+            echo "tiers already in sync — nothing to commit"
+            exit 0
+          fi
+          git config user.name  "ChinesePrince07"
+          git config user.email "chineseprince07@users.noreply.github.com"
+          git add api/_pieces.js
+          git commit -m "Sync difficulty tiers from the admin panel
+
+Retiering done in the deployed panel lives in R2, which overrides the
+source. This is that state written back so the repo matches what players
+actually get."
+          git push
+          echo "pushed updated tiers"
