@@ -144,7 +144,7 @@
   },
   "Hungarian Dance No. 5": {
     "id": "p11",
-    "tier": "medium",
+    "tier": "easy",
     "pages": [
       "s/p11/1.webp",
       "s/p11/2.webp",
@@ -207,7 +207,7 @@
   },
   "La donna è mobile (Rigoletto)": {
     "id": "p16",
-    "tier": "medium",
+    "tier": "easy",
     "pages": [
       "s/p16/1.webp"
     ],
@@ -215,7 +215,7 @@
   },
   "Wedding March (A Midsummer Night’s Dream)": {
     "id": "p17",
-    "tier": "medium",
+    "tier": "easy",
     "pages": [
       "s/p17/1.webp",
       "s/p17/2.webp",
@@ -232,7 +232,7 @@
   },
   "The Swan (Carnival of the Animals)": {
     "id": "p18",
-    "tier": "medium",
+    "tier": "easy",
     "pages": [
       "s/p18/1.webp"
     ],
@@ -248,7 +248,7 @@
   },
   "Caprice No. 24 in A minor": {
     "id": "p20",
-    "tier": "medium",
+    "tier": "easy",
     "pages": [
       "s/p20/1.webp",
       "s/p20/2.webp",
@@ -373,7 +373,7 @@
   },
   "Nocturne in E-flat major, Op. 9 No. 2": {
     "id": "p29",
-    "tier": "medium",
+    "tier": "easy",
     "pages": [
       "s/p29/1.webp",
       "s/p29/2.webp"
@@ -382,7 +382,7 @@
   },
   "Cello Suite No. 1 in G major — Prélude": {
     "id": "p30",
-    "tier": "medium",
+    "tier": "easy",
     "pages": [
       "s/p30/1.webp"
     ],
@@ -403,7 +403,7 @@
   },
   "Piano Concerto No. 1 in B-flat minor — I.": {
     "id": "p32",
-    "tier": "medium",
+    "tier": "easy",
     "pages": [
       "s/p32/1.webp",
       "s/p32/2.webp",
@@ -420,7 +420,7 @@
   },
   "Rhapsody in Blue": {
     "id": "p33",
-    "tier": "medium",
+    "tier": "easy",
     "pages": [
       "s/p33/1.webp",
       "s/p33/2.webp",
@@ -519,7 +519,7 @@
   },
   "Symphony No. 9 — Finale (Ode to Joy)": {
     "id": "p40",
-    "tier": "medium",
+    "tier": "easy",
     "pages": [
       "s/p40/1.webp",
       "s/p40/2.webp",
@@ -570,7 +570,7 @@
   },
   "The Marriage of Figaro — Overture": {
     "id": "p43",
-    "tier": "medium",
+    "tier": "easy",
     "pages": [
       "s/p43/1.webp",
       "s/p43/2.webp",
@@ -600,7 +600,7 @@
   },
   "Air on the G String (Orchestral Suite No. 3)": {
     "id": "p45",
-    "tier": "medium",
+    "tier": "easy",
     "pages": [
       "s/p45/1.webp",
       "s/p45/2.webp"
@@ -643,7 +643,7 @@
   },
   "The Four Seasons — “Winter”, RV 297, I.": {
     "id": "p48",
-    "tier": "medium",
+    "tier": "easy",
     "pages": [
       "s/p48/1.webp",
       "s/p48/2.webp",
@@ -719,7 +719,7 @@
   },
   "Pomp and Circumstance March No. 1": {
     "id": "p53",
-    "tier": "medium",
+    "tier": "hard",
     "pages": [
       "s/p53/1.webp",
       "s/p53/2.webp",
@@ -736,7 +736,7 @@
   },
   "The Moldau": {
     "id": "p54",
-    "tier": "medium",
+    "tier": "hard",
     "pages": [
       "s/p54/1.webp",
       "s/p54/2.webp",
@@ -812,7 +812,7 @@
   },
   "Finlandia": {
     "id": "p60",
-    "tier": "medium",
+    "tier": "hard",
     "pages": [
       "s/p60/1.webp",
       "s/p60/2.webp",
@@ -880,7 +880,7 @@
   },
   "Fantaisie-Impromptu, Op. 66": {
     "id": "p64",
-    "tier": "medium",
+    "tier": "easy",
     "pages": [
       "s/p64/1.webp",
       "s/p64/2.webp",
@@ -896,7 +896,7 @@
   },
   "Lacrimosa (Requiem, K. 626)": {
     "id": "p65",
-    "tier": "medium",
+    "tier": "easy",
     "pages": [
       "s/p65/1.webp",
       "s/p65/2.webp",
@@ -926,7 +926,7 @@
   },
   "Pavane, Op. 50": {
     "id": "p67",
-    "tier": "medium",
+    "tier": "hard",
     "pages": [
       "s/p67/1.webp",
       "s/p67/2.webp",
@@ -952,7 +952,7 @@
   },
   "Piano Concerto in A minor, Op. 16 — I. Allegro molto moderato": {
     "id": "p71",
-    "tier": "medium",
+    "tier": "easy",
     "pages": [
       "s/p71/1.webp",
       "s/p71/2.webp",
@@ -967,7 +967,7 @@
   },
   "The Four Seasons — “Summer”, RV 315, III. Presto": {
     "id": "p72",
-    "tier": "medium",
+    "tier": "easy",
     "pages": [
       "s/p72/1.webp",
       "s/p72/2.webp"
@@ -976,7 +976,7 @@
   },
   "Pavane pour une infante défunte": {
     "id": "p73",
-    "tier": "hard",
+    "tier": "medium",
     "pages": [
       "s/p73/1.webp",
       "s/p73/2.webp",
@@ -1153,7 +1153,7 @@
   },
   "Barcarolle (The Tales of Hoffmann)": {
     "id": "p86",
-    "tier": "medium",
+    "tier": "hard",
     "pages": [
       "s/p86/1.webp",
       "s/p86/2.webp",
@@ -1202,7 +1202,7 @@
   },
   "Keyboard Sonata in E major, K. 380": {
     "id": "p89",
-    "tier": "medium",
+    "tier": "hard",
     "pages": [
       "s/p89/1.webp",
       "s/p89/2.webp",
@@ -1243,7 +1243,7 @@
   },
   "The Four Seasons — “Autumn”, RV 293, I. Allegro": {
     "id": "p92",
-    "tier": "medium",
+    "tier": "easy",
     "pages": [
       "s/p92/1.webp",
       "s/p92/2.webp"
@@ -1252,7 +1252,7 @@
   },
   "Arrival of the Queen of Sheba (Solomon)": {
     "id": "p93",
-    "tier": "medium",
+    "tier": "easy",
     "pages": [
       "s/p93/1.webp",
       "s/p93/2.webp",
@@ -1307,7 +1307,7 @@
   },
   "Jeux d'eau": {
     "id": "p97",
-    "tier": "hard",
+    "tier": "easy",
     "pages": [
       "s/p97/1.webp",
       "s/p97/2.webp",
@@ -1520,7 +1520,7 @@
   },
   "Ballade No. 1 in G minor, Op. 23": {
     "id": "p110",
-    "tier": "hard",
+    "tier": "easy",
     "pages": [
       "s/p110/1.webp",
       "s/p110/2.webp",
@@ -1570,7 +1570,7 @@
   },
   "Octet in E-flat major, Op. 20 — III. Scherzo": {
     "id": "p113",
-    "tier": "hard",
+    "tier": "medium",
     "pages": [
       "s/p113/1.webp",
       "s/p113/2.webp",
@@ -1587,7 +1587,7 @@
   },
   "Vocalise, Op. 34 No. 14": {
     "id": "p114",
-    "tier": "medium",
+    "tier": "easy",
     "pages": [
       "s/p114/1.webp",
       "s/p114/2.webp",
@@ -1638,7 +1638,7 @@
   },
   "Étude in C minor, Op. 10 No. 12 (Revolutionary)": {
     "id": "p118",
-    "tier": "medium",
+    "tier": "easy",
     "pages": [
       "s/p118/1.webp",
       "s/p118/2.webp"
@@ -1657,7 +1657,7 @@
   },
   "Piano Sonata No. 2 in B-flat minor, Op. 35 — III. Marche funèbre": {
     "id": "p120",
-    "tier": "medium",
+    "tier": "easy",
     "pages": [
       "s/p120/1.webp",
       "s/p120/2.webp"
@@ -1666,7 +1666,7 @@
   },
   "Barcarolle in F-sharp major, Op. 60": {
     "id": "p121",
-    "tier": "hard",
+    "tier": "medium",
     "pages": [
       "s/p121/1.webp",
       "s/p121/2.webp",
@@ -1708,7 +1708,7 @@
   },
   "Symphony No. 3 “Eroica” — III. Scherzo": {
     "id": "p125",
-    "tier": "medium",
+    "tier": "easy",
     "pages": [
       "s/p125/1.webp",
       "s/p125/2.webp",
@@ -1916,5 +1916,85 @@
       "s/p145/3.webp"
     ],
     "audioLocal": "tools/audio-cache/p145.mp3"
+  },
+  "4 Sketches, Op. 15 — No. 3. Dreaming": {
+    "id": "p146",
+    "tier": "medium",
+    "pages": [
+      "s/p146/1.webp",
+      "s/p146/2.webp",
+      "s/p146/3.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p146.mp3"
+  },
+  "Nocturne (for Violin or Flute and Piano)": {
+    "id": "p147",
+    "tier": "medium",
+    "pages": [
+      "s/p147/1.webp",
+      "s/p147/2.webp",
+      "s/p147/3.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p147.mp3"
+  },
+  "Callirhoë, Op. 37 — III. Pas des Écharpes (Scarf Dance)": {
+    "id": "p148",
+    "tier": "medium",
+    "pages": [
+      "s/p148/1.webp",
+      "s/p148/2.webp",
+      "s/p148/3.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p148.mp3"
+  },
+  "Piano Trio in D minor, Op. 11 — I. Allegro molto vivace": {
+    "id": "p149",
+    "tier": "medium",
+    "pages": [
+      "s/p149/1.webp",
+      "s/p149/2.webp",
+      "s/p149/3.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p149.mp3"
+  },
+  "Spanish Dance No. 1 in C major, Op. 12 No. 1": {
+    "id": "p150",
+    "tier": "medium",
+    "pages": [
+      "s/p150/1.webp",
+      "s/p150/2.webp",
+      "s/p150/3.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p150.mp3"
+  },
+  "2 Piano Pieces, Op. 54 — No. 1. Scottish Legend": {
+    "id": "p151",
+    "tier": "hard",
+    "pages": [
+      "s/p151/1.webp",
+      "s/p151/2.webp",
+      "s/p151/3.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p151.mp3"
+  },
+  "Trois Morceaux pour Piano — III. Cortège": {
+    "id": "p152",
+    "tier": "hard",
+    "pages": [
+      "s/p152/1.webp",
+      "s/p152/2.webp",
+      "s/p152/3.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p152.mp3"
+  },
+  "Scherzo No. 2 in C minor, Op. 14": {
+    "id": "p153",
+    "tier": "hard",
+    "pages": [
+      "s/p153/1.webp",
+      "s/p153/2.webp",
+      "s/p153/3.webp"
+    ],
+    "audioLocal": "tools/audio-cache/p153.mp3"
   }
 }
