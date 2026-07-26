@@ -43,6 +43,11 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: org.andypandy.composerdle
         MARKETING_VERSION: "1.0"
         CURRENT_PROJECT_VERSION: "1"
+        # Must be set on the TARGET: XcodeGen defaults an iOS app target to "1,2", and a
+        # target-level value beats the project-level one in settings.base — so the shipped
+        # binary claimed iPad support and App Store Connect demanded 13-inch iPad screenshots
+        # for what is a portrait-only, iPhone-only layout.
+        TARGETED_DEVICE_FAMILY: "1"
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
 
