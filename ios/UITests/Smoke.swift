@@ -51,18 +51,23 @@ final class Smoke: XCTestCase {
         return el.exists && el.isHittable
     }
 
-    /// The software keyboard covers the tab bar. Leaving it up made every later tab switch miss
-    /// silently on the first run, so dismiss it before navigating.
+    /// The software keyboard covers the tab bar, so it has to go before any navigation. Naming
+    /// the return key does not work here — this keyboard's submit key is a blue arrow, not
+    /// "return" — and swipeDown does not dismiss it either. Tapping empty content does.
     private func dismissKeyboard() {
-        guard app.keyboards.element.exists else { return }
-        if app.keyboards.buttons["return"].exists { app.keyboards.buttons["return"].tap() }
-        else if app.keyboards.buttons["Return"].exists { app.keyboards.buttons["Return"].tap() }
-        else { app.swipeDown() }
-        sleep(1)
+        for _ in 0..<3 {
+            guard app.keyboards.element.exists else { return }
+            // empty page area: below the clue cards, above the input row
+            app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.42)).tap()
+            sleep(1)
+        }
+        if app.keyboards.element.exists { app.swipeDown(); sleep(1) }
     }
 
     private func openTab(_ label: String, index: Int) {
         dismissKeyboard()
+        XCTAssertFalse(app.keyboards.element.exists,
+                       "keyboard still covering the tab bar before opening \(label)")
         let byLabel = app.tabBars.buttons[label]
         if byLabel.waitForExistence(timeout: 5) { byLabel.tap() }
         else {
@@ -70,10 +75,9 @@ final class Smoke: XCTestCase {
             if bar.buttons.count > index { bar.buttons.element(boundBy: index).tap() }
         }
         sleep(3)
-        // Loudly, not silently: a smoke run that quietly stays on the wrong tab reports success
-        // while proving nothing, which is exactly what the first attempt did.
-        XCTAssertTrue(app.tabBars.buttons[label].isSelected || app.tabBars.buttons[label].exists,
-                      "failed to reach the \(label) tab")
+        // isSelected, not exists: every tab button always exists, so the previous assertion
+        // passed even while the app never left By Facts — it proved nothing across six screens.
+        XCTAssertTrue(app.tabBars.buttons[label].isSelected, "failed to reach the \(label) tab")
     }
 
     // MARK: - the playthrough
