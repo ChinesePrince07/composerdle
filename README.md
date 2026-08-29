@@ -3,7 +3,9 @@
 </p>
 
 <p align="center">
-  <a href="https://composerdle.andypandy.org"><strong>Play Composerdle</strong></a>
+  <a href="https://apps.apple.com/us/app/composerdle/id6794768172"><strong>Download on the App Store</strong></a>
+  ·
+  <a href="https://composerdle.andypandy.org"><strong>Play in the browser</strong></a>
   ·
   <a href="https://composerdle.andypandy.org/listen.html">Play by ear</a>
   ·
@@ -38,7 +40,7 @@ Correct guesses reveal the composer, work, performer, and score edition:
 - **No answer in the page source.** Game selection, clues, answers, and scoring stay in Vercel serverless functions.
 - **Stateless rounds.** In-progress state travels in an HMAC-signed token instead of a database.
 - **Opaque media assets.** Score pages and audio live on Cloudflare R2 without answer-spoiling filenames.
-- **Native iOS client.** The SwiftUI app uses the same live API and catalogue as the web game.
+- **Native iOS client.** [On the App Store](https://apps.apple.com/us/app/composerdle/id6794768172). The SwiftUI app uses the same live API and catalogue as the web game, so new pieces appear without an app update.
 
 ## Architecture
 
