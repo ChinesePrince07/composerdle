@@ -7,9 +7,9 @@ import SwiftUI
 // concurrency — the observer block is @Sendable and can't capture main-actor state.
 @MainActor
 final class AudioPlayer: ObservableObject {
-    @Published var time: Double = 0
-    @Published var duration: Double = 0
-    @Published var playing = false
+    @Published private(set) var time: Double = 0
+    @Published private(set) var duration: Double = 0
+    @Published private(set) var playing = false
 
     private var player: AVPlayer?
     private var ticker: Task<Void, Never>?
@@ -22,26 +22,10 @@ final class AudioPlayer: ObservableObject {
         guard let u = URL(string: url) else { return }
         try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
         player = AVPlayer(playerItem: AVPlayerItem(url: u))
-        // Auto-play the recording as soon as the piece loads.
-        try? AVAudioSession.sharedInstance().setActive(true)
-        player?.play()
-        playing = true
-        ticker = Task { [weak self] in
-            while !Task.isCancelled {
-                try? await Task.sleep(for: .milliseconds(300))
-                guard let self, let p = self.player else { continue }
-                self.time = p.currentTime().seconds
-                if let d = p.currentItem?.duration.seconds, d.isFinite, d > 0 { self.duration = d }
-                if let d = p.currentItem?.duration.seconds, d.isFinite, self.time >= d { self.playing = false }
-            }
-        }
+        play()   // auto-play the recording as soon as the piece loads
     }
 
-    func toggle() {
-        guard let p = player else { return }
-        if playing { p.pause(); playing = false }
-        else { try? AVAudioSession.sharedInstance().setActive(true); p.play(); playing = true }
-    }
+    func toggle() { playing ? pause() : play() }
 
     // Halt playback but keep the loaded clip and its position — used when the player leaves the
     // By Ear tab, so coming back resumes instead of restarting the piece.
@@ -49,11 +33,38 @@ final class AudioPlayer: ObservableObject {
         guard playing else { return }
         player?.pause()
         playing = false
+        ticker?.cancel(); ticker = nil
     }
 
     func stop() {
         ticker?.cancel(); ticker = nil
         player?.pause(); player = nil
         playing = false; time = 0; duration = 0; urlString = ""
+    }
+
+    private func play() {
+        guard let p = player else { return }
+        if duration > 0, time >= duration - 0.5 { p.seek(to: .zero); time = 0 }   // finished: play again from the top
+        try? AVAudioSession.sharedInstance().setActive(true)
+        p.play()
+        playing = true
+        // Poll only while playing. Every @Published write re-renders the score card, so a ticker left
+        // running on a paused clip kept the app awake ~3 times a second for the rest of the session.
+        ticker?.cancel()
+        ticker = Task { [weak self] in
+            while !Task.isCancelled {
+                try? await Task.sleep(for: .milliseconds(300))
+                guard let self, let p = self.player else { return }
+                self.sync(p)
+            }
+        }
+    }
+
+    private func sync(_ p: AVPlayer) {
+        let t = p.currentTime().seconds
+        if t.isFinite, t != time { time = t }
+        if let d = p.currentItem?.duration.seconds, d.isFinite, d > 0, d != duration { duration = d }
+        // Stopped underneath us: the recording ended, headphones were unplugged, or a call came in.
+        if p.timeControlStatus == .paused { playing = false; ticker?.cancel(); ticker = nil }
     }
 }

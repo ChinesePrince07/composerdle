@@ -314,6 +314,7 @@
   function showPage(i) {
     page = i;
     img.src = S.puzzle.pages[i];
+    if (S.puzzle.pages[i + 1]) new Image().src = S.puzzle.pages[i + 1];   // warm the cache: next turn is instant
     $('pgLabel').textContent = `page ${i + 1} of ${S.puzzle.pages.length}`;
     $('pgPrev').disabled = i <= 0;
     $('pgNext').disabled = i >= S.puzzle.pages.length - 1;

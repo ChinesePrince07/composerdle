@@ -180,7 +180,8 @@ private struct ScoreCard: View {
         let top: CGFloat = (store.earPage == 0 && !done) ? CGFloat(game.puzzle.crop ?? 0) : 0
         let bottom: CGFloat = !done ? CGFloat(game.puzzle.cropBottom ?? 0) : 0
         let url = pages.indices.contains(store.earPage) ? pages[store.earPage] : nil
-        return ScorePage(url: url, top: top, bottom: bottom)
+        let next = pages.indices.contains(store.earPage + 1) ? pages[store.earPage + 1] : nil
+        return ScorePage(url: url, next: next, top: top, bottom: bottom)
             .padding(.horizontal, 8).padding(.top, 8).padding(.bottom, 8)
             .background(Color.white)
             .overlay(Rectangle().stroke(CD.rule, lineWidth: 1))
@@ -261,6 +262,7 @@ private struct ScoreCard: View {
 // AsyncImage via preferences (which collapsed the score to a tiny fallback height).
 private struct ScorePage: View {
     let url: String?
+    let next: String?   // fetched while this page shows, so the auto page-turn is instant
     let top: CGFloat
     let bottom: CGFloat
     @State private var img: UIImage?
@@ -291,11 +293,37 @@ private struct ScorePage: View {
     }
 
     private func load() async {
-        img = nil
-        guard let u = url.flatMap(URL.init(string:)) else { return }
-        if let (data, _) = try? await URLSession.shared.data(from: u), let ui = UIImage(data: data) {
-            img = ui
+        guard let url else { img = nil; return }
+        if let hit = ScoreImages.cached(url) {
+            img = hit
+        } else {
+            img = nil
+            let loaded = await ScoreImages.load(url)
+            guard !Task.isCancelled else { return }   // the page changed while this one downloaded
+            img = loaded
         }
+        if let next { Task { _ = await ScoreImages.load(next) } }
+    }
+}
+
+// Score pages decoded for display, kept for the session: each page downloads once, decodes off
+// the main thread, and a page already seen (or prefetched) shows with no blank flash.
+// ponytail: countLimit 4 (~9 MB per decoded page); NSCache also empties itself on memory warnings.
+@MainActor
+private enum ScoreImages {
+    private static let cache: NSCache<NSString, UIImage> = {
+        let c = NSCache<NSString, UIImage>(); c.countLimit = 4; return c
+    }()
+
+    static func cached(_ url: String) -> UIImage? { cache.object(forKey: url as NSString) }
+
+    static func load(_ url: String) async -> UIImage? {
+        if let hit = cached(url) { return hit }
+        guard let u = URL(string: url), let (data, _) = try? await URLSession.shared.data(from: u),
+              let raw = UIImage(data: data) else { return nil }
+        let img = await raw.byPreparingForDisplay() ?? raw
+        cache.setObject(img, forKey: url as NSString)
+        return img
     }
 }
 
