@@ -62,8 +62,17 @@ final class GameStore: ObservableObject {
         if name.isEmpty && ls("skip") != "1" { sheet = .welcome }
     }
 
+    #if DEBUG
+    // App Store preview recording (UITests/PreviewRecording.swift) pins the puzzles so the right
+    // answers can be typed on camera. Debug builds only: Release never reads these variables.
+    private static let previewEnv = ProcessInfo.processInfo.environment
+    #endif
+
     private static func nonce() -> String {
-        String(UUID().uuidString.lowercased().filter { $0.isLetter || $0.isNumber }.prefix(16))
+        #if DEBUG
+        if let n = previewEnv["PREVIEW_FACTS_NONCE"] { return n }
+        #endif
+        return String(UUID().uuidString.lowercased().filter { $0.isLetter || $0.isNumber }.prefix(16))
     }
 
     // MARK: By Facts
@@ -123,6 +132,9 @@ final class GameStore: ObservableObject {
 
     // MARK: By Ear
     func loadEarDaily() {
+        #if DEBUG
+        if let n = Self.previewEnv["PREVIEW_EAR_NONCE"] { loadEar(nonce: n); return }
+        #endif
         loadEar(nonce: nil)
     }
     func loadEarPractice() {
