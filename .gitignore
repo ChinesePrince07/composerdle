@@ -26,3 +26,6 @@ screenshots/
 # Local tool output — not part of the app
 .claude/
 .playwright-mcp/
+
+# /brag launch-video output (rendered mp4 + Hyperframes project)
+brag-output*/

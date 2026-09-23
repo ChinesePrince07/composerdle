@@ -12,6 +12,12 @@
   <a href="https://composerdle.andypandy.org/credits.html">Recording and score credits</a>
 </p>
 
+<p align="center">
+  <a href="https://pub-6d332a2be65d4bd2bb00662bba9cb4b0.r2.dev/cdle/launch/composerdle-launch-v1.mp4"><img src="./assets/readme/launch-video.jpg" width="100%" alt="Play the 25-second Composerdle launch video"></a>
+  <br>
+  <sub><a href="https://pub-6d332a2be65d4bd2bb00662bba9cb4b0.r2.dev/cdle/launch/composerdle-launch-v1.mp4">▶ Watch the 25-second launch video</a> — scored with the game's own public-domain recording of Beethoven's Fifth.</sub>
+</p>
+
 Composerdle is a fan-made daily guessing game inspired by an idea from [TwoSet Violin](https://www.youtube.com/@twosetviolin). Identify a classical composer from progressively easier facts, or listen to a real public-domain recording and name both the composer and the piece.
 
 ## Two ways to play
