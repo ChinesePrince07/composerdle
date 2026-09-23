@@ -16,6 +16,7 @@ const PREVIEW_URL = env('PREVIEW_URL');
 const PREVIEW_TYPE = env('PREVIEW_TYPE', 'IPHONE_67');
 const PREVIEW_FRAME = env('PREVIEW_FRAME');
 const SUBMIT = env('SUBMIT') === 'true';
+const TESTER = env('TESTER');   // TestFlight invitee email; from a secret so it never shows in public logs
 if (!VERSION) throw new Error('VERSION is required');
 
 const key = createPrivateKey(process.env.ASC_KEY_P8);
@@ -122,6 +123,37 @@ console.log(`screenshots: ${count((await api('GET', `/v1/appStoreVersionLocaliza
 console.log(`previews: ${count((await api('GET', `/v1/appStoreVersionLocalizations/${loc.id}/appPreviewSets?include=appPreviews`)).data, 'appPreviews')}`);
 const attached = (await api('GET', `/v1/appStoreVersions/${ver.id}/build`)).data;
 console.log(`build: ${attached ? attached.attributes.version : 'none'}`);
+
+// TestFlight: App Store Connect users join the internal group and can install at once; anyone else
+// joins an external group, whose builds need Beta App Review first. Never logs the address.
+if (TESTER) {
+  if (!attached) throw new Error('attach a build to this version before inviting testers');
+  const internal = (await api('GET', `/v1/users?filter[username]=${encodeURIComponent(TESTER)}&limit=1`)).data.length > 0;
+  const groups = (await api('GET', `/v1/apps/${app.id}/betaGroups`)).data;
+  const group = groups.find((g) => g.attributes.isInternalGroup === internal) ?? (await api('POST', '/v1/betaGroups', {
+    type: 'betaGroups', attributes: internal ? { name: 'Team', isInternalGroup: true, hasAccessToAllBuilds: true } : { name: 'Friends' },
+    relationships: { app: rel('apps', app.id) },
+  })).data;
+  const link = (path, data) => api('POST', path, data).catch((e) => { if (!/ -> 409/.test(e.message)) throw e; });   // 409 = already linked
+  if (!group.attributes.hasAccessToAllBuilds) await link(`/v1/betaGroups/${group.id}/relationships/builds`, [{ type: 'builds', id: attached.id }]);
+  let tester = (await api('GET', `/v1/betaTesters?filter[email]=${encodeURIComponent(TESTER)}&filter[apps]=${app.id}&limit=1`)).data[0];
+  if (tester) await link(`/v1/betaGroups/${group.id}/relationships/betaTesters`, [{ type: 'betaTesters', id: tester.id }]);
+  else tester = (await api('POST', '/v1/betaTesters', {
+    type: 'betaTesters', attributes: { email: TESTER }, relationships: { betaGroups: { data: [{ type: 'betaGroups', id: group.id }] } },
+  })).data;
+  console.log(`tester is in ${internal ? 'internal' : 'external'} group "${group.attributes.name}" with build ${attached.attributes.version}`);
+  if (!internal) {
+    const state = (await api('GET', `/v1/builds/${attached.id}/buildBetaDetail`)).data.attributes.externalBuildState;
+    if (state === 'READY_FOR_BETA_SUBMISSION') {
+      await api('POST', '/v1/betaAppReviewSubmissions', { type: 'betaAppReviewSubmissions', relationships: { build: rel('builds', attached.id) } });
+      console.log('build sent to Beta App Review; the invite email goes out once Apple approves it');
+    } else console.log(`external build state: ${state}`);
+  }
+  try {
+    await api('POST', '/v1/betaTesterInvitations', { type: 'betaTesterInvitations', relationships: { app: rel('apps', app.id), betaTester: rel('betaTesters', tester.id) } });
+    console.log('TestFlight invitation sent');
+  } catch (e) { console.log(`invitation not sent yet: ${e.message}`); }
+}
 
 if (SUBMIT) {
   const sub = (await api('POST', '/v1/reviewSubmissions', { type: 'reviewSubmissions', attributes: { platform: 'IOS' }, relationships: { app: rel('apps', app.id) } })).data;

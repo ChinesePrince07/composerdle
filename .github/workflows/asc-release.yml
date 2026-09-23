@@ -29,6 +29,10 @@ on:
         description: "Submit the version for App Review"
         type: boolean
         default: false
+      tester:
+        description: "Invite the TESTFLIGHT_TESTER secret's email to TestFlight (the version's build)"
+        type: boolean
+        default: false
 
 jobs:
   release:
@@ -52,3 +56,5 @@ jobs:
           PREVIEW_URL: ${{ inputs.preview_url }}
           PREVIEW_FRAME: ${{ inputs.preview_frame }}
           SUBMIT: ${{ inputs.submit }}
+          # The address lives in a secret, so it is masked in these public logs.
+          TESTER: ${{ inputs.tester && secrets.TESTFLIGHT_TESTER || '' }}
