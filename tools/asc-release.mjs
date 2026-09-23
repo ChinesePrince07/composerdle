@@ -116,6 +116,13 @@ if (BUILD) {
   console.log(`build ${BUILD} attached to ${VERSION}`);
 }
 
+// Readout: what the version holds per display size (a rerun with only VERSION prints just this).
+const count = (sets, kind) => sets.map((s) => `${s.attributes.screenshotDisplayType ?? s.attributes.previewType} x${s.relationships?.[kind]?.data?.length ?? '?'}`).join(', ') || 'none';
+console.log(`screenshots: ${count((await api('GET', `/v1/appStoreVersionLocalizations/${loc.id}/appScreenshotSets?include=appScreenshots`)).data, 'appScreenshots')}`);
+console.log(`previews: ${count((await api('GET', `/v1/appStoreVersionLocalizations/${loc.id}/appPreviewSets?include=appPreviews`)).data, 'appPreviews')}`);
+const attached = (await api('GET', `/v1/appStoreVersions/${ver.id}/build`)).data;
+console.log(`build: ${attached ? attached.attributes.version : 'none'}`);
+
 if (SUBMIT) {
   const sub = (await api('POST', '/v1/reviewSubmissions', { type: 'reviewSubmissions', attributes: { platform: 'IOS' }, relationships: { app: rel('apps', app.id) } })).data;
   await api('POST', '/v1/reviewSubmissionItems', { type: 'reviewSubmissionItems', relationships: { reviewSubmission: rel('reviewSubmissions', sub.id), appStoreVersion: rel('appStoreVersions', ver.id) } });
