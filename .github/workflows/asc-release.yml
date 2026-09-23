@@ -1,0 +1,54 @@
+name: App Store release
+
+# Manual only. Prepares an App Store version through the App Store Connect API (tools/asc-release.mjs):
+# creates it if needed, sets What's New, uploads an app preview, attaches a TestFlight build.
+# Submitting for App Review happens only when `submit` is ticked.
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version string, e.g. 1.0.1"
+        required: true
+      build:
+        description: "Build number to attach (the TestFlight run number); waits for processing"
+        required: false
+        default: ""
+      whats_new:
+        description: "What's New text"
+        required: false
+        default: ""
+      preview_url:
+        description: "Public URL of an app preview .mp4 (886x1920)"
+        required: false
+        default: ""
+      preview_frame:
+        description: "Preview poster frame, HH:MM:SS:FF"
+        required: false
+        default: "00:00:01:10"
+      submit:
+        description: "Submit the version for App Review"
+        type: boolean
+        default: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      # Inputs travel as env vars, never interpolated into the shell.
+      - name: Prepare the App Store version
+        run: node tools/asc-release.mjs
+        env:
+          ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          VERSION: ${{ inputs.version }}
+          BUILD: ${{ inputs.build }}
+          WHATS_NEW: ${{ inputs.whats_new }}
+          PREVIEW_URL: ${{ inputs.preview_url }}
+          PREVIEW_FRAME: ${{ inputs.preview_frame }}
+          SUBMIT: ${{ inputs.submit }}
